@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <ncurses.h>
 
 typedef enum {RED,YELLOW,GREEN,CYAN,BLUE,MAGENTA,WHITE}Color;
 typedef enum {UP,DOWN,LEFT,RIGHT}Direction;
@@ -35,5 +36,8 @@ typedef struct entity
 	Data data;
 	Data *container;
 }Entity;
+
+void printMap();
+_Bool collisionDetection(Hitbox a, Hitbox b);
 
 #endif
