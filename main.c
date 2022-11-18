@@ -10,15 +10,14 @@
 
 #include "gameLib.h"
 
-
 void initializeScreen();
-void spawnThreads();
+void gameStart();
 void terminateGame();
 
 int main()
 {
 	initializeScreen();
-	spawnThreads();
+	gameStart();
 	terminateGame();
 	printf("Bye!");
 	return 0;
@@ -29,7 +28,7 @@ void initializeScreen()
 	/** Initial settings: screen and colours **/
 	initscr();
 	noecho();
-	curs_set(false);
+	curs_set(0);
 	erase();
 	start_color();
 	init_pair(RED, COLOR_RED, COLOR_BLACK);
@@ -37,30 +36,34 @@ void initializeScreen()
 	srand(time(NULL)); // Rand initialization
 }
 
-void spawnThreads()
-{
-	// pthread_t tMainThread, tShip, tUfo;
-	int communicationPipe[2];
-	int pidMainThread, pidPhrog, pidUfo;
+void gameStart(){
 
-	if (pipe(communicationPipe) == -1)
-	{ 
-		perror("Error in the initialization of communication pipes!");
+	int gamePipe[2];
+	pid_t pidPhrog;
+
+	if (pipe(gamePipe) == -1)
+	{
+		perror("eee la fin de la gamePipe");
 		exit(-1);
 	}
 
+	
+	switch(fork()){
+		case -1:
+			perror("eee la fin del fork ship");
+			exit(-1);
+		break;
 
-	pidPhrog = fork();
-
-	if (pidPhrog == 0) // This process is ship process
-	{
-			close(communicationPipe[0]); // Closing reading pipe
-			Phrog(communicationPipe[1]);
-			exit(1);	
+		case 0:
+			close(gamePipe[0]);
+			Phrog(gamePipe[1]);
+			exit(1);
+		break;
+		
+		default:
+			mammarrancaFields(gamePipe[0],gamePipe[1]);
+		break;
 	}
-
-	// This is the main thread
-	mammarrancaFields(communicationPipe[0], communicationPipe[1]);
 }
 
 void terminateGame()

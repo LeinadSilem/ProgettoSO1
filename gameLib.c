@@ -1,63 +1,16 @@
 #include "gameLib.h"
 
-char carBody1 [3][4] = 
-{
-	{'o','-','-','o'},
-	{'|','E','D',')'},
-	{'o','-','-','o'}
-};
-
-char carBody2 [3][5] =
-{
-	{'o','-','-','-','o'},
-	{'|','E','H','D',')'},
-	{'o','-','-','-','o'}
-};
-
-char carBody3 [3][6] =
-{
-	{'o','-','-','-','-','o'},
-	{'|','E','H','H','D',')'},
-	{'o','-','-','-','-','o'}
-};
-
-char logBody1 [3][4] = 
-{
-	{'(','-','-',')'},
-	{'(',' ',' ',')'},
-	{'(','-','-',')'}
-};
-
-char logBody2 [3][5] = 
-{
-	{'(','-','-','-',')'},
-	{'(',' ',' ',' ',')'},
-	{'(','-','-','-',')'}
-};
-
-char logBody3 [3][6] = 
-{
-	{'(','-','-','-','-',')'},
-	{'(',' ',' ',' ',' ',')'},
-	{'(','-','-','-','-',')'}
-};
-
-char phrogBody[3][3] = 
-{
-	{'\\','_','/'},
-	{'(','O',')'},
-	{'/','-','\\'}
-};
+Gamestate game;
 
 void Phrog(int pipewrite){
 
 	Entity phrog;
 
 	phrog.lives = 3;
-	phrog.box.topleft.x = 0;
-	phrog.box.topleft.y = 0;
-	phrog.box.botright.x = 0;
-	phrog.box.botright.y = 0;
+	phrog.box.topleft.x = 1;
+	phrog.box.topleft.y = 1;
+	phrog.box.botright.x = 3;
+	phrog.box.botright.y = 3;
 	phrog.color = RED;
 	phrog.dir = N;
 	phrog.et = PHROG;
@@ -70,23 +23,37 @@ void Phrog(int pipewrite){
 		char c = getch();
 		switch(c){
 			case UP:
-				phrogbox->topleft.y -= 1;
-				phrogbox->botright.y -= 1;
+				if(phrogbox->topleft.y > 0){
+					phrogbox->topleft.y -= 3;
+					phrogbox->botright.y -= 3;
+					phrog.row -=1;
+					phrog.dir = N;
+				}	
 			break;
 
 			case DOWN:
-				phrogbox->topleft.y += 1;
-				phrogbox->botright.y += 1;
+				if(phrogbox->botright.y < MAXY){
+					phrogbox->topleft.y += 3;
+					phrogbox->botright.y += 3;
+					phrog.row +=1;
+					phrog.dir = S;
+				}				
 			break;
 
 			case LEFT:
-				phrogbox->topleft.x += 1;
-				phrogbox->botright.x += 1;
+				if(phrogbox->topleft.x > 0){
+					phrogbox->topleft.x -= 1;
+					phrogbox->botright.x -= 1;
+					phrog.dir = W;
+				}			
 			break;
 
 			case RIGHT:
-				phrogbox->topleft.x -= 1;
-				phrogbox->botright.x -= 1;
+				if(phrogbox->botright.x < MAXX){
+					phrogbox->topleft.x += 1;
+					phrogbox->botright.x += 1;
+					phrog.dir = E;
+				}				
 			break;
 
 			case ' ':
@@ -94,7 +61,7 @@ void Phrog(int pipewrite){
 			break;
 
 			case 'q':
-				exit(0);
+				phrog.lives = 0;
 			break;
 		}
 
@@ -102,68 +69,126 @@ void Phrog(int pipewrite){
 	}
 }
 
-void mammarrancaFields(int piperead, int pipewrite){
-	_Bool gamestate = true;
-	Entity tempEntity;
+void mammarrancaFields(int piperead, int pipewrite)
+{
+    Entity tempEntity, tempSpit, tempCar;
+    Log tempLog;
 
-	while(gamestate){
-		read(piperead,&tempEntity,sizeof(Entity));
-		switch(tempEntity.et){
-			case PHROG:
-				clearer(tempEntity);
-				printer(tempEntity);
-			break;
-		}
-	}
+    //drawFieldBorder();
+
+    initGamestateData();
+    
+    while(game.running)
+    {   
+        //drawFieldBorder();
+        read(piperead, &tempEntity, sizeof(Entity));
+
+        switch (tempEntity.et)
+        {
+            case PHROG:
+                clearer(game.player);
+                game.player.box.topleft.x = tempEntity.box.topleft.x;
+                game.player.box.topleft.y = tempEntity.box.topleft.y;
+                game.player.box.botright.x = tempEntity.box.botright.x;
+                game.player.box.botright.y = tempEntity.box.botright.y;
+                game.player.pid = tempEntity.pid;
+                game.player.row = tempEntity.row;
+                game.player.dir = tempEntity.dir;
+                if(game.player.lives > 0){
+                    printer(tempEntity);
+                }
+            break;
+        }
+        refresh(); 
+    }
 }
 
-void printer(Entity tempEntity){
-	
-	int i = 0,j = 0;
+void printer(Entity ent)
+{
+	int i,j,x,y;
+    // matrice giocatore...
+    char phrogBody [3][3] = {
+        "\\-/",
+        "(O)",
+        "/-\\"
+    };
 
-	switch(tempEntity.et){
+    y = ent.box.topleft.y;
+    x = ent.box.topleft.x;
+    
+    switch(ent.et){
 		case PHROG:
-			attron(COLOR_PAIR(tempEntity.color));
+			attron(COLOR_PAIR(ent.color));
 			for(i = 0; i<PHROG_SIZE; i++){
 				for(j = 0; j<PHROG_SIZE; i++){
-					mvaddch(tempEntity.box.topleft.y+i,tempEntity.box.topleft.x+j,phrogBody[i][j]);
+					mvaddch(y+i,x+j,phrogBody[i][j]);
 				}
 			}
-			attroff(COLOR_PAIR(tempEntity.color));
+			attroff(COLOR_PAIR(ent.color));
 		break;
 	}
 }
 
-void clearer(Entity tempEntity){
+void clearer(Entity ent){
+    int size,x,y,adjy,adjx;
 
-	int i = 0, j = 0, adjX = 0, adjY = 0;
+    y = ent.box.topleft.y;
+    x = ent.box.topleft.x;
+    adjy = adjx = 0;
 
-	switch(tempEntity.et){
-		case PHROG:
+    switch(ent.et){
+        case PHROG:            
+            size = PHROG_SIZE;
 
-			switch(tempEntity.dir){
-				case UP:
-					adjY = 1;				
+            switch(ent.dir){
+	            case N:
+	            	adjy +=1;
 				break;
 
-				case DOWN:
-					adjY = -1;
+				case S:
+					adjy -=1;
 				break;
 
-				case LEFT:
-					adjX = 1;
+				case W:
+					adjx +=1;
 				break;
 
-				case RIGHT:
-					adjX = -1;
+				case E:
+					adjx -=1;
 				break;
-			}
+            }
+        break;
+    }
 
-			for(i = 0; i<PHROG_SIZE; i++){
-				for(j = 0; j<PHROG_SIZE; i++){
-					mvaddch(tempEntity.box.topleft.y+i+adjY,tempEntity.box.topleft.x+j+adjX,' ');
-				}
-			}
-		break;
-	}
+    for(int i = 0; i < size; i++){
+        for(int j = 0 ; j < size ; j++){
+            mvaddch(y+i+adjy,x+j+adjx,' ');
+        }
+    }
+}
+
+void initGamestateData(){
+	init_pair(WHITE,COLOR_WHITE,COLOR_BLACK);
+    init_pair(RED,COLOR_RED,COLOR_BLACK);
+    init_pair(YELLOW,COLOR_YELLOW,COLOR_BLACK);
+    init_pair(GREEN,COLOR_GREEN,COLOR_BLACK);
+    init_pair(BLUE,COLOR_BLUE,COLOR_BLACK);
+    init_pair(MAGENTA,COLOR_MAGENTA,COLOR_BLACK);
+    init_pair(CYAN,COLOR_CYAN,COLOR_BLACK);
+
+    game.player.lives = 3;
+    game.player.color = RED;
+
+    game.running = true;
+    game.loss = false;
+    game.win = false;
+}
+
+_Bool collisionDetection(Hitbox a, Hitbox b){
+	if(((a.topleft.x >= b.topleft.x && a.topleft.x <= b.botright.x) || (a.botright.x >= b.topleft.x && a.botright.x <= b.botright.x)) &&
+       ((a.topleft.y >= b.topleft.y && a.topleft.y <= b.botright.y) || (a.botright.y >= b.topleft.y && a.botright.y <= b.botright.y))) {
+        return true;
+    } else {
+        return false;
+    }
 }
