@@ -1,13 +1,3 @@
-#include <stdio.h>
-#include <ncurses.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <time.h>
-
 #include "gameLib.h"
 
 void initializeScreen();
@@ -31,15 +21,15 @@ void initializeScreen()
 	curs_set(0);
 	erase();
 	start_color();
-	init_pair(RED, COLOR_RED, COLOR_BLACK);
 
 	srand(time(NULL)); // Rand initialization
+
+	mvprintw(MAXY,MAXX+1,"initializeScreen over\n");
 }
 
 void gameStart(){
 
 	int gamePipe[2];
-	pid_t pidPhrog;
 
 	if (pipe(gamePipe) == -1)
 	{
@@ -47,7 +37,8 @@ void gameStart(){
 		exit(-1);
 	}
 
-	
+	mvprintw(MAXY+1,MAXX+1,"pipe is legal\n");
+
 	switch(fork()){
 		case -1:
 			perror("eee la fin del fork ship");
@@ -56,7 +47,7 @@ void gameStart(){
 
 		case 0:
 			close(gamePipe[0]);
-			Phrog(gamePipe[1]);
+			phrog(gamePipe[1]);
 			exit(1);
 		break;
 		

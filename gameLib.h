@@ -2,9 +2,13 @@
 #define GATCHA_CROSSY_ROAD
 
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include <ncurses.h>
+#include <time.h>
+#include <sys/types.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdbool.h>
 
 #define UP 65
 #define DOWN 66
@@ -12,20 +16,17 @@
 #define LEFT 68
 #define PHROG_SIZE 3
 #define NUM_LOGS 3
+#define NUM_LANES 3
 #define NUM_CARS 3
 #define NUM_DENS 5
-#define CAR_LANES 5
-#define LOG_LANES 3
-#define DEN1X
-#define DEN2X
-#define DEN3X
-#define DEN4X
-#define DEN5X
-#define MAXX 21
-#define MAXY 38
+#define MAXX 27
+#define MAXY 27
+#define MIN_ROW_CAR 15
+#define MIN_ROW_LOG 3
+#define ENEMY_CHANCE 20;
 
 typedef enum {RED,YELLOW,GREEN,CYAN,BLUE,MAGENTA,WHITE}Color;
-typedef enum {N,S,W,E}Direction;
+typedef enum {N,S,W,E,FIXED}Direction;
 typedef enum {PHROG,SPIDER,CAR,LOG}EntityType;
 
 typedef struct position
@@ -47,7 +48,7 @@ typedef struct data
 	EntityType et;
 	Hitbox box;
 	int lives;
-	int row;
+	int row,col,length;
 	pid_t pid;
 }Entity;
 
@@ -57,27 +58,34 @@ typedef struct logs
 	Entity *container;
 }Log;
 
+typedef struct den{
+	Position coords;
+	_Bool visited;
+}Den;
+
 typedef struct gamestate
 {
 	Entity player;
-	Log lane2[NUM_LOGS];
-	Log lane3[NUM_LOGS];
-	Log lane4[NUM_LOGS];
-	Entity lane6[NUM_CARS];
-	Entity lane7[NUM_CARS];
-	Entity lane8[NUM_CARS];
-	Entity lane9[NUM_CARS];
-	Entity lane10[NUM_CARS];
-	_Bool visitedDens[NUM_DENS];
+	Entity carTable[NUM_LANES][NUM_CARS];
+	Entity logs[NUM_LOGS];
+	Direction dirLanes[NUM_LANES];
+	Direction dirRivers[NUM_LOGS];	
+	Den visitedDens[NUM_DENS];
 	_Bool running,loss,win;
 }Gamestate;
 
-void printMap();
+// COMPLETED
+void drawFieldBorder();
 _Bool collisionDetection(Hitbox a, Hitbox b);
-void Phrog(int pipewrite);
-void mammarrancaFields(int piperead, int pipewrite);
 void printer(Entity tempEntity);
 void clearer(Entity tempEntity);
-void initGamestateData();
+int getVisitedDens();
+
+// WORK IN PROGRESS
+void initializeGameElements();
+void phrog(int pipewrite);
+void mammarrancaFields(int piperead, int pipewrite);
+void logGenerator(int pipewrite);
+void carGenerator(int pipewrite);
 
 #endif
