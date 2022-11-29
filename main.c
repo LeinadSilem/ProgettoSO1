@@ -1,30 +1,33 @@
 #include "gameLib.h"
 
-void initializeScreen();
+void initialize();
 void gameStart();
-void terminateGame();
+void gameEnd();
 
-int main()
-{
-	initializeScreen();
+int main(){
+	initialize();
 	gameStart();
-	terminateGame();
-	printf("Bye!");
+	gameEnd();
+	printf("game over!");
 	return 0;
 }
 
-void initializeScreen()
-{
-	/** Initial settings: screen and colours **/
+void initialize(){
+	
 	initscr();
 	noecho();
 	curs_set(0);
 	erase();
 	start_color();
+	init_pair(1, COLOR_RED, COLOR_BLACK);
 
-	srand(time(NULL)); // Rand initialization
+	srand(time(NULL));
+}
 
-	mvprintw(MAXY,MAXX+1,"initializeScreen over\n");
+void gameEnd(){	
+	erase();
+	curs_set(1);
+	endwin();
 }
 
 void gameStart(){
@@ -37,8 +40,7 @@ void gameStart(){
 		exit(-1);
 	}
 
-	mvprintw(MAXY+1,MAXX+1,"pipe is legal\n");
-
+	
 	switch(fork()){
 		case -1:
 			perror("eee la fin del fork ship");
@@ -52,15 +54,27 @@ void gameStart(){
 		break;
 		
 		default:
-			mammarrancaFields(gamePipe[0],gamePipe[1]);
+			/*
+			switch(fork()){
+				case -1:
+					perror("eee la fin del fork alienGenerator");
+					exit(-1);
+				break;
+
+				case 0:
+					close(gamePipe[0]);
+					alienGenerator(gamePipe[1]);
+					exit(1);
+				break;
+
+				default:
+					
+				break;
+			}
+			*/
+			roadsAndPonds(gamePipe[0], gamePipe[1]);
 		break;
 	}
 }
 
-void terminateGame()
-{
-	/** Final settings: screen **/
-	erase();
-	curs_set(1);
-	endwin();
-}
+

@@ -25,9 +25,10 @@
 #define MIN_ROW_LOG 3
 #define ENEMY_CHANCE 20;
 
+//structures and type definitions
 typedef enum {RED,YELLOW,GREEN,CYAN,BLUE,MAGENTA,WHITE}Color;
 typedef enum {N,S,W,E,FIXED}Direction;
-typedef enum {PHROG,SPIDER,CAR,LOG}EntityType;
+typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL}EntityType;
 
 typedef struct position
 {
@@ -37,8 +38,8 @@ typedef struct position
 
 typedef struct hitbox
 {
-	Position topleft;
-	Position botright;
+	Position topLeft;
+	Position botRight;
 }Hitbox;
 
 typedef struct data
@@ -74,18 +75,23 @@ typedef struct gamestate
 	_Bool running,loss,win;
 }Gamestate;
 
-// COMPLETED
-void drawFieldBorder();
-_Bool collisionDetection(Hitbox a, Hitbox b);
-void printer(Entity tempEntity);
-void clearer(Entity tempEntity);
-int getVisitedDens();
-
-// WORK IN PROGRESS
-void initializeGameElements();
+//void gameEnd();
 void phrog(int pipewrite);
-void mammarrancaFields(int piperead, int pipewrite);
-void logGenerator(int pipewrite);
-void carGenerator(int pipewrite);
+void spit(int pipewrite, Hitbox pH);
+void moveSpitBall(int pipewrite, Entity projectile);
+//void attack(int pipewrite, int attackChance, Hitbox aH);
+//void alien(int pipewrite, Entity alien);
+//void alien2(int pipewrite, Entity alien);
+//void alienGenerator(int pipewrite);
+void roadsAndPonds(int piperead, int pipewrite);
+//void projectileCollisions(Entity currentMissile, int pipewrite);
+//void shipCollisions(Entity temp);
+//void checkBorderProximity(int topLeftx);
+//_Bool verifyHitbox(Hitbox a, Hitbox b);
+void updateEntity(Entity temp, int pipewrite);
+void initializeData();
+void drawFieldBorder();
+void printer(Entity ent);
+void bodyClearing(Entity ent);
 
 #endif

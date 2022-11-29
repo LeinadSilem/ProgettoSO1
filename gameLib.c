@@ -2,66 +2,106 @@
 
 Gamestate game;
 
-// WORK IN PROGRESS
+// munzione per il movimento della rana
 void phrog(int pipewrite)
 {
     char input;
     Entity player;
 
-    player.box.topleft.x = MAXX/2;
-    player.box.topleft.y = MAXY-3;
+    player.box.topLeft.x = MAXX/2;
+    player.box.topLeft.y = MAXY-3;
 
-    player.box.botright.x = player.box.topleft.x + PHROG_SIZE-1;
-    player.box.botright.y = player.box.topleft.y + PHROG_SIZE-1;
-    player.lives = 1;
+    player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
+    player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
+
+    player.lives = 3;
     player.dir = FIXED;
     player.et = PHROG;
     player.pid = getpid();
-    player.color = RED;
+    player.col = RED;
 
     while(true) {
         input=getch();
         switch(input) {
             case UP:
-                if(player.box.topleft.y > 0) {
-                    player.box.topleft.y -=3;
+                if(player.box.topLeft.y > 0){
+                    player.box.topLeft.y -= 3;
                     player.dir = N;
-                }                
+                }
             break;
 
             case DOWN:
-                if(player.box.botright.y < MAXY) {
-                    player.box.topleft.y += 3;
+                if(player.box.botRight.y < MAXY){
+                    player.box.topLeft.y += 3;
                     player.dir = S;
                 }
             break;
 
         	case LEFT:
-        		if(player.box.topleft.x > 0){
-        			player.box.topleft.x -= 1;
-        			player.dir = W;
-        		}
+        		if(player.box.topLeft.x > 0){
+                    player.box.topLeft.y -= 1;
+                    player.dir = W;
+                }
         	break;
+
 
         	case RIGHT:
-        		if(player.box.botright.x < MAXX){
-        			player.box.botright.x += 1;
-        			player.dir = E;
-        		}
-        	break;
+        		if(player.box.botRight.x < MAXX){
+                    player.box.topLeft.y += 1;
+                    player.dir = E;
+                }
+        	break;      
         }
 
-        player.box.botright.x = player.box.topleft.x + PHROG_SIZE-1;
-        player.box.botright.y = player.box.topleft.y + PHROG_SIZE-1;
+        player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
+        player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
 
-        write(pipewrite,&player,sizeof(Entity));
+        updateEntity(player,pipewrite);
     }
 }
 
-void mammarrancaFields(int piperead, int pipewrite)
+// funzione per la generazione degli sputi del ragno
+void spit(int pipewrite, Hitbox pH)
 {
-    initializeGameElements();
-    Entity tempEntity, tempSpider;
+    Entity spitball;
+
+    spitball.lives = 1;
+    spitball.box.topLeft.x = spitball.box.botRight.x = pH.botRight.x-1;
+    spitball.box.topLeft.y = spitball.box.botRight.y = pH.botRight.y+1;
+    spitball.color = MAGENTA;
+    spitball.dir = S;
+    spitball.et = SPITBALL;
+
+    if(fork() == 0){
+        moveSpitBall(pipewrite, spitball);
+    }
+}
+
+// funzione per il movimento degli sputi
+void moveSpitBall(int pipewrite, Entity projectile)
+{
+    
+    projectile.pid = getpid();
+    while (true) {
+        projectile.box.topLeft.y = projectile.box.botRight.y -=1;
+
+        if (projectile.box.topLeft.x <= 1) {
+            projectile.lives = 0;
+            updateEntity(projectile,pipewrite);
+            kill(projectile.pid, 1);
+            return;
+        }
+
+        updateEntity(projectile,pipewrite);
+
+        usleep(25000);         
+    }
+}
+
+void roadsAndPonds(int piperead, int pipewrite)
+{
+    initializeData();
+    Entity tempEntity;
 
     drawFieldBorder();
     
@@ -73,74 +113,365 @@ void mammarrancaFields(int piperead, int pipewrite)
         switch (tempEntity.et)
         {
             case PHROG:
-                clearer(game.player);
-                game.player.box.topleft.x = tempEntity.box.topleft.x;
-                game.player.box.topleft.y = tempEntity.box.topleft.y;
-                game.player.box.botright.x = tempEntity.box.botright.x;
-                game.player.box.botright.y = tempEntity.box.botright.y;
+                bodyClearing(game.player);
+                game.player.box.topLeft.x = tempEntity.box.topLeft.x;
+                game.player.box.topLeft.y = tempEntity.box.topLeft.y;
+                game.player.box.botRight.x = tempEntity.box.botRight.x;
+                game.player.box.botRight.y = tempEntity.box.botRight.y;
                 game.player.pid = tempEntity.pid;
-                game.player.dir = tempEntity.dir;
                 if(game.player.lives > 0){
                     printer(tempEntity);
                 }
             break;
 
-            case CAR:
-                clearer(game.carTable[tempEntity.row][tempEntity.col]);
-                game.carTable[tempEntity.row][tempEntity.col].box.topleft.x = tempEntity.box.topleft.x;
-                game.carTable[tempEntity.row][tempEntity.col].box.topleft.y = tempEntity.box.topleft.y;
-                game.carTable[tempEntity.row][tempEntity.col].box.botright.x = tempEntity.box.botright.x;
-                game.carTable[tempEntity.row][tempEntity.col].box.botright.y = tempEntity.box.botright.y;
-                game.carTable[tempEntity.row][tempEntity.col].dir = tempEntity.dir;
-                game.carTable[tempEntity.row][tempEntity.col].pid = tempEntity.pid;                              
-                //carCollisions(game.carTable[tempEntity.row][tempEntity.col]);
-                //checkBorderProximity(game.carTable[tempEntity.id][tempEntity.col].box.topleft.x);               
-                printer(tempEntity);
+            case LOG:
+                //bodyClearing(game.aliensLVL1[tempEntity.id]);
+                //game.aliensLVL1[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
+                //game.aliensLVL1[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
+                //game.aliensLVL1[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
+                //game.aliensLVL1[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
+                //game.aliensLVL1[tempEntity.id].d = tempEntity.d;
+                //game.aliensLVL1[tempEntity.id].col = tempEntity.col;
+                //game.aliensLVL1[tempEntity.id].pid = tempEntity.pid;                              
+                //shipCollisions(game.aliensLVL1[tempEntity.id]);
+                //checkBorderProximity(game.aliensLVL1[tempEntity.id].box.topLeft.x);               
+                //if(game.aliensLVL1[tempEntity.id].lives > 0){
+                //    printer(game.aliensLVL1[tempEntity.id]);
+                //}
             break;
             
-            case LOG:
-                clearer(game.logs[tempEntity.row]); 
-                game.logs[tempEntity.row].box.topleft.x = tempEntity.box.topleft.x;
-                game.logs[tempEntity.row].box.topleft.y = tempEntity.box.topleft.y;
-                game.logs[tempEntity.row].box.botright.x = tempEntity.box.botright.x;
-                game.logs[tempEntity.row].box.botright.y = tempEntity.box.botright.y;
-                game.logs[tempEntity.row].dir = tempEntity.dir;
-                game.logs[tempEntity.row].pid = tempEntity.pid;                
+            case CAR:
+                //bodyClearing(game.aliensLVL2[tempEntity.id]); 
+                //game.aliensLVL2[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
+                //game.aliensLVL2[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
+                //game.aliensLVL2[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
+                //game.aliensLVL2[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
+                //game.aliensLVL2[tempEntity.id].d = tempEntity.d;
+                //game.aliensLVL2[tempEntity.id].col = tempEntity.col;
+                //game.aliensLVL2[tempEntity.id].pid = tempEntity.pid;                
                 //shipCollisions(game.aliensLVL2[tempEntity.id]);
-                //checkBorderProximity(game.aliensLVL2[tempEntity.id].box.topleft.x);
+                //checkBorderProximity(game.aliensLVL2[tempEntity.id].box.topLeft.x);
                 //if(game.aliensLVL2[tempEntity.id].lives > 0){
-                printer(tempEntity);
+                //    printer(game.aliensLVL2[tempEntity.id]);
                 //}
             break;
         
             case SPIDER:
-                clearer(tempSpider);
-                tempSpider.box.topleft.x = tempSpider.box.botright.x = tempEntity.box.topleft.x;
-                tempSpider.box.topleft.y = tempSpider.box.botright.y = tempEntity.box.botright.y;
-                tempSpider.pid = tempEntity.pid;
-                tempSpider.dir = tempEntity.dir;
-                tempSpider.et = tempEntity.et;                            
-                //shipCollisions(tempSpider);
-                //if(tempSpider.box.topleft.x > 1){
-                printer(tempSpider);
+                //bodyClearing(tempEntity);
+                //tempBomba.box.topLeft.x = tempBomba.box.botRight.x = tempEntity.box.topLeft.x;
+                //tempBomba.box.topLeft.y = tempBomba.box.botRight.y = tempEntity.box.botRight.y;
+                //tempBomba.pid = tempEntity.pid;
+                //tempBomba.d = tempEntity.d;
+                //tempBomba.id = tempEntity.id;
+                //tempBomba.e = tempEntity.e;                            
+                //shipCollisions(tempBomba);
+                //if(tempBomba.box.topLeft.x > 1){
+                //    printer(tempBomba);
                 //}               
+            break;
+
+            case SPITBALL:
+                //bodyClearing(tempEntity);
+                //tempMissile.box.topLeft.x = tempMissile.box.botRight.x = tempEntity.box.topLeft.x;
+                //tempMissile.box.topLeft.y = tempMissile.box.botRight.y = tempEntity.box.botRight.y;
+                //tempMissile.pid = tempEntity.pid;
+                //tempMissile.col = tempEntity.col;
+                //tempMissile.d = tempEntity.d;
+                //tempMissile.id = tempEntity.id;
+                //tempMissile.e = tempEntity.e;
+                //projectileCollisions(tempMissile,pipewrite);
+                //if(tempMissile.lives > 0 && tempMissile.box.topLeft.x < MAXX-1 && tempMissile.box.topLeft.y > 1 && tempMissile.box.topLeft.y < MAXY-1){
+                //    printer(tempMissile);
+                //}              
             break;
         }
         
-        refresh();
-
-        if (game.running && game.player.lives > 0 && getVisitedDens() == 5)
-        {
-        	game.win = true;
-            game.running = false;
-            refresh();
-        }  
+        refresh();  
     }
 }
 
-void initializeGameElements()
+/*
+	// funzione che regola lo spawn dei nuvoi alieni
+	void alienGenerator(int pipewrite){
+	    int prevmod,currentmod,lastOccupPosition,i;
+	    Entity aliensLVL1[ALIENS_ALLOWED*WAVES];
+	    prevmod = currentmod = 0;
+
+	    for (int i=0; i<(ALIENS_ALLOWED * WAVES); i+=1) {
+	        currentmod = rand()%3;
+	        if(prevmod == currentmod) {
+	            if(currentmod - 1 < 0) {
+	                currentmod += 1;
+	            } else {
+	                currentmod -=1;
+	            }
+	        }
+
+	        aliensLVL1[i].lives = 1;
+	        aliensLVL1[i].e = ORFIST;
+	        aliensLVL1[i].id = i;
+
+	        switch(currentmod){
+	            case 0:
+	                aliensLVL1[i].d = NWEST;
+	                aliensLVL1[i].box.topLeft.y = 25 + rand()%9;
+	                aliensLVL1[i].box.topLeft.x = MAXX - ALIEN_SIZE;
+	                aliensLVL1[i].col = YELLOW;
+	            break;
+
+	            case 1:
+	                aliensLVL1[i].d = SWEST;
+	                aliensLVL1[i].box.topLeft.y = 1 + rand()%9;
+	                aliensLVL1[i].box.topLeft.x = MAXX - ALIEN_SIZE;
+	                aliensLVL1[i].col = MAGENTA;
+	            break;
+
+	            case 2:
+	                aliensLVL1[i].d = FIXED;
+	                aliensLVL1[i].box.topLeft.y = MAXY/2;
+	                aliensLVL1[i].box.topLeft.x = MAXX - ALIEN_SIZE;
+	                aliensLVL1[i].col = GREEN;
+	            break;
+	        }
+
+	        aliensLVL1[i].box.botRight.x = aliensLVL1[i].box.topLeft.x + (ALIEN_SIZE-1);
+	        aliensLVL1[i].box.botRight.y = aliensLVL1[i].box.topLeft.y + (ALIEN_SIZE-1);
+
+	        prevmod = currentmod;
+	    }
+
+	    lastOccupPosition = 0;
+
+	    while(lastOccupPosition < WAVES*ALIENS_ALLOWED){
+	        
+	        for(i = lastOccupPosition;i < ALIENS_ALLOWED+lastOccupPosition; i++){
+	            if(fork()== 0){
+	                alien(pipewrite,aliensLVL1[i]);
+	            }
+	            sleep(3);
+	        }
+	        lastOccupPosition = i;  
+	        sleep(10);
+	    }
+
+	    exit(0);
+	}
+
+	// funzione per il movimento degli alieni di lvl 1
+	void alien(int pipewrite, Entity alien)
+	{
+	    srand(time(NULL) * alien.id);
+	    alien.pid = getpid();
+	    int midborder = MAXY/2;
+
+	    while (true){
+	        switch(alien.d){
+	            case NWEST:
+	                alien.box.topLeft.x--;
+	                if(alien.box.topLeft.y <= 1 || alien.box.topLeft.y == midborder-1){
+	                    alien.d = SWEST;
+	                    alien.box.topLeft.y++;
+	                } else {
+	                    alien.box.topLeft.y--;
+	                }
+	                alien.box.botRight.x = alien.box.topLeft.x + ALIEN_SIZE-1;
+	                alien.box.botRight.y = alien.box.topLeft.y + ALIEN_SIZE-1;
+	            break;
+
+	            case SWEST:
+	                alien.box.topLeft.x--;
+	                if(alien.box.botRight.y >= MAXY-1 || alien.box.botRight.y == midborder+1) {
+	                    alien.d = NWEST;
+	                    alien.box.topLeft.y--;
+	                } else {
+	                    alien.box.topLeft.y++;
+	                }
+	                alien.box.botRight.x = alien.box.topLeft.x + ALIEN_SIZE-1;
+	                alien.box.botRight.y = alien.box.topLeft.y + ALIEN_SIZE-1;
+	            break;
+
+	            case FIXED:
+	                alien.box.topLeft.x--;
+	                alien.box.botRight.x = alien.box.topLeft.x + ALIEN_SIZE-1;
+	            break;
+	        }
+	        attack(pipewrite, ATK_CHANCE, alien.box);
+	        updateEntity(alien,pipewrite); 
+	        usleep(600000); 
+	    }
+	}
+
+	// funzione per il movimento degli alieni di lvl 2
+	void alien2(int pipewrite, Entity alien)
+	{
+	    srand(time(NULL) * alien.id);
+	    alien.pid = getpid();
+	    int midborder = MAXY/2-2;
+
+	    while (true){ 
+	        switch(alien.d) {
+	            case NWEST:
+	                alien.box.topLeft.x--;
+	                if(alien.box.topLeft.y <= 1 || alien.box.topLeft.y == midborder+2) {
+	                    alien.d = SWEST;
+	                    alien.box.topLeft.y++;
+	                } else {
+	                    alien.box.topLeft.y--;
+	                }
+	                alien.box.botRight.y = alien.box.topLeft.y + (ALIEN_SIZE*2)-1;
+	                alien.box.botRight.x = alien.box.topLeft.x + (ALIEN_SIZE*2)+1;
+	            break;
+
+	            case SWEST:
+	                alien.box.topLeft.x--;
+	                if(alien.box.botRight.y >= MAXY-1 || alien.box.topLeft.y == midborder-2) {
+	                    alien.d = NWEST;
+	                    alien.box.topLeft.y--;
+	                } else {
+	                    alien.box.topLeft.y++;
+	                }
+	                alien.box.botRight.y = alien.box.topLeft.y + (ALIEN_SIZE*2)-1;
+	                alien.box.botRight.x = alien.box.topLeft.x + (ALIEN_SIZE*2)+1;
+	            break;
+
+	            case FIXED:
+	                alien.box.topLeft.x--;
+	                alien.box.botRight.x = alien.box.topLeft.x + (ALIEN_SIZE*2)+1;
+	            break;
+	        }
+	        attack(pipewrite, ATK_CHANCE, alien.box);
+	        updateEntity(alien,pipewrite);             
+	        usleep(600000); 
+	    }
+	}
+
+	// funzione che rappresenta lo spazio, stampa tutti gli elementi a schermo non appena vengono letti in pipe
+	
+
+	// verifica delle collisioni della bomba
+	void projectileCollisions(Entity currentMissile, int pipewrite)
+	{
+	    for (int i = 0; i < ALIENS_ALLOWED*WAVES ; i++) {
+	        if (game.aliensLVL1[i].lives > 0) {
+	            if (verifyHitbox(game.aliensLVL1[i].box,currentMissile.box)) {
+
+	                pid_t alien2p;
+
+	                game.aliensLVL2[i].col = game.aliensLVL1[i].col;
+	                game.aliensLVL2[i].d = game.aliensLVL1[i].d;
+	                game.aliensLVL2[i].box.topLeft.x = game.aliensLVL1[i].box.topLeft.x-2;
+	                game.aliensLVL2[i].box.topLeft.y = game.aliensLVL1[i].box.topLeft.y-1;
+	                game.aliensLVL2[i].box.botRight.x = game.aliensLVL1[i].box.botRight.x+2;
+	                game.aliensLVL2[i].box.botRight.y = game.aliensLVL1[i].box.botRight.y+2;
+	                game.aliensLvl2Alive++;
+
+	                game.aliensLvl1Alive--;
+	                game.aliensLVL1[i].lives = 0;
+	                bodyClearing(currentMissile);
+	                bodyClearing(game.aliensLVL1[i]);
+	                kill(currentMissile.pid, 1);
+	                kill(game.aliensLVL1[i].pid, 1);
+
+	                if((alien2p = fork()) == 0){
+	                    alien2(pipewrite, game.aliensLVL2[i]);
+	                }
+	                return;
+	            }
+	        }
+	    }
+
+	    for (int i = 0; i < ALIENS_ALLOWED*WAVES; i++) {
+	        if (game.aliensLVL2[i].lives > 0) {
+	            if (verifyHitbox(game.aliensLVL2[i].box, currentMissile.box)) {
+
+	                game.aliensLVL2[i].lives-=1;
+	                bodyClearing(currentMissile);
+	                kill(currentMissile.pid, 1);
+	                
+	                if (game.aliensLVL2[i].lives <= 0) {
+	                    game.aliensLvl2Alive--;
+	                    bodyClearing(game.aliensLVL2[i]);                    
+	                    kill(game.aliensLVL2[i].pid, 1);                    
+	                }
+	                return;               
+	            }
+	        }
+	    }
+	}
+
+	// verifica delle collisioni con la nave
+	void shipCollisions(Entity temp)
+	{
+
+	    if (verifyHitbox(game.player.box, temp.box)){
+	        game.player.lives = 0;
+	        bodyClearing(game.player);
+	        bodyClearing(temp);        
+	        kill(game.player.pid, 1);
+	        kill(temp.pid, 1);      
+	        game.running = false;  
+	        refresh();
+	    }
+	}
+
+	// controllo per verificare se gli alieni hanno oltrepassato il confine sinistro della mappa
+	void checkBorderProximity(int topLeftx)
+	{
+	    if (topLeftx <= 1) { //Ufo has reached the end of the area, the player has lost
+	        game.running = false;
+	        refresh();
+	    }
+	}
+
+	// controlla se le hitbox di due entità compenetrano o meno
+	_Bool verifyHitbox(Hitbox a, Hitbox b)
+	{
+
+	    if(((a.topLeft.x >= b.topLeft.x && a.topLeft.x <= b.botRight.x) || (a.botRight.x >= b.topLeft.x && a.botRight.x <= b.botRight.x)) &&
+	       ((a.topLeft.y >= b.topLeft.y && a.topLeft.y <= b.botRight.y) || (a.botRight.y >= b.topLeft.y && a.botRight.y <= b.botRight.y))) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+*/
+
+// eggiornamento e scrittura di un entità in pipe
+void updateEntity(Entity temp, int pipewrite)
+{
+    Entity current;
+
+    if(temp.et == SPITBALL) {
+        current.box.topLeft.x = current.box.botRight.x = temp.box.topLeft.x;
+        current.box.topLeft.y = current.box.botRight.y = temp.box.topLeft.y;
+    } else {
+        current.box.topLeft.x = temp.box.topLeft.x;
+        current.box.topLeft.y = temp.box.topLeft.y;
+        current.box.botRight.x = temp.box.botRight.x;
+        current.box.botRight.y = temp.box.botRight.y;
+    }
+
+    current.lives = temp.lives;
+    current.et = temp.et;
+    current.color = temp.color;
+    current.dir = temp.dir;
+    current.pid = temp.pid;
+ 	
+ 	current.row = temp.row;
+ 	current.col = temp.col;
+ 	current.length = temp.length;
+
+    write(pipewrite, &current, sizeof(Entity));
+}
+
+// inizializzazione dei dati di gioco
+void initializeData()
 {
 	int i,j;
+
+	game.running = true;
+    game.loss = false;
+    game.win = false;
 
 	// init colors
 	init_pair(WHITE,COLOR_WHITE,COLOR_BLACK);
@@ -155,6 +486,7 @@ void initializeGameElements()
 	game.player.lives = 3;
 	game.player.color = RED;
 	game.player.row = game.player.col = 0;
+	mvprintw(MAXY+3,MAXX+1,"player stats initialized");
 
 
 	// init car & log directions
@@ -173,6 +505,7 @@ void initializeGameElements()
 			game.dirRivers[i] = E;
 		}
 	}
+	mvprintw(MAXY+4,MAXX+1,"player stats initialized");
 
 	// init cars
 	for(i = 0; i < NUM_LANES; i++){
@@ -182,12 +515,14 @@ void initializeGameElements()
 			game.carTable[i][j].dir = game.dirLanes[j]; 
 		}
 	}
+	mvprintw(MAXY+5,MAXX+1,"player stats initialized");
 
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
 		game.logs[i].row = i;
 		game.logs[i].dir = game.dirRivers[i];
 	}
+	mvprintw(MAXY+6,MAXX+1,"player stats initialized");
 
 	// init dens
 	for(i = 0; i < NUM_DENS; i++){
@@ -195,197 +530,10 @@ void initializeGameElements()
 		game.visitedDens[i].coords.y = 0;
 		game.visitedDens[i].visited = false;
 	}
+	mvprintw(MAXY+7,MAXX+1,"player stats initialized");
 }
-
-void carGenerator(int pipewrite)
-{
-	int i,j;
-	Entity car[NUM_LANES][NUM_CARS];
-	
-	for(i = 0; i < NUM_LANES; i++){
-		for(j = 0; j < NUM_CARS; j++){
-
-			// deciding map position and direction
-			car[i][j].row = i;
-			car[i][j].col = j;
-
-			// deciding characteristics
-			car[i][j].length = 4 +rand()%(6);
-			if(car[i][j].length > 6){
-				car[i][j].color = BLUE;
-			}else {
-				car[i][j].color = CYAN;
-			}
-
-			// deciding starting methods and hitbox measurements
-			if(car[i][j].dir == W){
-				car[i][j].box.topleft.x = 0 - car[i][j].length;
-			}else{
-				car[i][j].box.topleft.x = MAXX;
-			}
-
-			car[i][j].box.topleft.y = MIN_ROW_CAR + (i*PHROG_SIZE);
-			
-			car[i][j].box.botright.x = car[i][j].box.topleft.x + car[i][j].length;
-			car[i][j].box.botright.y = car[i][j].box.topleft.y + PHROG_SIZE;
-		}
-	}
-
-	// timed interval generation
-}
-
-void logGenerator(int pipewrite)
-{
-	int i;
-	Log log[NUM_LOGS];
-
-	for(i = 0; i < NUM_LOGS; i++){
-		// deciding map position and direction
-		log[i].data.row = i;
-
-		// deciding characteristics
-		log[i].data.length = 4 +rand()%(6);
-		if(log[i].data.length > 6){
-			log[i].data.color = BLUE;
-		}else {
-			log[i].data.color = CYAN;
-		}
-
-		// deciding starting methods and hitbox measurements
-		if(log[i].data.dir == W){
-			log[i].data.box.topleft.x = 0 - log[i].data.length;
-		}else{
-			log[i].data.box.topleft.x = MAXX;
-		}
-
-		log[i].data.box.topleft.y = MIN_ROW_CAR + (i*PHROG_SIZE);
-		
-		log[i].data.box.botright.x = log[i].data.box.topleft.x + log[i].data.length;
-		log[i].data.box.botright.y = log[i].data.box.topleft.y + PHROG_SIZE;
-
-		// chance of enemy spawning
-
-		// send log
-	}
-}
-
-// COMPLETED
-
-int getVisitedDens(){
-	int i,count;
-	for(i = 0; i < NUM_DENS; i++){
-		if(game.visitedDens[i].visited){
-			count +=1;
-		}
-	}
-	return count;
-}
-
-void printer(Entity ent)
-{
-	int i,j,x,y;
-    // matrice giocatore...
-    char phrogBody [PHROG_SIZE][PHROG_SIZE] = {
-        "\\-/",
-        "(O)",
-        "/-\\"
-    };
-
-    char carFrontSectionRight [PHROG_SIZE][2] = {
-    	"o-",
-    	"|C",
-    	"o-"
-    };
-
-    char carFrontSectionLeft [PHROG_SIZE][2] = {
-    	"-o",
-    	"D|",
-    	"-o"
-    };
-
-    char carBackSectionRight [PHROG_SIZE][2] = {
-    	"-o",
-    	"K|",
-    	"-o"
-    };
-
-    char carBackSectionLeft [PHROG_SIZE][2] = {
-    	"o-",
-    	"|H",
-    	"o-"
-    };
-
-    char carMiddleSection [PHROG_SIZE][1] = {
-    	"-",
-    	" ",
-    	"-"
-    };
-
-    y = ent.box.topleft.y;
-    x = ent.box.topleft.x;
     
-    switch(ent.et){
-		case PHROG:
-			attron(COLOR_PAIR(ent.color));
-			for(i = 0; i < PHROG_SIZE; i++){
-				for(j = 0; j < PHROG_SIZE; i++){
-					mvaddch(y+i,x+j,phrogBody[i][j]);
-				}
-			}
-			attroff(COLOR_PAIR(ent.color));
-		break;
-	}
-}
-
-void clearer(Entity ent)
-{
-    int size,x,y,adjy,adjx;
-
-    y = ent.box.topleft.y;
-    x = ent.box.topleft.x;
-    adjy = adjx = 0;
-
-    switch(ent.et){
-        case PHROG:            
-            size = PHROG_SIZE;
-
-            switch(ent.dir){
-	            case N:
-	            	adjy +=1;
-				break;
-
-				case S:
-					adjy -=1;
-				break;
-
-				case W:
-					adjx +=1;
-				break;
-
-				case E:
-					adjx -=1;
-				break;
-            }
-        break;
-    }
-
-    for(int i = 0; i < size; i++){
-        for(int j = 0 ; j < size ; j++){
-            mvaddch(y+i+adjy,x+j+adjx,' ');
-        }
-    }
-}
-
-_Bool collisionDetection(Hitbox a, Hitbox b)
-{
-	if(((a.topleft.x >= b.topleft.x && a.topleft.x <= b.botright.x) || (a.botright.x >= b.topleft.x && a.botright.x <= b.botright.x)) &&
-       ((a.topleft.y >= b.topleft.y && a.topleft.y <= b.botright.y) || (a.botright.y >= b.topleft.y && a.botright.y <= b.botright.y))) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
+// funzioni per la stampa e la pulizia
 void drawFieldBorder()
 {
     int i = 0;
@@ -409,112 +557,101 @@ void drawFieldBorder()
     mvaddch(MAXY, 0, ACS_LLCORNER);
 }
 
-/*
-	void Phrog(int pipewrite)
-	{
-		Entity phrog;
+void printer(Entity ent)
+{
+    // matrice giocatore...
+    char phrogBody [3][3] = {
+        "\\-/",
+        "(0)",
+        "/-\\"
+    };
 
-		char c;
-		phrog.lives = 3;
-		phrog.box.topleft.x = MAXX/2;
-		phrog.box.topleft.y = MAXY/2;
-		phrog.box.botright.x = (MAXX/2)+2;
-		phrog.box.botright.y = (MAXY/2)+2;
-		phrog.color = RED;
-		phrog.dir = N;
-		phrog.et = PHROG;
-		phrog.pid = getpid();
+    // matrice alieno lvl 1
+    char ORFISTBody [3][3] = {
+        "(*)",
+        "]M[",
+        "^v^"
+    };
 
-		while(phrog.lives > 0){
-			c = getch();
-			switch(c){
-				case UP:
-					if(phrog.box.topleft.y > 0){
-						phrog.box.topleft.y -= 3;
-						phrog.box.botright.y -= 3;
-						phrog.row -=1;
-						phrog.dir = N;
-					}	
-				break;
+    // matrice alieno lvl 2
+    char GRAVIDIABody [2][3] = {
+        "<A>",
+        "(T)"
+    };
 
-				case DOWN:
-					if(phrog.box.botright.y < MAXY){
-						phrog.box.topleft.y += 3;
-						phrog.box.botright.y += 3;
-						phrog.row +=1;
-						phrog.dir = S;
-					}				
-				break;
+    // asterisco per i missili,zero per la bomba
+    char CRITICALBody = 'O';
+    char METEORBody = '0';
 
-				case LEFT:
-					if(phrog.box.topleft.x > 0){
-						phrog.box.topleft.x -= 1;
-						phrog.box.botright.x -= 1;
-						phrog.dir = W;
-					}			
-				break;
+    
+    // individuazione entità...
+    switch(ent.et) {
+    // giocatore
+    case PHROG:
+    attron(COLOR_PAIR(ent.color));
+    for(int i = 0; i<PHROG_SIZE; i++) {
+        for(int j = 0; j<PHROG_SIZE; j++) {
+            mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j, phrogBody[i][j]);
+        }
+    }
+    attroff(COLOR_PAIR(ent.color));
+    break;
 
-				case RIGHT:
-					if(phrog.box.botright.x < MAXX){
-						phrog.box.topleft.x += 1;
-						phrog.box.botright.x += 1;
-						phrog.dir = E;
-					}				
-				break;
+    // alieno lvl 1
+    case LOG:
 
-				case ' ':
-					//spit();
-				break;
+    break;
 
-				case 'q':
-					phrog.lives = 0;
-				break;
-			}
+    // alieno lvl2
+    case CAR:
+    break;
 
-			write(pipewrite,&phrog,sizeof(Entity));
-		}
-	}
+    // bomba
+    case SPIDER:
+    break;
 
-	void mammarrancaFields(int piperead, int pipewrite)
-	{
+    // missili
+    case SPITBALL:
+    break;
+    }
+}
 
-		mvprintw(MAXY+2,MAXX+1,"a casa delle nutrie\n");
-	    Entity tempEntity, tempSpit, tempCar;
-	    Log tempLog;
+void bodyClearing(Entity ent){
+    int size,x,y,adjy,adjx;
 
-	    game.player.lives = 3;
-	    game.player.color = RED;
+    y = ent.box.topLeft.y;
+    x = ent.box.topLeft.x;
+    adjy = adjx = 0;
 
-	    game.running = true;
-	    game.loss = false;
-	    game.win = false;
+    switch(ent.et) {
+        case PHROG:            
+            size = PHROG_SIZE;
+        break;
 
-	    drawFieldBorder();
-	 
-	    while(game.running)
-	    {   
-	        drawFieldBorder();
-	        read(piperead, &tempEntity, sizeof(Entity));
+        case LOG:
 
-	        switch (tempEntity.et)
-	        {
-	            case PHROG:
-	                clearer(game.player);
-	                game.player.box.topleft.x = tempEntity.box.topleft.x;
-	                game.player.box.topleft.y = tempEntity.box.topleft.y;
-	                game.player.box.botright.x = tempEntity.box.botright.x;
-	                game.player.box.botright.y = tempEntity.box.botright.y;
-	                game.player.pid = tempEntity.pid;
-	                game.player.row = tempEntity.row;
-	                game.player.dir = tempEntity.dir;
+        break;
 
-	                if(game.player.lives > 0){
-	                	printer(tempEntity);	
-	                }
-	                
-	            break;
-	        }
-	        refresh(); 
-	    }
-	}
-*/
+        case CAR:
+
+        break;
+
+        case SPIDER:
+  
+        break;
+
+        case SPITBALL:
+
+        break;
+    }
+
+    for(int i = 0; i < size; i++){
+        for(int j = 0 ; j < size ; j++){
+            mvaddch(y+i+adjy,x+j+adjx,' ');
+        }
+    }
+}
+
+
+
+
