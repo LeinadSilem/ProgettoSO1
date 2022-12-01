@@ -1,5 +1,5 @@
 processP: main.c gameLib.c
-	gcc -g -o processP main.c gameLib.c -lncurses -I. 
+	gcc -g -o succ main.c gameLib.c -lncurses -I. 
 
 clean:
-	rm *o processP
+	rm *o succ

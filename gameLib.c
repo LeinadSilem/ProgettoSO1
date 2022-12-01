@@ -8,7 +8,7 @@ void phrog(int pipewrite)
     char input;
     Entity player;
 
-    player.box.topLeft.x = MAXX/2;
+    player.box.topLeft.x = 1;
     player.box.topLeft.y = MAXY-3;
 
     player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
@@ -24,30 +24,30 @@ void phrog(int pipewrite)
         input=getch();
         switch(input) {
             case UP:
-                if(player.box.topLeft.y > 0){
-                    player.box.topLeft.y -= 3;
+                if(player.box.topLeft.y > 1){
+                    player.box.topLeft.y -= PHROG_SIZE;
                     player.dir = N;
                 }
             break;
 
             case DOWN:
-                if(player.box.botRight.y < MAXY){
-                    player.box.topLeft.y += 3;
+                if(player.box.botRight.y < MAXY-1){
+                    player.box.topLeft.y += PHROG_SIZE;
                     player.dir = S;
                 }
             break;
 
         	case LEFT:
-        		if(player.box.topLeft.x > 0){
-                    player.box.topLeft.y -= 1;
+        		if(player.box.topLeft.x > 1){
+                    player.box.topLeft.x -= PHROG_SIZE;
                     player.dir = W;
                 }
         	break;
 
 
         	case RIGHT:
-        		if(player.box.botRight.x < MAXX){
-                    player.box.topLeft.y += 1;
+        		if(player.box.botRight.x < MAXX-1){
+                    player.box.topLeft.x += PHROG_SIZE;
                     player.dir = E;
                 }
         	break;      
@@ -57,6 +57,7 @@ void phrog(int pipewrite)
         player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
 
         updateEntity(player,pipewrite);
+        usleep(20000);
     }
 }
 
@@ -103,11 +104,11 @@ void roadsAndPonds(int piperead, int pipewrite)
     initializeData();
     Entity tempEntity;
 
-    drawFieldBorder();
+    drawMap();
     
     while(game.running)
     {   
-        drawFieldBorder();
+        drawMap();
         read(piperead, &tempEntity, sizeof(Entity));
 
         switch (tempEntity.et)
@@ -436,7 +437,7 @@ void roadsAndPonds(int piperead, int pipewrite)
 	}
 */
 
-// eggiornamento e scrittura di un entità in pipe
+// aggiornamento e scrittura di un entità in pipe
 void updateEntity(Entity temp, int pipewrite)
 {
     Entity current;
@@ -482,6 +483,12 @@ void initializeData()
     init_pair(MAGENTA,COLOR_MAGENTA,COLOR_BLACK);
     init_pair(CYAN,COLOR_CYAN,COLOR_BLACK);
 
+    //delimitations calculations
+    game.zoneLimitY[0] = 4;
+	game.zoneLimitY[1] = 4 + (NUM_RIVERS*PHROG_SIZE);
+	game.zoneLimitY[2] = (MAXY-3) - (NUM_LANES*PHROG_SIZE);
+	game.zoneLimitY[3] = MAXY-3;
+
 	// initPlayer
 	game.player.lives = 3;
 	game.player.color = RED;
@@ -505,7 +512,6 @@ void initializeData()
 			game.dirRivers[i] = E;
 		}
 	}
-	mvprintw(MAXY+4,MAXX+1,"player stats initialized");
 
 	// init cars
 	for(i = 0; i < NUM_LANES; i++){
@@ -515,30 +521,28 @@ void initializeData()
 			game.carTable[i][j].dir = game.dirLanes[j]; 
 		}
 	}
-	mvprintw(MAXY+5,MAXX+1,"player stats initialized");
 
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
 		game.logs[i].row = i;
 		game.logs[i].dir = game.dirRivers[i];
 	}
-	mvprintw(MAXY+6,MAXX+1,"player stats initialized");
 
 	// init dens
 	for(i = 0; i < NUM_DENS; i++){
-		game.visitedDens[i].coords.x = 0 + (i*PHROG_SIZE*2);
-		game.visitedDens[i].coords.y = 0;
+		game.visitedDens[i].coords.x = 1 + (i*WIDTH_DENS*2);
+		game.visitedDens[i].coords.y = 1;
 		game.visitedDens[i].visited = false;
 	}
-	mvprintw(MAXY+7,MAXX+1,"player stats initialized");
 }
     
 // funzioni per la stampa e la pulizia
-void drawFieldBorder()
+void drawMap()
 {
-    int i = 0;
-    int j = 0;
-    for (j; j <= MAXY; j++) {
+    int i,j,k;
+
+    // drawing border
+    for (j= 0; j <= MAXY; j++) {
         i = 0;
         if (j >= 1 && j < MAXY) {
             mvaddch(j, i, ACS_VLINE);
@@ -555,15 +559,61 @@ void drawFieldBorder()
     mvaddch(0, MAXX, ACS_URCORNER);
     mvaddch(MAXY, MAXX, ACS_LRCORNER);
     mvaddch(MAXY, 0, ACS_LLCORNER);
+
+    // limiting zones
+    for(j = 0; j<ZONES; j++){
+    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	    
+	    for(i = 1;i<MAXX;i++){
+	    	mvaddch(game.zoneLimitY[j],i,ACS_HLINE);
+	    }
+	    mvaddch(game.zoneLimitY[j],MAXX,ACS_RTEE);
+    }
+
+    // drawing dens
+
+    for(i = 0; i < NUM_DENS; i++){
+    	switch(i){
+	    	case 0:
+	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);
+	    	break;
+
+	    	case NUM_DENS-1:
+	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    	break;
+
+	    	default:
+	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    		
+	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);	    		
+	    	break;
+    	}
+    }
+    
 }
 
 void printer(Entity ent)
 {
     // matrice giocatore...
     char phrogBody [3][3] = {
-        "\\-/",
+        ",_,",
         "(0)",
-        "/-\\"
+        "' '"
     };
 
     // matrice alieno lvl 1

@@ -16,13 +16,16 @@
 #define LEFT 68
 #define PHROG_SIZE 3
 #define NUM_LOGS 3
+#define NUM_RIVERS 3
 #define NUM_LANES 3
 #define NUM_CARS 3
 #define NUM_DENS 5
-#define MAXX 27
-#define MAXY 27
+#define WIDTH_DENS 9
+#define MAXX 82
+#define MAXY 28
 #define MIN_ROW_CAR 15
 #define MIN_ROW_LOG 3
+#define ZONES 4
 #define ENEMY_CHANCE 20;
 
 //structures and type definitions
@@ -72,6 +75,7 @@ typedef struct gamestate
 	Direction dirLanes[NUM_LANES];
 	Direction dirRivers[NUM_LOGS];	
 	Den visitedDens[NUM_DENS];
+	int zoneLimitY[ZONES];
 	_Bool running,loss,win;
 }Gamestate;
 
@@ -90,7 +94,7 @@ void roadsAndPonds(int piperead, int pipewrite);
 //_Bool verifyHitbox(Hitbox a, Hitbox b);
 void updateEntity(Entity temp, int pipewrite);
 void initializeData();
-void drawFieldBorder();
+void drawMap();
 void printer(Entity ent);
 void bodyClearing(Entity ent);
 
