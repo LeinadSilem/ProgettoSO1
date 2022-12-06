@@ -2,64 +2,575 @@
 
 Gamestate game;
 
-// munzione per il movimento della rana
+// funzione per il movimento della rana
 void phrog(int pipewrite)
 {
     char input;
     Entity player;
 
-    player.box.topLeft.x = 1;
-    player.box.topLeft.y = MAXY-3;
-
-    player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
-    player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
+    player.pid = getpid();
+    player.dir = FIXED;
 
     player.lives = 3;
-    player.dir = FIXED;
-    player.et = PHROG;
-    player.pid = getpid();
-    player.col = RED;
+	player.color = RED;
+	player.row = game.player.col = 0;
+	player.et = PHROG;
+	player.box.topLeft.x = 1;
+    player.box.topLeft.y = MAXY-3;
+    player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
+    player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
 
     while(true) {
         input=getch();
         switch(input) {
             case UP:
-                if(player.box.topLeft.y > 1){
-                    player.box.topLeft.y -= PHROG_SIZE;
-                    player.dir = N;
-                }
-            break;
+				if(player.box.topLeft.y > 1){
+					player.box.topLeft.y -= 3;
+					player.dir = N;		
+				}	
+			break;
 
-            case DOWN:
-                if(player.box.botRight.y < MAXY-1){
-                    player.box.topLeft.y += PHROG_SIZE;
-                    player.dir = S;
-                }
-            break;
+			case DOWN:
+				if(player.box.botRight.y < MAXY-1){
+					player.box.topLeft.y += 3;
+					player.dir = S;
+				}
+			break;
 
-        	case LEFT:
-        		if(player.box.topLeft.x > 1){
-                    player.box.topLeft.x -= PHROG_SIZE;
-                    player.dir = W;
-                }
-        	break;
+			case LEFT:
+				if(player.box.topLeft.x > 1){
+					player.box.topLeft.x -= 3;	
+					player.dir = W;
+				}
+			break;
 
-
-        	case RIGHT:
-        		if(player.box.botRight.x < MAXX-1){
-                    player.box.topLeft.x += PHROG_SIZE;
-                    player.dir = E;
-                }
-        	break;      
+			case RIGHT:
+				if(player.box.botRight.x < MAXX-1){
+					player.box.topLeft.x += 3;	
+					player.dir = E;	
+				}
+			break;
         }
 
         player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
         player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
 
         updateEntity(player,pipewrite);
-        usleep(20000);
     }
 }
+
+void carGenerator(int pipewrite)
+{
+	int i,j;
+	Entity car[NUM_LANES][NUM_CARS];
+	
+	for(i = 0; i < NUM_LANES; i++){
+		for(j = 0; j < NUM_CARS; j++){
+
+			// deciding map position and direction
+			car[i][j].row = i;
+			car[i][j].col = j;
+			car[i][j].dir = game.dirLanes[i];
+			car[i][j].et = CAR;
+
+			// deciding characteristics
+			car[i][j].length = (4 +rand()%(6))*PHROG_SIZE;
+			if(car[i][j].length > 6){
+				car[i][j].color = BLUE;
+			}else {
+				car[i][j].color = CYAN;
+			}
+
+			// deciding starting methods and hitbox measurements
+			if(car[i][j].dir == W){
+				car[i][j].box.topLeft.x = 0 - car[i][j].length;
+			}else{
+				car[i][j].box.topLeft.x = MAXX;
+			}
+
+			car[i][j].box.topLeft.y = MIN_ROW_CAR + (i*PHROG_SIZE);
+			
+			car[i][j].box.botRight.x = car[i][j].box.topLeft.x + car[i][j].length-1;
+			car[i][j].box.botRight.y = car[i][j].box.topLeft.y + PHROG_SIZE-1;
+		}
+	}
+
+	for(j = 0; j < NUM_CARS; j++){
+		for(i = 0; i < NUM_LANES; i++){
+			moveCar(car[i][j],pipewrite);
+		}
+		sleep(3);
+	}
+}
+
+void moveCar(Entity car,int pipewrite)
+{
+	car.pid = getpid();
+
+	while(true){
+		switch(car.dir){
+			case W:
+				if(car.box.botRight.x == 0){
+					car.box.topLeft.x = MAXX-1;
+				}else{
+					car.box.topLeft.x -=1;
+				}
+			break;
+
+			case E:
+				if(car.box.botRight.x == MAXX){
+					car.box.topLeft.x = 1;
+				}
+				car.box.topLeft.x +=1;
+			break;
+		}
+
+		car.box.botRight.x = car.box.topLeft.x + car.length-1;
+
+		updateEntity(car,pipewrite);
+		usleep(250000);
+	}
+}
+
+void roadsAndPonds(int piperead, int pipewrite)
+{
+    initializeData();
+    Entity tempEntity;
+
+    drawMap();
+    
+    while(game.running)
+    {   
+        drawMap();
+        read(piperead, &tempEntity, sizeof(Entity));
+        mvprintw(0,MAXX+1,"entity read:%d",tempEntity.et);
+
+        switch (tempEntity.et)
+        {
+            case PHROG:
+                bodyClearing(game.player);                
+                     
+                game.player.pid = tempEntity.pid;
+                game.player.dir = tempEntity.dir;
+
+                game.player.box.topLeft.x = tempEntity.box.topLeft.x;
+                game.player.box.topLeft.y = tempEntity.box.topLeft.y;
+                game.player.box.botRight.x = tempEntity.box.botRight.x;
+                game.player.box.botRight.y = tempEntity.box.botRight.y;
+                
+                if(game.player.lives > 0){
+                    printer(game.player);
+                }
+                
+                mvprintw(MAXY+1,0,"Phrog position x:%d, y:%d, dir:",
+                game.player.box.topLeft.x,game.player.box.topLeft.y);
+               	translateDirection(game.player.dir);
+            break;
+
+            case LOG:
+                //bodyClearing(game.aliensLVL1[tempEntity.id]);
+                //game.aliensLVL1[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
+                //game.aliensLVL1[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
+                //game.aliensLVL1[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
+                //game.aliensLVL1[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
+                //game.aliensLVL1[tempEntity.id].d = tempEntity.d;
+                //game.aliensLVL1[tempEntity.id].col = tempEntity.col;
+                //game.aliensLVL1[tempEntity.id].pid = tempEntity.pid;                              
+                //shipCollisions(game.aliensLVL1[tempEntity.id]);
+                //checkBorderProximity(game.aliensLVL1[tempEntity.id].box.topLeft.x);               
+                //if(game.aliensLVL1[tempEntity.id].lives > 0){
+                //    printer(game.aliensLVL1[tempEntity.id]);
+                //}
+            break;
+            
+            case CAR:
+            	game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
+                game.carTable[tempEntity.row][tempEntity.col].color = tempEntity.color;
+                game.carTable[tempEntity.row][tempEntity.col].dir = tempEntity.dir;
+                
+                bodyClearing(game.carTable[tempEntity.row][tempEntity.col]); 
+                
+                game.carTable[tempEntity.row][tempEntity.col].box.topLeft.x = tempEntity.box.topLeft.x;
+                game.carTable[tempEntity.row][tempEntity.col].box.topLeft.y = tempEntity.box.topLeft.y;
+                game.carTable[tempEntity.row][tempEntity.col].box.botRight.x = tempEntity.box.botRight.x;
+                game.carTable[tempEntity.row][tempEntity.col].box.botRight.y = tempEntity.box.botRight.y;
+                game.carTable[tempEntity.row][tempEntity.col].pid = tempEntity.pid;        
+
+                printer(game.carTable[tempEntity.row][tempEntity.col]);
+
+                mvprintw(tempEntity.box.topLeft.y,MAXX,"car position x:%d, y:%d, dir:",
+                tempEntity.box.topLeft.x,tempEntity.box.topLeft.y);
+               	translateDirection(tempEntity.dir);
+            break;
+        
+            case SPIDER:
+                //bodyClearing(tempEntity);
+                //tempBomba.box.topLeft.x = tempBomba.box.botRight.x = tempEntity.box.topLeft.x;
+                //tempBomba.box.topLeft.y = tempBomba.box.botRight.y = tempEntity.box.botRight.y;
+                //tempBomba.pid = tempEntity.pid;
+                //tempBomba.d = tempEntity.d;
+                //tempBomba.id = tempEntity.id;
+                //tempBomba.e = tempEntity.e;                            
+                //shipCollisions(tempBomba);
+                //if(tempBomba.box.topLeft.x > 1){
+                //    printer(tempBomba);
+                //}               
+            break;
+
+            case SPITBALL:
+                //bodyClearing(tempEntity);
+                //tempMissile.box.topLeft.x = tempMissile.box.botRight.x = tempEntity.box.topLeft.x;
+                //tempMissile.box.topLeft.y = tempMissile.box.botRight.y = tempEntity.box.botRight.y;
+                //tempMissile.pid = tempEntity.pid;
+                //tempMissile.col = tempEntity.col;
+                //tempMissile.d = tempEntity.d;
+                //tempMissile.id = tempEntity.id;
+                //tempMissile.e = tempEntity.e;
+                //projectileCollisions(tempMissile,pipewrite);
+                //if(tempMissile.lives > 0 && tempMissile.box.topLeft.x < MAXX-1 && tempMissile.box.topLeft.y > 1 && tempMissile.box.topLeft.y < MAXY-1){
+                //    printer(tempMissile);
+                //}              
+            break;
+        }
+        
+        refresh();  
+    }
+}
+
+void printer(Entity ent)
+{
+	int i,j,k;
+
+    // matrice giocatore...
+    char phrogBody [3][3] = {
+        ",_,",
+        "(0)",
+        "' '"
+    };
+
+    char carFrontSectionLeft [PHROG_SIZE][2] = {
+    	"o-",
+    	"|C",
+    	"o-"
+    };
+
+    char carFrontSectionRight[PHROG_SIZE][2] = {
+    	"-o",
+    	"D|",
+    	"-o"
+    };
+
+    char carBackSectionLeft [PHROG_SIZE][2] = {
+    	"-o",
+    	"K|",
+    	"-o"
+    };
+
+    char carBackSectionRight [PHROG_SIZE][2] = {
+    	"o-",
+    	"|H",
+    	"o-"
+    };
+
+    char carMiddleSection [PHROG_SIZE][1] = {
+    	"-",
+    	" ",
+    	"-"
+    };
+
+    // individuazione entità...
+    switch(ent.et) {
+	    // giocatore
+	    case PHROG:
+		    attron(COLOR_PAIR(ent.color));
+		    for(i = 0; i < PHROG_SIZE; i++) {
+		        for(j = 0; j < PHROG_SIZE; j++) {
+		            mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j, phrogBody[i][j]);
+		        }
+		    }
+		    attroff(COLOR_PAIR(ent.color));
+	    break;
+
+	    case LOG:
+	    	attron(COLOR_PAIR(ent.color));
+	    	attroff(COLOR_PAIR(ent.color));
+	    break;
+
+	    case CAR:
+	    	attron(COLOR_PAIR(ent.color));
+	    	for(i = 0; i < PHROG_SIZE; i++) {
+	    		for(j = 0; j < ent.length; j++ ){
+	    			if(j < 2){
+		    			switch(ent.dir){
+				    		case W:
+				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carFrontSectionLeft[i][j]);
+				    		break;
+
+				    		case E:
+				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carBackSectionRight[i][j]);
+				    		break;
+				    	}
+		    		}else if(j >= ent.length-3){
+		    			switch(ent.dir){
+				    		case W:
+				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carBackSectionLeft[i][j]);
+				    		break;
+
+				    		case E:
+				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carFrontSectionRight[i][j]);
+				    		break;
+				    	}
+		    		}else{
+		    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carMiddleSection[i][j]);		
+		    		}
+	    		}
+		    }	    	
+	    	attroff(COLOR_PAIR(ent.color));
+	    break;
+
+	    case SPIDER:
+	    	attron(COLOR_PAIR(ent.color));
+	    	attroff(COLOR_PAIR(ent.color));
+	    break;
+
+	    case SPITBALL:
+	    	attron(COLOR_PAIR(ent.color));
+	    	attroff(COLOR_PAIR(ent.color));
+	    break;
+    }
+}
+
+void bodyClearing(Entity ent)
+{
+    int size,x,y,adjy,adjx;
+
+    y = ent.box.topLeft.y;
+    x = ent.box.topLeft.x;
+    adjy = adjx = 0;
+
+    switch(ent.et) {
+        case PHROG:            
+            size = PHROG_SIZE;
+        break;
+
+        case LOG:
+        break;
+
+        case CAR:
+        	size = ent.length;
+        break;
+
+        case SPIDER:  
+        break;
+
+        case SPITBALL:
+        break;
+    }
+
+    for(int i = 0; i < PHROG_SIZE; i++){
+        for(int j = 0 ; j < size ; j++){
+            mvaddch(y+i+adjy,x+j+adjx,' ');
+        }
+    }
+}
+
+// aggiornamento e scrittura di un entità in pipe
+void updateEntity(Entity temp, int pipewrite)
+{
+    Entity current;
+
+    if(temp.et == SPITBALL) {
+        current.box.topLeft.x = current.box.botRight.x = temp.box.topLeft.x;
+        current.box.topLeft.y = current.box.botRight.y = temp.box.topLeft.y;
+    } else {
+        current.box.topLeft.x = temp.box.topLeft.x;
+        current.box.topLeft.y = temp.box.topLeft.y;
+        current.box.botRight.x = temp.box.botRight.x;
+        current.box.botRight.y = temp.box.botRight.y;
+    }
+
+    current.lives = temp.lives;
+    current.et = temp.et;
+    current.color = temp.color;
+    current.dir = temp.dir;
+    current.pid = temp.pid;
+ 	
+ 	current.row = temp.row;
+ 	current.col = temp.col;
+ 	current.length = temp.length;
+
+    write(pipewrite, &current, sizeof(Entity));
+}
+
+// inizializzazione dei dati di gioco
+void initializeData()
+{
+	int i,j;
+
+	game.running = true;
+    game.loss = false;
+    game.win = false;
+
+	// init colors
+	init_pair(WHITE,COLOR_WHITE,COLOR_BLACK);
+    init_pair(RED,COLOR_RED,COLOR_BLACK);
+    init_pair(YELLOW,COLOR_YELLOW,COLOR_BLACK);
+    init_pair(GREEN,COLOR_GREEN,COLOR_BLACK);
+    init_pair(BLUE,COLOR_BLUE,COLOR_BLACK);
+    init_pair(MAGENTA,COLOR_MAGENTA,COLOR_BLACK);
+    init_pair(CYAN,COLOR_CYAN,COLOR_BLACK);
+
+    //delimitations calculations
+    game.zoneLimitY[0] = 4;
+	game.zoneLimitY[1] = 4 + (NUM_RIVERS*PHROG_SIZE);
+	game.zoneLimitY[2] = (MAXY-3) - (NUM_LANES*PHROG_SIZE);
+	game.zoneLimitY[3] = MAXY-3;
+
+	// initPlayer
+	game.player.lives = 3;
+	game.player.color = RED;
+	game.player.row = game.player.col = 0;
+	game.player.et = PHROG;
+
+	game.player.box.topLeft.x = 1;
+    game.player.box.topLeft.y = MAXY-3;
+
+    game.player.box.botRight.x = game.player.box.topLeft.x + PHROG_SIZE-1;
+    game.player.box.botRight.y = game.player.box.topLeft.y + PHROG_SIZE-1;
+
+	// init car & log directions
+	for(i = 0; i < NUM_LANES; i++){
+		if(rand()%2 == 0){
+			game.dirLanes[i] = E;
+		}else{
+			game.dirLanes[i] = W;
+		}
+	}
+
+	for(i = 0; i < NUM_LOGS; i++){
+		if(rand()%2 == 0){
+			game.dirRivers[i] = W;
+		}else{
+			game.dirRivers[i] = E;
+		}
+	}
+
+	// init cars
+	// row in the case of cars is the lane in which they are found
+	// col is just car number 0,1,2 etc..
+	for(i = 0; i < NUM_LANES; i++){
+		for(j = 0; j < NUM_CARS; j++){
+			game.carTable[i][j].row = i;
+			game.carTable[i][j].col = j;
+			game.carTable[i][j].dir = game.dirLanes[j]; 
+		}
+	}
+
+	// init logs
+	for(i = 0; i < NUM_LOGS; i++){
+		game.logs[i].row = i;
+		game.logs[i].dir = game.dirRivers[i];
+	}
+
+	// init dens
+	for(i = 0; i < NUM_DENS; i++){
+		game.visitedDens[i].coords.x = 1 + (i*WIDTH_DENS*2);
+		game.visitedDens[i].coords.y = 1;
+		game.visitedDens[i].visited = false;
+	}
+}
+    
+// funzioni per la stampa e la pulizia
+void drawMap()
+{
+    int i,j,k;
+
+    // drawing border
+    for (j = 0; j <= MAXY; j++) {
+        i = 0;
+        if (j >= 1 && j < MAXY) {
+            mvaddch(j, i, ACS_VLINE);
+            mvaddch(j, MAXX, ACS_VLINE);
+
+        } else if (j == 0 || j == MAXY) {
+            for (i = 0; i < MAXX; i++) {
+                mvaddch(j, i, ACS_HLINE);
+                mvaddch(j, MAXX, ACS_HLINE);
+            }
+        }
+    }
+    mvaddch(0, 0, ACS_ULCORNER);
+    mvaddch(0, MAXX, ACS_URCORNER);
+    mvaddch(MAXY, MAXX, ACS_LRCORNER);
+    mvaddch(MAXY, 0, ACS_LLCORNER);
+
+    // limiting zones
+    for(j = 0; j<ZONES; j++){
+    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	    
+	    for(i = 1;i<MAXX;i++){
+	    	mvaddch(game.zoneLimitY[j],i,ACS_HLINE);
+	    }
+	    mvaddch(game.zoneLimitY[j],MAXX,ACS_RTEE);
+    }
+
+    // drawing dens
+    for(i = 0; i < NUM_DENS; i++){
+    	switch(i){
+	    	case 0:
+	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);
+	    	break;
+
+	    	case NUM_DENS-1:
+	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    	break;
+
+	    	default:
+	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    		
+	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		for(j=1;j<PHROG_SIZE+1;j++){
+	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    		}
+	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);	    		
+	    	break;
+    	}
+    } 
+}
+
+void translateDirection(Direction dir)
+{
+	switch(dir){
+	    case N:
+	    	printw("north");
+		break;
+
+	    case S:
+	    	printw("south");
+		break;
+
+		case W:
+			printw("west ");
+		break;
+
+		case E:
+			printw("east ");
+		break;
+	}
+}
+
+// NOT (IN USE) YET
 
 // funzione per la generazione degli sputi del ragno
 void spit(int pipewrite, Hitbox pH)
@@ -99,99 +610,59 @@ void moveSpitBall(int pipewrite, Entity projectile)
     }
 }
 
-void roadsAndPonds(int piperead, int pipewrite)
+_Bool verifyHitbox(Hitbox a, Hitbox b)
 {
-    initializeData();
-    Entity tempEntity;
 
-    drawMap();
-    
-    while(game.running)
-    {   
-        drawMap();
-        read(piperead, &tempEntity, sizeof(Entity));
-
-        switch (tempEntity.et)
-        {
-            case PHROG:
-                bodyClearing(game.player);
-                game.player.box.topLeft.x = tempEntity.box.topLeft.x;
-                game.player.box.topLeft.y = tempEntity.box.topLeft.y;
-                game.player.box.botRight.x = tempEntity.box.botRight.x;
-                game.player.box.botRight.y = tempEntity.box.botRight.y;
-                game.player.pid = tempEntity.pid;
-                if(game.player.lives > 0){
-                    printer(tempEntity);
-                }
-            break;
-
-            case LOG:
-                //bodyClearing(game.aliensLVL1[tempEntity.id]);
-                //game.aliensLVL1[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
-                //game.aliensLVL1[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
-                //game.aliensLVL1[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
-                //game.aliensLVL1[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
-                //game.aliensLVL1[tempEntity.id].d = tempEntity.d;
-                //game.aliensLVL1[tempEntity.id].col = tempEntity.col;
-                //game.aliensLVL1[tempEntity.id].pid = tempEntity.pid;                              
-                //shipCollisions(game.aliensLVL1[tempEntity.id]);
-                //checkBorderProximity(game.aliensLVL1[tempEntity.id].box.topLeft.x);               
-                //if(game.aliensLVL1[tempEntity.id].lives > 0){
-                //    printer(game.aliensLVL1[tempEntity.id]);
-                //}
-            break;
-            
-            case CAR:
-                //bodyClearing(game.aliensLVL2[tempEntity.id]); 
-                //game.aliensLVL2[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
-                //game.aliensLVL2[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
-                //game.aliensLVL2[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
-                //game.aliensLVL2[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
-                //game.aliensLVL2[tempEntity.id].d = tempEntity.d;
-                //game.aliensLVL2[tempEntity.id].col = tempEntity.col;
-                //game.aliensLVL2[tempEntity.id].pid = tempEntity.pid;                
-                //shipCollisions(game.aliensLVL2[tempEntity.id]);
-                //checkBorderProximity(game.aliensLVL2[tempEntity.id].box.topLeft.x);
-                //if(game.aliensLVL2[tempEntity.id].lives > 0){
-                //    printer(game.aliensLVL2[tempEntity.id]);
-                //}
-            break;
-        
-            case SPIDER:
-                //bodyClearing(tempEntity);
-                //tempBomba.box.topLeft.x = tempBomba.box.botRight.x = tempEntity.box.topLeft.x;
-                //tempBomba.box.topLeft.y = tempBomba.box.botRight.y = tempEntity.box.botRight.y;
-                //tempBomba.pid = tempEntity.pid;
-                //tempBomba.d = tempEntity.d;
-                //tempBomba.id = tempEntity.id;
-                //tempBomba.e = tempEntity.e;                            
-                //shipCollisions(tempBomba);
-                //if(tempBomba.box.topLeft.x > 1){
-                //    printer(tempBomba);
-                //}               
-            break;
-
-            case SPITBALL:
-                //bodyClearing(tempEntity);
-                //tempMissile.box.topLeft.x = tempMissile.box.botRight.x = tempEntity.box.topLeft.x;
-                //tempMissile.box.topLeft.y = tempMissile.box.botRight.y = tempEntity.box.botRight.y;
-                //tempMissile.pid = tempEntity.pid;
-                //tempMissile.col = tempEntity.col;
-                //tempMissile.d = tempEntity.d;
-                //tempMissile.id = tempEntity.id;
-                //tempMissile.e = tempEntity.e;
-                //projectileCollisions(tempMissile,pipewrite);
-                //if(tempMissile.lives > 0 && tempMissile.box.topLeft.x < MAXX-1 && tempMissile.box.topLeft.y > 1 && tempMissile.box.topLeft.y < MAXY-1){
-                //    printer(tempMissile);
-                //}              
-            break;
-        }
-        
-        refresh();  
+    if(((a.topLeft.x >= b.topLeft.x && a.topLeft.x <= b.botRight.x) || (a.botRight.x >= b.topLeft.x && a.botRight.x <= b.botRight.x)) &&
+       ((a.topLeft.y >= b.topLeft.y && a.topLeft.y <= b.botRight.y) || (a.botRight.y >= b.topLeft.y && a.botRight.y <= b.botRight.y))) {
+        return true;
+    } else {
+        return false;
     }
 }
 
 /*
+
+	void updatePhrog()
+	{
+
+		switch(game.player.dir){
+			case N:
+				if(game.player.box.topLeft.y > 1){
+					game.player.box.topLeft.y -= 3;
+				}			
+			break;
+
+			case S:
+				if(game.player.box.botRight.y < MAXY-1){
+					game.player.box.topLeft.y += 3;
+				}
+			break;
+
+			case W:
+				if(game.player.box.topLeft.x > 1){
+					game.player.box.topLeft.x -= 3;
+				}
+			break;
+
+			case E:
+				if(game.player.box.botRight.x < MAXX-1){
+					game.player.box.topLeft.x += 3;
+				}		
+			break;
+
+			case FIXED:
+				//controllo per vedere se è su un tronco:
+				//true, movimento da aggiornare con tronco
+			break;
+		}
+
+		game.player.box.botRight.x = game.player.box.topLeft.x + PHROG_SIZE-1;
+	    game.player.box.botRight.y = game.player.box.topLeft.y + PHROG_SIZE-1;
+
+		printer(game.player);
+	}
+
 	// funzione che regola lo spawn dei nuvoi alieni
 	void alienGenerator(int pipewrite){
 	    int prevmod,currentmod,lastOccupPosition,i;
@@ -358,12 +829,12 @@ void roadsAndPonds(int piperead, int pipewrite)
 
 	                pid_t alien2p;
 
-	                game.aliensLVL2[i].col = game.aliensLVL1[i].col;
-	                game.aliensLVL2[i].d = game.aliensLVL1[i].d;
-	                game.aliensLVL2[i].box.topLeft.x = game.aliensLVL1[i].box.topLeft.x-2;
-	                game.aliensLVL2[i].box.topLeft.y = game.aliensLVL1[i].box.topLeft.y-1;
-	                game.aliensLVL2[i].box.botRight.x = game.aliensLVL1[i].box.botRight.x+2;
-	                game.aliensLVL2[i].box.botRight.y = game.aliensLVL1[i].box.botRight.y+2;
+	                game.carTable[i].col = game.aliensLVL1[i].col;
+	                game.carTable[i].d = game.aliensLVL1[i].d;
+	                game.carTable[i].box.topLeft.x = game.aliensLVL1[i].box.topLeft.x-2;
+	                game.carTable[i].box.topLeft.y = game.aliensLVL1[i].box.topLeft.y-1;
+	                game.carTable[i].box.botRight.x = game.aliensLVL1[i].box.botRight.x+2;
+	                game.carTable[i].box.botRight.y = game.aliensLVL1[i].box.botRight.y+2;
 	                game.aliensLvl2Alive++;
 
 	                game.aliensLvl1Alive--;
@@ -374,7 +845,7 @@ void roadsAndPonds(int piperead, int pipewrite)
 	                kill(game.aliensLVL1[i].pid, 1);
 
 	                if((alien2p = fork()) == 0){
-	                    alien2(pipewrite, game.aliensLVL2[i]);
+	                    alien2(pipewrite, game.carTable[i]);
 	                }
 	                return;
 	            }
@@ -382,17 +853,17 @@ void roadsAndPonds(int piperead, int pipewrite)
 	    }
 
 	    for (int i = 0; i < ALIENS_ALLOWED*WAVES; i++) {
-	        if (game.aliensLVL2[i].lives > 0) {
-	            if (verifyHitbox(game.aliensLVL2[i].box, currentMissile.box)) {
+	        if (game.carTable[i].lives > 0) {
+	            if (verifyHitbox(game.carTable[i].box, currentMissile.box)) {
 
-	                game.aliensLVL2[i].lives-=1;
+	                game.carTable[i].lives-=1;
 	                bodyClearing(currentMissile);
 	                kill(currentMissile.pid, 1);
 	                
-	                if (game.aliensLVL2[i].lives <= 0) {
+	                if (game.carTable[i].lives <= 0) {
 	                    game.aliensLvl2Alive--;
-	                    bodyClearing(game.aliensLVL2[i]);                    
-	                    kill(game.aliensLVL2[i].pid, 1);                    
+	                    bodyClearing(game.carTable[i]);                    
+	                    kill(game.carTable[i].pid, 1);                    
 	                }
 	                return;               
 	            }
@@ -437,270 +908,6 @@ void roadsAndPonds(int piperead, int pipewrite)
 	}
 */
 
-// aggiornamento e scrittura di un entità in pipe
-void updateEntity(Entity temp, int pipewrite)
-{
-    Entity current;
-
-    if(temp.et == SPITBALL) {
-        current.box.topLeft.x = current.box.botRight.x = temp.box.topLeft.x;
-        current.box.topLeft.y = current.box.botRight.y = temp.box.topLeft.y;
-    } else {
-        current.box.topLeft.x = temp.box.topLeft.x;
-        current.box.topLeft.y = temp.box.topLeft.y;
-        current.box.botRight.x = temp.box.botRight.x;
-        current.box.botRight.y = temp.box.botRight.y;
-    }
-
-    current.lives = temp.lives;
-    current.et = temp.et;
-    current.color = temp.color;
-    current.dir = temp.dir;
-    current.pid = temp.pid;
- 	
- 	current.row = temp.row;
- 	current.col = temp.col;
- 	current.length = temp.length;
-
-    write(pipewrite, &current, sizeof(Entity));
-}
-
-// inizializzazione dei dati di gioco
-void initializeData()
-{
-	int i,j;
-
-	game.running = true;
-    game.loss = false;
-    game.win = false;
-
-	// init colors
-	init_pair(WHITE,COLOR_WHITE,COLOR_BLACK);
-    init_pair(RED,COLOR_RED,COLOR_BLACK);
-    init_pair(YELLOW,COLOR_YELLOW,COLOR_BLACK);
-    init_pair(GREEN,COLOR_GREEN,COLOR_BLACK);
-    init_pair(BLUE,COLOR_BLUE,COLOR_BLACK);
-    init_pair(MAGENTA,COLOR_MAGENTA,COLOR_BLACK);
-    init_pair(CYAN,COLOR_CYAN,COLOR_BLACK);
-
-    //delimitations calculations
-    game.zoneLimitY[0] = 4;
-	game.zoneLimitY[1] = 4 + (NUM_RIVERS*PHROG_SIZE);
-	game.zoneLimitY[2] = (MAXY-3) - (NUM_LANES*PHROG_SIZE);
-	game.zoneLimitY[3] = MAXY-3;
-
-	// initPlayer
-	game.player.lives = 3;
-	game.player.color = RED;
-	game.player.row = game.player.col = 0;
-	mvprintw(MAXY+3,MAXX+1,"player stats initialized");
-
-
-	// init car & log directions
-	for(i = 0; i < NUM_LANES; i++){
-		if(rand()%2 == 0){
-			game.dirLanes[i] = E;
-		}else{
-			game.dirLanes[i] = W;
-		}
-	}
-
-	for(i = 0; i < NUM_LOGS; i++){
-		if(rand()%2 == 0){
-			game.dirRivers[i] = W;
-		}else{
-			game.dirRivers[i] = E;
-		}
-	}
-
-	// init cars
-	for(i = 0; i < NUM_LANES; i++){
-		for(j = 0; j < NUM_CARS; j++){
-			game.carTable[i][j].row = i;
-			game.carTable[i][j].col = j;
-			game.carTable[i][j].dir = game.dirLanes[j]; 
-		}
-	}
-
-	// init logs
-	for(i = 0; i < NUM_LOGS; i++){
-		game.logs[i].row = i;
-		game.logs[i].dir = game.dirRivers[i];
-	}
-
-	// init dens
-	for(i = 0; i < NUM_DENS; i++){
-		game.visitedDens[i].coords.x = 1 + (i*WIDTH_DENS*2);
-		game.visitedDens[i].coords.y = 1;
-		game.visitedDens[i].visited = false;
-	}
-}
-    
-// funzioni per la stampa e la pulizia
-void drawMap()
-{
-    int i,j,k;
-
-    // drawing border
-    for (j= 0; j <= MAXY; j++) {
-        i = 0;
-        if (j >= 1 && j < MAXY) {
-            mvaddch(j, i, ACS_VLINE);
-            mvaddch(j, MAXX, ACS_VLINE);
-
-        } else if (j == 0 || j == MAXY) {
-            for (i = 0; i < MAXX; i++) {
-                mvaddch(j, i, ACS_HLINE);
-                mvaddch(j, MAXX, ACS_HLINE);
-            }
-        }
-    }
-    mvaddch(0, 0, ACS_ULCORNER);
-    mvaddch(0, MAXX, ACS_URCORNER);
-    mvaddch(MAXY, MAXX, ACS_LRCORNER);
-    mvaddch(MAXY, 0, ACS_LLCORNER);
-
-    // limiting zones
-    for(j = 0; j<ZONES; j++){
-    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	    
-	    for(i = 1;i<MAXX;i++){
-	    	mvaddch(game.zoneLimitY[j],i,ACS_HLINE);
-	    }
-	    mvaddch(game.zoneLimitY[j],MAXX,ACS_RTEE);
-    }
-
-    // drawing dens
-
-    for(i = 0; i < NUM_DENS; i++){
-    	switch(i){
-	    	case 0:
-	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);
-	    	break;
-
-	    	case NUM_DENS-1:
-	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
-	    	break;
-
-	    	default:
-	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
-	    		
-	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);	    		
-	    	break;
-    	}
-    }
-    
-}
-
-void printer(Entity ent)
-{
-    // matrice giocatore...
-    char phrogBody [3][3] = {
-        ",_,",
-        "(0)",
-        "' '"
-    };
-
-    // matrice alieno lvl 1
-    char ORFISTBody [3][3] = {
-        "(*)",
-        "]M[",
-        "^v^"
-    };
-
-    // matrice alieno lvl 2
-    char GRAVIDIABody [2][3] = {
-        "<A>",
-        "(T)"
-    };
-
-    // asterisco per i missili,zero per la bomba
-    char CRITICALBody = 'O';
-    char METEORBody = '0';
-
-    
-    // individuazione entità...
-    switch(ent.et) {
-    // giocatore
-    case PHROG:
-    attron(COLOR_PAIR(ent.color));
-    for(int i = 0; i<PHROG_SIZE; i++) {
-        for(int j = 0; j<PHROG_SIZE; j++) {
-            mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j, phrogBody[i][j]);
-        }
-    }
-    attroff(COLOR_PAIR(ent.color));
-    break;
-
-    // alieno lvl 1
-    case LOG:
-
-    break;
-
-    // alieno lvl2
-    case CAR:
-    break;
-
-    // bomba
-    case SPIDER:
-    break;
-
-    // missili
-    case SPITBALL:
-    break;
-    }
-}
-
-void bodyClearing(Entity ent){
-    int size,x,y,adjy,adjx;
-
-    y = ent.box.topLeft.y;
-    x = ent.box.topLeft.x;
-    adjy = adjx = 0;
-
-    switch(ent.et) {
-        case PHROG:            
-            size = PHROG_SIZE;
-        break;
-
-        case LOG:
-
-        break;
-
-        case CAR:
-
-        break;
-
-        case SPIDER:
-  
-        break;
-
-        case SPITBALL:
-
-        break;
-    }
-
-    for(int i = 0; i < size; i++){
-        for(int j = 0 ; j < size ; j++){
-            mvaddch(y+i+adjy,x+j+adjx,' ');
-        }
-    }
-}
 
 
 
