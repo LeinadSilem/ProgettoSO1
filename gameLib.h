@@ -72,8 +72,6 @@ typedef struct gamestate
 	Entity player;
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
-	Direction dirLanes[NUM_LANES];
-	Direction dirRivers[NUM_LOGS];	
 	Den visitedDens[NUM_DENS];
 	int zoneLimitY[ZONES];
 	_Bool running,loss,win;

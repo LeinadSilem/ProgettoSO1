@@ -63,6 +63,21 @@ void carGenerator(int pipewrite)
 {
 	int i,j;
 	Entity car[NUM_LANES][NUM_CARS];
+	Direction dirLanes[NUM_LANES];
+
+	if(rand()%2 == 0){
+		dirLanes[0] = W;
+	}else{
+		dirLanes[0] = E;
+	}
+
+	for(i = 1; i < NUM_LANES; i++){
+		if(dirLanes[i] == W){
+			dirLanes[i] = E;
+		}else{
+			dirLanes[i] = W;
+		}
+	}
 	
 	for(i = 0; i < NUM_LANES; i++){
 		for(j = 0; j < NUM_CARS; j++){
@@ -70,11 +85,11 @@ void carGenerator(int pipewrite)
 			// deciding map position and direction
 			car[i][j].row = i;
 			car[i][j].col = j;
-			car[i][j].dir = game.dirLanes[i];
+			car[i][j].dir = dirLanes[i];
 			car[i][j].et = CAR;
 
 			// deciding characteristics
-			car[i][j].length = (4 +rand()%(6))*PHROG_SIZE;
+			car[i][j].length = (4 +rand()%6);
 			if(car[i][j].length > 6){
 				car[i][j].color = BLUE;
 			}else {
@@ -83,9 +98,9 @@ void carGenerator(int pipewrite)
 
 			// deciding starting methods and hitbox measurements
 			if(car[i][j].dir == W){
+				car[i][j].box.topLeft.x = MAXX+1;
+			}else{				
 				car[i][j].box.topLeft.x = 0 - car[i][j].length;
-			}else{
-				car[i][j].box.topLeft.x = MAXX;
 			}
 
 			car[i][j].box.topLeft.y = MIN_ROW_CAR + (i*PHROG_SIZE);
@@ -97,9 +112,11 @@ void carGenerator(int pipewrite)
 
 	for(j = 0; j < NUM_CARS; j++){
 		for(i = 0; i < NUM_LANES; i++){
-			moveCar(car[i][j],pipewrite);
+			if(fork()==0){
+				moveCar(car[i][j],pipewrite);
+			}			
 		}
-		sleep(3);
+		sleep(6);
 	}
 }
 
@@ -111,24 +128,25 @@ void moveCar(Entity car,int pipewrite)
 		switch(car.dir){
 			case W:
 				if(car.box.botRight.x == 0){
-					car.box.topLeft.x = MAXX-1;
+					car.box.topLeft.x = MAXX+1;
 				}else{
 					car.box.topLeft.x -=1;
 				}
 			break;
 
 			case E:
-				if(car.box.botRight.x == MAXX){
-					car.box.topLeft.x = 1;
-				}
-				car.box.topLeft.x +=1;
+				if(car.box.topLeft.x == MAXX){
+					car.box.topLeft.x = 0-car.length;
+				}else{
+					car.box.topLeft.x +=1;
+				}		
 			break;
 		}
 
 		car.box.botRight.x = car.box.topLeft.x + car.length-1;
 
 		updateEntity(car,pipewrite);
-		usleep(250000);
+		usleep(100000);
 	}
 }
 
@@ -183,12 +201,12 @@ void roadsAndPonds(int piperead, int pipewrite)
                 //}
             break;
             
-            case CAR:
-            	game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
+            case CAR:             
+                bodyClearing(game.carTable[tempEntity.row][tempEntity.col]); 
+
+                game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
                 game.carTable[tempEntity.row][tempEntity.col].color = tempEntity.color;
                 game.carTable[tempEntity.row][tempEntity.col].dir = tempEntity.dir;
-                
-                bodyClearing(game.carTable[tempEntity.row][tempEntity.col]); 
                 
                 game.carTable[tempEntity.row][tempEntity.col].box.topLeft.x = tempEntity.box.topLeft.x;
                 game.carTable[tempEntity.row][tempEntity.col].box.topLeft.y = tempEntity.box.topLeft.y;
@@ -197,10 +215,6 @@ void roadsAndPonds(int piperead, int pipewrite)
                 game.carTable[tempEntity.row][tempEntity.col].pid = tempEntity.pid;        
 
                 printer(game.carTable[tempEntity.row][tempEntity.col]);
-
-                mvprintw(tempEntity.box.topLeft.y,MAXX,"car position x:%d, y:%d, dir:",
-                tempEntity.box.topLeft.x,tempEntity.box.topLeft.y);
-               	translateDirection(tempEntity.dir);
             break;
         
             case SPIDER:
@@ -239,7 +253,7 @@ void roadsAndPonds(int piperead, int pipewrite)
 
 void printer(Entity ent)
 {
-	int i,j,k;
+	int i,j,k,y,x;
 
     // matrice giocatore...
     char phrogBody [3][3] = {
@@ -248,35 +262,8 @@ void printer(Entity ent)
         "' '"
     };
 
-    char carFrontSectionLeft [PHROG_SIZE][2] = {
-    	"o-",
-    	"|C",
-    	"o-"
-    };
-
-    char carFrontSectionRight[PHROG_SIZE][2] = {
-    	"-o",
-    	"D|",
-    	"-o"
-    };
-
-    char carBackSectionLeft [PHROG_SIZE][2] = {
-    	"-o",
-    	"K|",
-    	"-o"
-    };
-
-    char carBackSectionRight [PHROG_SIZE][2] = {
-    	"o-",
-    	"|H",
-    	"o-"
-    };
-
-    char carMiddleSection [PHROG_SIZE][1] = {
-    	"-",
-    	" ",
-    	"-"
-    };
+    y = ent.box.topLeft.y;
+    x = ent.box.topLeft.x;
 
     // individuazione entità...
     switch(ent.et) {
@@ -285,7 +272,7 @@ void printer(Entity ent)
 		    attron(COLOR_PAIR(ent.color));
 		    for(i = 0; i < PHROG_SIZE; i++) {
 		        for(j = 0; j < PHROG_SIZE; j++) {
-		            mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j, phrogBody[i][j]);
+		            mvaddch(y+i,x+j, phrogBody[i][j]);
 		        }
 		    }
 		    attroff(COLOR_PAIR(ent.color));
@@ -297,34 +284,26 @@ void printer(Entity ent)
 	    break;
 
 	    case CAR:
-	    	attron(COLOR_PAIR(ent.color));
-	    	for(i = 0; i < PHROG_SIZE; i++) {
-	    		for(j = 0; j < ent.length; j++ ){
-	    			if(j < 2){
-		    			switch(ent.dir){
-				    		case W:
-				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carFrontSectionLeft[i][j]);
-				    		break;
-
-				    		case E:
-				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carBackSectionRight[i][j]);
-				    		break;
-				    	}
-		    		}else if(j >= ent.length-3){
-		    			switch(ent.dir){
-				    		case W:
-				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carBackSectionLeft[i][j]);
-				    		break;
-
-				    		case E:
-				    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carFrontSectionRight[i][j]);
-				    		break;
-				    	}
-		    		}else{
-		    			mvaddch(ent.box.topLeft.y+i,ent.box.topLeft.x+j,carMiddleSection[i][j]);		
-		    		}
+	    	attron(COLOR_PAIR(ent.color)); 
+	    	for(i = 0; i < ent.length; i++){
+	    		if(i == 0 || i == ent.length-1){
+	    			mvaddch(y,x+i,  "o");
+	    			mvaddch(y+1,x+i,"|");
+	    			mvaddch(y+2,x+i,"o");
+	    		}else{
+	    			mvaddch(y,x+i,  "-");
+	    			mvaddch(y+1,x+i," ");
+	    			mvaddch(y+2,x+i," ");
 	    		}
-		    }	    	
+	    	}
+
+	    	if(ent.dir == W){
+	    		mvaddch(y+1,x+1,"H");
+	    		mvaddch(y+1,x+ent.length-2,"D");
+	    	}else{
+	    		mvaddch(y+1,x+1,"C");
+	    		mvaddch(y+1,x+ent.length-2,"K");
+	    	}
 	    	attroff(COLOR_PAIR(ent.color));
 	    break;
 
@@ -437,24 +416,22 @@ void initializeData()
 
     game.player.box.botRight.x = game.player.box.topLeft.x + PHROG_SIZE-1;
     game.player.box.botRight.y = game.player.box.topLeft.y + PHROG_SIZE-1;
-
-	// init car & log directions
-	for(i = 0; i < NUM_LANES; i++){
-		if(rand()%2 == 0){
-			game.dirLanes[i] = E;
-		}else{
-			game.dirLanes[i] = W;
-		}
+	
+/*
+    if(rand()%2 == 0){
+		game.dirRivers[0] = W;
+	}else{
+		game.dirRivers[0] = E;
 	}
 
-	for(i = 0; i < NUM_LOGS; i++){
-		if(rand()%2 == 0){
-			game.dirRivers[i] = W;
-		}else{
+	for(i = 1; i < NUM_LOGS; i++){
+		if(game.dirRivers[i] == W){
 			game.dirRivers[i] = E;
+		}else{
+			game.dirRivers[i] = W;
 		}
 	}
-
+*/
 	// init cars
 	// row in the case of cars is the lane in which they are found
 	// col is just car number 0,1,2 etc..
@@ -462,14 +439,13 @@ void initializeData()
 		for(j = 0; j < NUM_CARS; j++){
 			game.carTable[i][j].row = i;
 			game.carTable[i][j].col = j;
-			game.carTable[i][j].dir = game.dirLanes[j]; 
+			game.carTable[i][j].et = CAR;
 		}
 	}
 
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
 		game.logs[i].row = i;
-		game.logs[i].dir = game.dirRivers[i];
 	}
 
 	// init dens
