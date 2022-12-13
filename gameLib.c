@@ -72,10 +72,13 @@ void carGenerator(int pipewrite)
 	}
 
 	for(i = 1; i < NUM_LANES; i++){
-		if(dirLanes[i] == W){
+		switch(dirLanes[i-1]){
+		case W:
 			dirLanes[i] = E;
-		}else{
+			break;
+		case E:
 			dirLanes[i] = W;
+			break;
 		}
 	}
 	
@@ -150,6 +153,94 @@ void moveCar(Entity car,int pipewrite)
 	}
 }
 
+void logGenerator(int pipewrite)
+{
+	int i,j;
+	Entity logs[NUM_LOGS];
+	Direction dirRivers[NUM_LANES];
+
+	if(rand()%2 == 0){
+		dirRivers[0] = W;
+	}else{
+		dirRivers[0] = E;
+	}
+
+	for(i = 1; i < NUM_LOGS; i++){
+		switch(dirRivers[i-1]){
+		case W:
+			dirRivers[i] = E;
+			break;
+		case E:
+			dirRivers[i] = W;
+			break;
+		}
+	}
+	
+	for(i = 0; i < NUM_LOGS; i++){
+		// deciding map position and direction
+		logs[i].row = i;
+		logs[i].dir = dirRivers[i];
+		logs[i].et = LOG;
+		logs[i].color = YELLOW;
+
+		// deciding characteristics
+		if(rand()%2 == 0){
+			logs[i].length = 6;
+		}else{
+			logs[i].length = 9;
+		}
+
+		// deciding starting methods and hitbox measurements
+		if(logs[i].dir == W){
+			logs[i].box.topLeft.x = MAXX+1;
+		}else{				
+			logs[i].box.topLeft.x = 0 - logs[i].length;
+		}
+
+		logs[i].box.topLeft.y = MIN_ROW_LOG + (i*PHROG_SIZE);
+		logs[i].box.botRight.x = logs[i].box.topLeft.x + logs[i].length-1;
+		logs[i].box.botRight.y = logs[i].box.topLeft.y + PHROG_SIZE-1;
+	}
+
+	for(i = 0; i < NUM_LOGS; i++){
+		if(fork()==0){
+			moveLog(logs[i],pipewrite);
+		}			
+	}
+}
+
+void moveLog(Entity log,int pipewrite)
+{
+	//spitter random generation and forking
+
+	log.pid = getpid();
+
+	while(true){
+		switch(log.dir){
+			case W:
+				if(log.box.topLeft.x == 1){
+					log.dir = E;
+				}else{
+					log.box.topLeft.x -=1;
+				}
+			break;
+
+			case E:
+				if(log.box.botRight.x == MAXX-1){
+					log.dir = W;
+				}else{
+					log.box.topLeft.x +=1;
+				}		
+			break;
+		}
+
+		log.box.botRight.x = log.box.topLeft.x + log.length-1;
+
+		updateEntity(log,pipewrite);
+		usleep(100000);
+	}
+}
+
 void roadsAndPonds(int piperead, int pipewrite)
 {
     initializeData();
@@ -177,7 +268,7 @@ void roadsAndPonds(int piperead, int pipewrite)
                 game.player.box.botRight.y = tempEntity.box.botRight.y;
                 
                 if(game.player.lives > 0){
-                    printer(game.player);
+                    printerSingleEntities(game.player);
                 }
                 
                 mvprintw(MAXY+1,0,"Phrog position x:%d, y:%d, dir:",
@@ -186,19 +277,19 @@ void roadsAndPonds(int piperead, int pipewrite)
             break;
 
             case LOG:
-                //bodyClearing(game.aliensLVL1[tempEntity.id]);
-                //game.aliensLVL1[tempEntity.id].box.topLeft.x = tempEntity.box.topLeft.x;
-                //game.aliensLVL1[tempEntity.id].box.topLeft.y = tempEntity.box.topLeft.y;
-                //game.aliensLVL1[tempEntity.id].box.botRight.x = tempEntity.box.botRight.x;
-                //game.aliensLVL1[tempEntity.id].box.botRight.y = tempEntity.box.botRight.y;
-                //game.aliensLVL1[tempEntity.id].d = tempEntity.d;
-                //game.aliensLVL1[tempEntity.id].col = tempEntity.col;
-                //game.aliensLVL1[tempEntity.id].pid = tempEntity.pid;                              
-                //shipCollisions(game.aliensLVL1[tempEntity.id]);
-                //checkBorderProximity(game.aliensLVL1[tempEntity.id].box.topLeft.x);               
-                //if(game.aliensLVL1[tempEntity.id].lives > 0){
-                //    printer(game.aliensLVL1[tempEntity.id]);
-                //}
+                bodyClearing(game.logs[tempEntity.row]); 
+
+                game.logs[tempEntity.row].length = tempEntity.length;  
+                game.logs[tempEntity.row].color = tempEntity.color;
+                game.logs[tempEntity.row].dir = tempEntity.dir;
+                
+                game.logs[tempEntity.row].box.topLeft.x = tempEntity.box.topLeft.x;
+                game.logs[tempEntity.row].box.topLeft.y = tempEntity.box.topLeft.y;
+                game.logs[tempEntity.row].box.botRight.x = tempEntity.box.botRight.x;
+                game.logs[tempEntity.row].box.botRight.y = tempEntity.box.botRight.y;
+                game.logs[tempEntity.row].pid = tempEntity.pid;        
+
+                printerSingleEntities(game.logs[tempEntity.row]);
             break;
             
             case CAR:             
@@ -214,7 +305,7 @@ void roadsAndPonds(int piperead, int pipewrite)
                 game.carTable[tempEntity.row][tempEntity.col].box.botRight.y = tempEntity.box.botRight.y;
                 game.carTable[tempEntity.row][tempEntity.col].pid = tempEntity.pid;        
 
-                printer(game.carTable[tempEntity.row][tempEntity.col]);
+                printerCars(game.carTable[tempEntity.row][tempEntity.col]);
             break;
         
             case SPIDER:
@@ -248,108 +339,6 @@ void roadsAndPonds(int piperead, int pipewrite)
         }
         
         refresh();  
-    }
-}
-
-void printer(Entity ent)
-{
-	int i,j,k,y,x;
-
-    // matrice giocatore...
-    char phrogBody [3][3] = {
-        ",_,",
-        "(0)",
-        "' '"
-    };
-
-    y = ent.box.topLeft.y;
-    x = ent.box.topLeft.x;
-
-    // individuazione entità...
-    switch(ent.et) {
-	    // giocatore
-	    case PHROG:
-		    attron(COLOR_PAIR(ent.color));
-		    for(i = 0; i < PHROG_SIZE; i++) {
-		        for(j = 0; j < PHROG_SIZE; j++) {
-		            mvaddch(y+i,x+j, phrogBody[i][j]);
-		        }
-		    }
-		    attroff(COLOR_PAIR(ent.color));
-	    break;
-
-	    case LOG:
-	    	attron(COLOR_PAIR(ent.color));
-	    	attroff(COLOR_PAIR(ent.color));
-	    break;
-
-	    case CAR:
-	    	attron(COLOR_PAIR(ent.color)); 
-	    	for(i = 0; i < ent.length; i++){
-	    		if(i == 0 || i == ent.length-1){
-	    			mvaddch(y,x+i,  "o");
-	    			mvaddch(y+1,x+i,"|");
-	    			mvaddch(y+2,x+i,"o");
-	    		}else{
-	    			mvaddch(y,x+i,  "-");
-	    			mvaddch(y+1,x+i," ");
-	    			mvaddch(y+2,x+i," ");
-	    		}
-	    	}
-
-	    	if(ent.dir == W){
-	    		mvaddch(y+1,x+1,"H");
-	    		mvaddch(y+1,x+ent.length-2,"D");
-	    	}else{
-	    		mvaddch(y+1,x+1,"C");
-	    		mvaddch(y+1,x+ent.length-2,"K");
-	    	}
-	    	attroff(COLOR_PAIR(ent.color));
-	    break;
-
-	    case SPIDER:
-	    	attron(COLOR_PAIR(ent.color));
-	    	attroff(COLOR_PAIR(ent.color));
-	    break;
-
-	    case SPITBALL:
-	    	attron(COLOR_PAIR(ent.color));
-	    	attroff(COLOR_PAIR(ent.color));
-	    break;
-    }
-}
-
-void bodyClearing(Entity ent)
-{
-    int size,x,y,adjy,adjx;
-
-    y = ent.box.topLeft.y;
-    x = ent.box.topLeft.x;
-    adjy = adjx = 0;
-
-    switch(ent.et) {
-        case PHROG:            
-            size = PHROG_SIZE;
-        break;
-
-        case LOG:
-        break;
-
-        case CAR:
-        	size = ent.length;
-        break;
-
-        case SPIDER:  
-        break;
-
-        case SPITBALL:
-        break;
-    }
-
-    for(int i = 0; i < PHROG_SIZE; i++){
-        for(int j = 0 ; j < size ; j++){
-            mvaddch(y+i+adjy,x+j+adjx,' ');
-        }
     }
 }
 
@@ -416,22 +405,7 @@ void initializeData()
 
     game.player.box.botRight.x = game.player.box.topLeft.x + PHROG_SIZE-1;
     game.player.box.botRight.y = game.player.box.topLeft.y + PHROG_SIZE-1;
-	
-/*
-    if(rand()%2 == 0){
-		game.dirRivers[0] = W;
-	}else{
-		game.dirRivers[0] = E;
-	}
 
-	for(i = 1; i < NUM_LOGS; i++){
-		if(game.dirRivers[i] == W){
-			game.dirRivers[i] = E;
-		}else{
-			game.dirRivers[i] = W;
-		}
-	}
-*/
 	// init cars
 	// row in the case of cars is the lane in which they are found
 	// col is just car number 0,1,2 etc..
@@ -598,7 +572,6 @@ _Bool verifyHitbox(Hitbox a, Hitbox b)
 }
 
 /*
-
 	void updatePhrog()
 	{
 

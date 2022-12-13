@@ -67,7 +67,6 @@ void gameStart(){
 				break;
 
 				default:
-					/*
 						switch(fork()){
 							case -1:
 								perror("eee la fin del fork alienGenerator");
@@ -76,16 +75,14 @@ void gameStart(){
 
 							case 0:
 								close(gamePipe[0]);
-								alienGenerator(gamePipe[1]);
+								logGenerator(gamePipe[1]);
 								exit(1);
 							break;
 
 							default:
-								
+								roadsAndPonds(gamePipe[0], gamePipe[1]);	
 							break;
-						}
-					*/	
-					roadsAndPonds(gamePipe[0], gamePipe[1]);	
+						}					
 				break;
 			}
 			
