@@ -236,6 +236,30 @@ void printerCars(Entity ent)
     attroff(COLOR_PAIR(ent.color));
 }
 
+void printerLogs(Entity ent){
+
+	int i,j,y,x;
+
+	y = ent.box.topLeft.y;
+    x = ent.box.topLeft.x;
+
+    attron(COLOR_PAIR(ent.color));
+	if(ent.length == 6){
+		for(i = 0; i < PHROG_SIZE; i++) {
+	        for(j = 0; j < ent.length; j++) {
+	            mvaddch(y+i,x+j,logSix[i][j]);
+	        }
+	    }
+	}else{
+		for(i = 0; i < PHROG_SIZE; i++) {
+	        for(j = 0; j < ent.length; j++) {
+	            mvaddch(y+i,x+j,logNine[i][j]);
+	        }
+	    }
+	}
+	attroff(COLOR_PAIR(ent.color));
+}
+
 void printerSingleEntities(Entity ent)
 {
 	int i,j,y,x;
@@ -253,22 +277,6 @@ void printerSingleEntities(Entity ent)
 		            mvaddch(y+i,x+j, phrogBody[i][j]);
 		        }
 		    }
-	    break;
-
-	    case LOG:
-	    	if(ent.length == 6){
-	    		for(i = 0; i < PHROG_SIZE; i++) {
-			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j, logSix[i][j]);
-			        }
-			    }
-	    	}else{
-	    		for(i = 0; i < PHROG_SIZE; i++) {
-			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j, logNine[i][j]);
-			        }
-			    }
-	    	}    	
 	    break;
 
 	    case SPIDER:

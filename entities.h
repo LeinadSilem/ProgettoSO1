@@ -40,6 +40,7 @@ typedef struct data
     _Bool isOnLog;
 }Entity;
 
+void printerLogs(Entity ent);
 void printerCars(Entity ent);
 void bodyClearing(Entity ent);
 void printerSingleEntities(Entity ent);

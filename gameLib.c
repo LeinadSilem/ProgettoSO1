@@ -289,7 +289,7 @@ void roadsAndPonds(int piperead, int pipewrite)
                 game.logs[tempEntity.row].box.botRight.y = tempEntity.box.botRight.y;
                 game.logs[tempEntity.row].pid = tempEntity.pid;        
 
-                printerSingleEntities(game.logs[tempEntity.row]);
+                printerLogs(game.logs[tempEntity.row]);
             break;
             
             case CAR:             

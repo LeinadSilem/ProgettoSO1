@@ -55,7 +55,6 @@ _Bool verifyHitbox(Hitbox a, Hitbox b);
 void updateEntity(Entity temp, int pipewrite);
 void initializeData();
 void drawMap();
-//void updatePhrog();
 void translateDirection(Direction dir);
 
 #endif
