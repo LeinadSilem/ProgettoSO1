@@ -16,11 +16,14 @@
 #define ENEMY_CHANCE 20;
 
 #define MIN_ROW_CAR 16
+#define MAX_ROW_CAR 22
 #define MIN_ROW_LOG 4
+#define MAX_ROW_LOG 10
 #define ZONES 4
 #define WIDTH_DENS 9
 #define MAXX 82
 #define MAXY 28
+#define PHROG_STARTING_LIVES 3
 
 //structures and type definitions
 
@@ -39,22 +42,30 @@ typedef struct gamestate
 	_Bool running,loss,win;
 }Gamestate;
 
-//void gameEnd();
-void phrog(int pipewrite);
+void phrog(int lives,int pipewrite);
+void resetPhrog(int pipewrite);
+
+void carGenerator(int pipewrite);
+void moveCar(Entity car,int pipewrite);
+void carCollisions(Entity currentCar, int pipewrite);
+void haltCar(int currentCar, int row);
+
+// void spider(Entity log,int pipewrite);
 void spit(int pipewrite, Hitbox pH);
 void moveSpitBall(int pipewrite, Entity projectile);
-void moveCar(Entity car,int pipewrite);
-void moveLog(Entity log, int pipewrite);
-void carGenerator(int pipewrite);
+
 void logGenerator(int pipewrite);
-void roadsAndPonds(int piperead, int pipewrite);
-//void projectileCollisions(Entity currentMissile, int pipewrite);
-//void phrogCollisions(Entity temp);
-//void checkBorderProximity(int topLeftx);
-_Bool verifyHitbox(Hitbox a, Hitbox b);
+void moveLog(Entity log, int pipewrite);
+void logCollisions(Entity phrog, Entity currentLog, int pipewrite);
+
 void updateEntity(Entity temp, int pipewrite);
 void initializeData();
+void roadsAndPonds(int piperead, int pipewrite);
+
+int calcRow(int playerRow);
 void drawMap();
 void translateDirection(Direction dir);
+	
+
 
 #endif

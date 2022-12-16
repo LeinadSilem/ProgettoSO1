@@ -44,4 +44,5 @@ void printerLogs(Entity ent);
 void printerCars(Entity ent);
 void bodyClearing(Entity ent);
 void printerSingleEntities(Entity ent);
+_Bool verifyHitbox(Hitbox a, Hitbox b);
 #endif

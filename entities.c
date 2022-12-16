@@ -236,8 +236,8 @@ void printerCars(Entity ent)
     attroff(COLOR_PAIR(ent.color));
 }
 
-void printerLogs(Entity ent){
-
+void printerLogs(Entity ent)
+{
 	int i,j,y,x;
 
 	y = ent.box.topLeft.y;
@@ -295,17 +295,20 @@ void bodyClearing(Entity ent)
     y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
 
-    if(ent.et == LOG || ent.et == CAR){
-    	size = ent.length;
-    }else if(ent.et == SPIDER || ent.et == PHROG){
-    	size = PHROG_SIZE;
-    }else{
-    	size = 1;
-    }
-
-    for(i = 0; i < PHROG_SIZE; i++){
-        for(j = 0 ; j < size ; j++){
+    for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
+        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
             mvaddch(y+i,x+j,' ');
         }
+    }
+}
+
+_Bool verifyHitbox(Hitbox a, Hitbox b)
+{
+
+    if(((a.topLeft.x >= b.topLeft.x && a.topLeft.x <= b.botRight.x) || (a.botRight.x >= b.topLeft.x && a.botRight.x <= b.botRight.x)) &&
+       ((a.topLeft.y >= b.topLeft.y && a.topLeft.y <= b.botRight.y) || (a.botRight.y >= b.topLeft.y && a.botRight.y <= b.botRight.y))) {
+        return true;
+    } else {
+        return false;
     }
 }

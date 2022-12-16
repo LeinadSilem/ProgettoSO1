@@ -49,7 +49,7 @@ void gameStart(){
 
 		case 0:
 			close(gamePipe[0]);
-			phrog(gamePipe[1]);
+			phrog(PHROG_STARTING_LIVES,gamePipe[1]);
 			exit(1);
 		break;
 		
