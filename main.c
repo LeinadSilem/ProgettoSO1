@@ -100,29 +100,27 @@ int gameStart(int startingLives){
 	}
 }
 
-
 void gameLoop(){
 
 	int totalLives = PHROG_STARTING_LIVES;
 	int densVisited = 0;
 	int resultOfMatch;
+	_Bool denRegister[NUM_DENS] = {false,false,false,false,false};
+	
 
 	while(true){
+		//converrebbe spostare la funzione della mappa qui
 		resultOfMatch = gameStart(totalLives);
 
-		switch(resultOfMatch){
-			case 0:
-				totalLives -= 1;
-			break;
-
-			case 1:
-				densVisited +=1;
-			break;
-
+		if(resultOfMatch < NUM_DENS && !denRegister[resultOfMatch]){
+			densVisited +=1;
+			denRegister[resultOfMatch] = true;
+		}else{
+			totalLives -= 1;
 		}
 
 		if(totalLives < 0 || densVisited == NUM_DENS){
-			if(totalLives<0){
+			if(totalLives < 0){
 				printf("game over, you suck");
 			}else{
 				printf("you win, you saved the frogs in california");

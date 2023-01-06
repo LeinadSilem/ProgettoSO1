@@ -68,8 +68,7 @@ void phrog(int lives,int pipewrite)
 			break;
 	    }
         
-        updateEntity(player,pipewrite);
-        
+        updateEntity(player,pipewrite);    
     }
 }
 
@@ -356,9 +355,11 @@ void initializeData()
 
 	// init dens
 	for(i = 0; i < NUM_DENS; i++){
-		game.visitedDens[i].coords.x = 1 + (i*WIDTH_DENS*2);
-		game.visitedDens[i].coords.y = 1;
-		game.visitedDens[i].visited = false;
+		game.Dens[i].area.topLeft.x = 1 + (i*WIDTH_DENS*2);
+		game.Dens[i].area.topLeft.y = 1;
+		game.Dens[i].area.botRight.x = 3 + (i*WIDTH_DENS*2);
+		game.Dens[i].area.botRight.y = 3;
+		game.Dens[i].visited = false;
 	}
 }
 
@@ -424,13 +425,16 @@ int roadsAndPonds(int piperead, int pipewrite)
                	translateDirection(game.player.dir);
 	            
 	            if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
-                	playerHit = logCollisions(game.player,game.logs[calcRow(game.player.row)]);
+                	//playerHit = logCollisions(game.player,game.logs[calcRow(game.player.row)]);
                 }
+
+                denReached = denCollisions();
               
                 if(game.player.lives > 0){
                     printerSingleEntities(game.player);
                     mvprintw(3,MAXX+3,"current player lives:%d",game.player.lives);
-                }      
+                }    
+
 
             break;
 
@@ -480,7 +484,6 @@ int roadsAndPonds(int piperead, int pipewrite)
                 	printerSingleEntities(game.player);
                 }
 */
-
                 game.logs[tempEntity.row].length = tempEntity.length;  
                 game.logs[tempEntity.row].color = tempEntity.color;
                 game.logs[tempEntity.row].dir = tempEntity.dir;
@@ -513,8 +516,16 @@ int roadsAndPonds(int piperead, int pipewrite)
     }
 
     if(denReached){
-    	return 1;
+    	int i = 0;
+    	while(!game.Dens[i].visited){
+    		i++;
+    	}
+    	return i;
     }
+
+    killEverything();
+    erase();
+    
 }
 
 int calcRow(int playerRow)
@@ -565,33 +576,33 @@ void drawMap()
     for(i = 0; i < NUM_DENS; i++){
     	switch(i){
 	    	case 0:
-	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
 	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
 	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);
+	    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);
 	    	break;
 
 	    	case NUM_DENS-1:
-	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
 	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
 	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
 	    	break;
 
 	    	default:
-	    		mvaddch(0,game.visitedDens[i].coords.x,ACS_TTEE);
+	    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
 	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x,ACS_VLINE);
+	    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
 	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x,ACS_BTEE);
+	    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
 	    		
-	    		mvaddch(0,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_TTEE);
+	    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
 	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_VLINE);
+	    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
 	    		}
-	    		mvaddch(4,game.visitedDens[i].coords.x+WIDTH_DENS,ACS_BTEE);	    		
+	    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);	    		
 	    	break;
     	}
     } 
@@ -628,6 +639,36 @@ void translateDirection(Direction dir)
 		case E:
 			printw("east ");
 		break;
+	}
+}
+
+_Bool denCollisions(){
+	int i;
+	for(i = 0; i < NUM_DENS; i++){
+		if(verifyHitbox(game.player.box,game.Dens[i].area)){
+			game.Dens[i].visited = true;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void killEverything(){
+	int i,j;
+
+	kill(game.player.pid,0);
+
+	for(i = 0; i < NUM_LOGS; i++){
+		kill(game.logs[i].pid,0);
+	}
+
+	for (i = 0; i < NUM_LANES; i++)
+	{
+		for (j = 0; j < NUM_CARS; j++)
+		{
+			kill(game.carTable[i][j].pid,0);
+		}
 	}
 }
 
@@ -884,6 +925,8 @@ void spitballCollisions(Entity spit){
 	    }
 	}
 */
+
+
 
 
 

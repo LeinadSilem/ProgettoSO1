@@ -30,7 +30,7 @@
 //structures and type definitions
 
 typedef struct den{
-	Position coords;
+	Hitbox area;
 	_Bool visited;
 }Den;
 
@@ -39,7 +39,7 @@ typedef struct gamestate
 	Entity player;
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
-	Den visitedDens[NUM_DENS];
+	Den Dens[NUM_DENS];
 	int zoneLimitY[ZONES];
 }Gamestate;
 
@@ -65,6 +65,8 @@ _Bool logCollisions(Entity phrog, Entity currentLog);
 void updateEntity(Entity temp, int pipewrite);
 void initializeData();
 int roadsAndPonds(int piperead, int pipewrite);
+_Bool denCollisions();
+void killEverything();
 
 int calcRow(int playerRow);
 void drawMap();
