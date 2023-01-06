@@ -14,7 +14,7 @@
 
 typedef enum {WHITE,RED,YELLOW,GREEN,CYAN,BLUE,MAGENTA}Color;
 typedef enum {N,S,W,E,FIXED}Direction;
-typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL}EntityType;
+typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL,EMPTY}EntityType;
 
 typedef struct position
 {
@@ -43,6 +43,7 @@ typedef struct data
 void printerLogs(Entity ent);
 void printerCars(Entity ent);
 void bodyClearing(Entity ent);
+void bodyClearingSingleEntities(Entity ent);
 void printerSingleEntities(Entity ent);
 _Bool verifyHitbox(Hitbox a, Hitbox b);
 #endif

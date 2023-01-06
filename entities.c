@@ -6,10 +6,8 @@ char phrogBody[PHROG_SIZE][PHROG_SIZE] = {
     "' '"
 };
 
-char spiderBody[PHROG_SIZE][PHROG_SIZE] = {
-	"\\ /",
-	"[O]",
-	"/ \\"
+char spiderBody[1][PHROG_SIZE] = {
+	")0("
 };
 
 char carLeftFour[PHROG_SIZE][4] = {
@@ -280,9 +278,15 @@ void printerSingleEntities(Entity ent)
 	    break;
 
 	    case SPIDER:
+	    	for(i = 0; i < PHROG_SIZE; i++) {
+		        for(j = 0; j < PHROG_SIZE; j++) {
+		            mvaddch(y+i,x+j, spiderBody[i][j]);
+		        }
+		    }
 	    break;
 
 	    case SPITBALL:
+	    	mvaddch(y+i,x+j,'*');
 	    break;
     }
     attroff(COLOR_PAIR(ent.color));
@@ -290,7 +294,7 @@ void printerSingleEntities(Entity ent)
 
 void bodyClearing(Entity ent)
 {
-    int i,j,size,x,y;
+    int i,j,x,y;
 
     y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
@@ -298,6 +302,34 @@ void bodyClearing(Entity ent)
     for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
         for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
             mvaddch(y+i,x+j,' ');
+        }
+    }
+}
+
+void bodyClearingSingleEntities(Entity ent)
+{
+    int i,j,x,y,adjx,adjy;
+
+    y = ent.box.topLeft.y;
+    x = ent.box.topLeft.x;
+
+    switch(ent.dir){
+    	case N:
+    		adjy = 1;
+    	break;
+
+    	case W:
+    		adjx = 1;
+    	break;
+
+    	case E:
+    		adjx = -1;
+    	break;
+    }
+
+    for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
+        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
+            mvaddch(y+i+adjy,x+j+adjx,' ');
         }
     }
 }

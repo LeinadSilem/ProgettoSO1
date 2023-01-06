@@ -1,14 +1,15 @@
 #include "gameLib.h"
 
 void initialize();
-void gameStart();
+int gameStart(int startingLives);
 void gameEnd();
+void gameLoop();
 
 int main(){
 	initialize();
-	gameStart();
+	gameLoop();
 	gameEnd();
-	printf("game over!");
+	printf("game over hoe!");
 	return 0;
 }
 
@@ -30,9 +31,11 @@ void gameEnd(){
 	endwin();
 }
 
-void gameStart(){
+int gameStart(int startingLives){
 
 	int gamePipe[2];
+	int lifeline[2];
+	int result;
 
 	if (pipe(gamePipe) == -1)
 	{
@@ -40,23 +43,30 @@ void gameStart(){
 		exit(-1);
 	}
 
+	if (pipe(lifeline) == -1 || fcntl(lifeline[0], F_SETFL, O_NONBLOCK) < 0)
+	{
+		perror("aw hell naw spunchbop, my lifeline died");
+		exit(-1);
+	}
 	
+
 	switch(fork()){
 		case -1:
-			perror("eee la fin del fork ship");
+			perror("eee la fin del fork player");
 			exit(-1);
 		break;
 
 		case 0:
 			close(gamePipe[0]);
-			phrog(PHROG_STARTING_LIVES,gamePipe[1]);
+			close(lifeline[1]);
+			phrog(startingLives,gamePipe[1]);
 			exit(1);
 		break;
 		
 		default:
 			switch(fork()){
 				case -1:
-					perror("eee la fin del fork alienGenerator");
+					perror("eee la fin del fork cars");
 					exit(-1);
 				break;
 
@@ -69,7 +79,7 @@ void gameStart(){
 				default:
 						switch(fork()){
 							case -1:
-								perror("eee la fin del fork alienGenerator");
+								perror("eee la fin del fork tronky");
 								exit(-1);
 							break;
 
@@ -80,7 +90,7 @@ void gameStart(){
 							break;
 
 							default:
-								roadsAndPonds(gamePipe[0], gamePipe[1]);	
+								roadsAndPonds(gamePipe[0],gamePipe[1]);	
 							break;
 						}					
 				break;
@@ -91,3 +101,33 @@ void gameStart(){
 }
 
 
+void gameLoop(){
+
+	int totalLives = PHROG_STARTING_LIVES;
+	int densVisited = 0;
+	int resultOfMatch;
+
+	while(true){
+		resultOfMatch = gameStart(totalLives);
+
+		switch(resultOfMatch){
+			case 0:
+				totalLives -= 1;
+			break;
+
+			case 1:
+				densVisited +=1;
+			break;
+
+		}
+
+		if(totalLives < 0 || densVisited == NUM_DENS){
+			if(totalLives<0){
+				printf("game over, you suck");
+			}else{
+				printf("you win, you saved the frogs in california");
+			}
+			exit(0);
+		}
+	}
+}
