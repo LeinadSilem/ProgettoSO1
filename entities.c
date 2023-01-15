@@ -106,6 +106,13 @@ char logSix[PHROG_SIZE][6] = {
     "o----o"
 };
 
+char logTEST[PHROG_SIZE][18] = {
+    "o----------------o",
+    "(================)",
+    "o----------------o"
+};
+
+
 void printerCars(Entity ent)
 {
 	int i,j,y,x;
@@ -245,13 +252,21 @@ void printerLogs(Entity ent)
 	if(ent.length == 6){
 		for(i = 0; i < PHROG_SIZE; i++) {
 	        for(j = 0; j < ent.length; j++) {
+#if TESTING == 0
 	            mvaddch(y+i,x+j,logSix[i][j]);
+#else
+	            mvaddch(y+i,x+j,logTEST[i][j]);
+#endif
 	        }
 	    }
 	}else{
 		for(i = 0; i < PHROG_SIZE; i++) {
 	        for(j = 0; j < ent.length; j++) {
+#if TESTING == 0
 	            mvaddch(y+i,x+j,logNine[i][j]);
+#else
+	            mvaddch(y+i,x+j,logTEST[i][j]);
+#endif
 	        }
 	    }
 	}

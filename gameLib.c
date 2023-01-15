@@ -13,7 +13,7 @@ void phrog(int lives,int pipewrite)
 
     player.pid = getpid();
     player.lives = lives;
-	player.color = RED;
+	player.color = PHROG_ON_GRASS;
 	player.row = 9;
 	player.col = 1;
 	player.et = PHROG;
@@ -75,6 +75,9 @@ void phrog(int lives,int pipewrite)
 void carGenerator(int pipewrite)
 {
 	int i,j;
+	pid_t myPid;
+
+	myPid = getpid();
 	Entity car[NUM_LANES][NUM_CARS];
 	Direction dirLanes[NUM_LANES];
 
@@ -107,9 +110,9 @@ void carGenerator(int pipewrite)
 			// deciding characteristics
 			car[i][j].length = (4 +rand()%6);
 			if(car[i][j].length > 6){
-				car[i][j].color = BLUE;
+				car[i][j].color = TRUCKS;
 			}else {
-				car[i][j].color = CYAN;
+				car[i][j].color = CARS;
 			}
 
 			// deciding starting methods and hitbox measurements
@@ -134,6 +137,8 @@ void carGenerator(int pipewrite)
 		}
 		sleep(6);
 	}
+
+	kill(myPid,SIGTERM);
 }
 
 void moveCar(Entity car,int pipewrite)
@@ -188,7 +193,7 @@ _Bool logCollisions(Entity phrog, Entity currentLog)
 {
 	if(verifyHitbox(phrog.box,currentLog.box)){
 		game.player.isOnLog = true;
-		// potrebbe servirci dopo
+		currentLog.isOnLog = true;
 		return false;
 	}else{
 		bodyClearingSingleEntities(game.player);
@@ -214,6 +219,9 @@ void haltCar(int currentCar, int row)
 void logGenerator(int pipewrite)
 {
 	int i,j;
+	pid_t myPid;
+
+	myPid = getpid();
 	Entity logs[NUM_LOGS];
 	Direction dirRivers[NUM_LANES];
 
@@ -239,14 +247,19 @@ void logGenerator(int pipewrite)
 		logs[i].row = i;
 		logs[i].dir = dirRivers[i];
 		logs[i].et = LOG;
-		logs[i].color = YELLOW;
+		logs[i].color = LOGS;
 
+		
 		// deciding characteristics
+#if TESTING == 0
 		if(rand()%2 == 0){
 			logs[i].length = 6;
 		}else{
 			logs[i].length = 9;
 		}
+#else 
+		logs[i].length = 18;
+#endif
 
 		// deciding starting methods and hitbox measurements
 		if(logs[i].dir == W){
@@ -265,6 +278,8 @@ void logGenerator(int pipewrite)
 			moveLog(logs[i],pipewrite);
 		}			
 	}
+
+	kill(myPid,0);
 }
 
 void moveLog(Entity log,int pipewrite)
@@ -305,18 +320,28 @@ void moveLog(Entity log,int pipewrite)
 }
 
 // SEZIONE GESTIONE GIOCO E GRAFICA
-void initializeData()
+void initializeData(_Bool dRegister[], int nDens)
 {
 	int i,j;
 
 	// init colors
-	init_pair(WHITE,COLOR_WHITE,COLOR_BLACK);
-    init_pair(RED,COLOR_RED,COLOR_BLACK);
-    init_pair(YELLOW,COLOR_YELLOW,COLOR_BLACK);
-    init_pair(GREEN,COLOR_GREEN,COLOR_BLACK);
-    init_pair(BLUE,COLOR_BLUE,COLOR_BLACK);
-    init_pair(MAGENTA,COLOR_MAGENTA,COLOR_BLACK);
-    init_pair(CYAN,COLOR_CYAN,COLOR_BLACK);
+	init_pair(SAFE_ZONE,COLOR_WHITE,COLOR_GREEN);
+	init_pair(ROAD,COLOR_WHITE,COLOR_BLACK);
+	init_pair(WATER,COLOR_WHITE,COLOR_CYAN);
+
+    init_pair(LOGS,COLOR_YELLOW,COLOR_CYAN);
+    
+    init_pair(TRUCKS,COLOR_BLUE,COLOR_BLACK); 
+    init_pair(CARS,COLOR_CYAN,COLOR_BLACK);
+
+    init_pair(PHROG_ON_ROAD,COLOR_RED,COLOR_BLACK);
+    init_pair(PHROG_ON_GRASS,COLOR_RED,COLOR_GREEN);
+    init_pair(PHROG_ON_LOG,COLOR_RED,COLOR_CYAN);
+
+    init_pair(SPIT_ON_ROAD,COLOR_MAGENTA,COLOR_BLACK);
+    init_pair(SPIT_ON_GRASS,COLOR_MAGENTA,COLOR_GREEN);
+    init_pair(SPIT_ON_LOG,COLOR_MAGENTA,COLOR_CYAN);
+
 
     //delimitations calculations
     game.zoneLimitY[0] = 4;
@@ -326,7 +351,7 @@ void initializeData()
 
 	// initPlayer
 	game.player.lives = PHROG_STARTING_LIVES;
-	game.player.color = RED;
+	game.player.color = PHROG_ON_GRASS;
 	game.player.row = 9;
 	game.player.col = 1;
 	game.player.et = PHROG;
@@ -357,9 +382,9 @@ void initializeData()
 	for(i = 0; i < NUM_DENS; i++){
 		game.Dens[i].area.topLeft.x = 1 + (i*WIDTH_DENS*2);
 		game.Dens[i].area.topLeft.y = 1;
-		game.Dens[i].area.botRight.x = 3 + (i*WIDTH_DENS*2);
+		game.Dens[i].area.botRight.x = 9 + (i*WIDTH_DENS*2);
 		game.Dens[i].area.botRight.y = 3;
-		game.Dens[i].visited = false;
+		game.Dens[i].visited = dRegister[i];
 	}
 }
 
@@ -390,12 +415,15 @@ void updateEntity(Entity temp, int pipewrite)
     write(pipewrite, &current, sizeof(Entity));
 }
 
-int roadsAndPonds(int piperead, int pipewrite)
+int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 {
-    initializeData();
+    initializeData(dRegister,NUM_DENS);
     Entity tempEntity;
+    Hitbox origin;
+
     _Bool playerHit = false;
     _Bool denReached = false;
+    int result, denId;
 
     drawMap();
     
@@ -403,12 +431,13 @@ int roadsAndPonds(int piperead, int pipewrite)
     {   
         drawMap();
         read(piperead, &tempEntity, sizeof(Entity));
-        mvprintw(0,MAXX+3,"entity read:%d",tempEntity.et);
+        mvprintw(0,MAXX+1,"entity read:%d",tempEntity.et);
 
         switch (tempEntity.et)
         {
             case PHROG:
-            	mvprintw(1,MAXX+3,"phrog lives:%d",tempEntity.lives);
+            	// se il player è sul tronco, muovilo col
+            	mvprintw(1,MAXX+1,"phrog lives:%d",tempEntity.lives);
                 bodyClearing(game.player);  
 
                 game.player.dir = tempEntity.dir;
@@ -416,29 +445,55 @@ int roadsAndPonds(int piperead, int pipewrite)
                 game.player.col = tempEntity.col;
                 game.player.color = tempEntity.color;
 
-                game.player.box.topLeft.x  = tempEntity.box.topLeft.x;
 				game.player.box.topLeft.y  = tempEntity.box.topLeft.y;
-				game.player.box.botRight.x = tempEntity.box.botRight.x;
 				game.player.box.botRight.y = tempEntity.box.botRight.y;
 
-                mvprintw(2,MAXX+3,"current player position x:%d, y:%d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
+				if(game.player.box.topLeft.y < game.zoneLimitY[2]){
+
+					switch(game.player.dir){
+						case W:
+							game.player.box.topLeft.x -= 3;					
+							game.player.box.botRight.x -= 3;
+						break;
+
+						case E:
+							game.player.box.topLeft.x += 3;					
+							game.player.box.botRight.x += 3;
+						break;
+					}
+				}else{
+					game.player.box.topLeft.x = tempEntity.box.topLeft.x;					
+					game.player.box.botRight.x = tempEntity.box.botRight.x;
+				}
+
+                mvprintw(2,MAXX+1,"current player position x:%d, y:%d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
                	translateDirection(game.player.dir);
+
+               	mvprintw(3,MAXX+1,"visited dens: ");
+               	for(int i = 0; i < NUM_DENS; i++){
+               		printw("%d[%d]\t", i+1, game.Dens[i].visited);
+               	}
 	            
 	            if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
-                	//playerHit = logCollisions(game.player,game.logs[calcRow(game.player.row)]);
+                	playerHit = logCollisions(game.player,game.logs[calcRow(game.player.row)]);
                 }
 
-                denReached = denCollisions();
+                denId = denCollisions();
+
+                if(game.player.box.topLeft.y == 1){
+	                if(denId < NUM_DENS){
+	                	denReached = true;
+	                }else{
+	                	playerHit = true;
+	                }
+                }                
               
                 if(game.player.lives > 0){
                     printerSingleEntities(game.player);
-                    mvprintw(3,MAXX+3,"current player lives:%d",game.player.lives);
                 }    
-
-
             break;
 
-            case SPIDER:    
+            case SPIDER:
             	bodyClearingSingleEntities(tempEntity);
 
             	if(tempEntity.lives > 0){
@@ -446,7 +501,7 @@ int roadsAndPonds(int piperead, int pipewrite)
             	}
             break;
 
-            case CAR:             
+            case CAR:
                 bodyClearing(game.carTable[tempEntity.row][tempEntity.col]); 
 
                 game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
@@ -467,23 +522,6 @@ int roadsAndPonds(int piperead, int pipewrite)
             case LOG:
                 bodyClearing(game.logs[tempEntity.row]); 
 
-/* parte che vorrei funzionasse per tenere il player sopra il tronco
-                if(game.player.isOnLog && (game.player.row == game.logs[tempEntity.row].row)){
-                	bodyClearing(game.player);
-                	game.player.dir = game.logs[tempEntity.row].dir;
-                	switch(game.player.dir){
-                		case W:
-                			game.player.box.topLeft.x--;
-                			game.player.box.botRight.x--;
-                		break;
-                		case E:
-                			game.player.box.topLeft.x++;
-                			game.player.box.botRight.x++;
-                		break;
-                	}
-                	printerSingleEntities(game.player);
-                }
-*/
                 game.logs[tempEntity.row].length = tempEntity.length;  
                 game.logs[tempEntity.row].color = tempEntity.color;
                 game.logs[tempEntity.row].dir = tempEntity.dir;
@@ -492,12 +530,27 @@ int roadsAndPonds(int piperead, int pipewrite)
                 game.logs[tempEntity.row].box.topLeft.y = tempEntity.box.topLeft.y;
                 game.logs[tempEntity.row].box.botRight.x = tempEntity.box.botRight.x;
                 game.logs[tempEntity.row].box.botRight.y = tempEntity.box.botRight.y;
-                game.logs[tempEntity.row].pid = tempEntity.pid;        
+                game.logs[tempEntity.row].pid = tempEntity.pid;
 
                 printerLogs(game.logs[tempEntity.row]);
+
+                if(game.logs[tempEntity.row].isOnLog){
+                	switch(game.logs[tempEntity.row].dir){
+                		case W:
+							game.player.box.topLeft.x -= 3;					
+							game.player.box.botRight.x -= 3;
+						break;
+
+						case E:
+							game.player.box.topLeft.x += 3;					
+							game.player.box.botRight.x += 3;
+						break;
+                	}
+                	printerSingleEntities(game.player);
+                }       
             break;
             
-            case SPITBALL: 
+            case SPITBALL:
             	bodyClearingSingleEntities(tempEntity);
 
             	spitballCollisions(tempEntity);
@@ -511,21 +564,19 @@ int roadsAndPonds(int piperead, int pipewrite)
         refresh();  
     }
 
+    //killEverything();
+    erase();
+    refresh();
+
     if(playerHit){
-    	return 0;
+    	result = OUCH;
     }
 
     if(denReached){
-    	int i = 0;
-    	while(!game.Dens[i].visited){
-    		i++;
-    	}
-    	return i;
+    	result = denId;
     }
 
-    killEverything();
-    erase();
-    
+    return result;
 }
 
 int calcRow(int playerRow)
@@ -545,12 +596,12 @@ void drawMap()
     int i,j,k;
 
     // drawing border
+
     for (j = 0; j <= MAXY; j++) {
         i = 0;
         if (j >= 1 && j < MAXY) {
             mvaddch(j, i, ACS_VLINE);
             mvaddch(j, MAXX, ACS_VLINE);
-
         } else if (j == 0 || j == MAXY) {
             for (i = 0; i < MAXX; i++) {
                 mvaddch(j, i, ACS_HLINE);
@@ -558,12 +609,21 @@ void drawMap()
             }
         }
     }
+
+    // painting roads
+
+    // painting water
+
+    // painting safe zones
+    
     mvaddch(0, 0, ACS_ULCORNER);
     mvaddch(0, MAXX, ACS_URCORNER);
     mvaddch(MAXY, MAXX, ACS_LRCORNER);
     mvaddch(MAXY, 0, ACS_LLCORNER);
 
     // limiting zones
+
+    attron(COLOR_PAIR(SAFE_ZONE));
     for(j = 0; j<ZONES; j++){
     	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	    
 	    for(i = 1;i<MAXX;i++){
@@ -574,38 +634,41 @@ void drawMap()
 
     // drawing dens
     for(i = 0; i < NUM_DENS; i++){
-    	switch(i){
-	    	case 0:
-	    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);
-	    	break;
+    	if(!game.Dens[i].visited){
+    		switch(i){
+		    	case 0:
+		    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
+		    		for(j=1;j<PHROG_SIZE+1;j++){
+		    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
+		    		}
+		    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);
+		    	break;
 
-	    	case NUM_DENS-1:
-	    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
-	    	break;
+		    	case NUM_DENS-1:
+		    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
+		    		for(j=1;j<PHROG_SIZE+1;j++){
+		    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
+		    		}
+		    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
+		    	break;
 
-	    	default:
-	    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
-	    		
-	    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
-	    		for(j=1;j<PHROG_SIZE+1;j++){
-	    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
-	    		}
-	    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);	    		
-	    	break;
-    	}
+		    	default:
+		    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
+		    		for(j=1;j<PHROG_SIZE+1;j++){
+		    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
+		    		}
+		    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
+		    		
+		    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);	    		
+		    		for(j=1;j<PHROG_SIZE+1;j++){
+		    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
+		    		}
+		    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);	    		
+		    	break;
+	    	}
+    	}  	
     } 
+    attroff(COLOR_PAIR(SAFE_ZONE));
 }
 
 void drawGridNums()
@@ -642,32 +705,42 @@ void translateDirection(Direction dir)
 	}
 }
 
-_Bool denCollisions(){
+int denCollisions()
+{
 	int i;
 	for(i = 0; i < NUM_DENS; i++){
 		if(verifyHitbox(game.player.box,game.Dens[i].area)){
 			game.Dens[i].visited = true;
-			return true;
+			return i;
 		}
 	}
 
-	return false;
+	return NUM_DENS;
 }
 
-void killEverything(){
+void killEverything()
+{
 	int i,j;
 
-	kill(game.player.pid,0);
-
 	for(i = 0; i < NUM_LOGS; i++){
-		kill(game.logs[i].pid,0);
+		if(kill(game.logs[i].pid,SIGTERM) == 0){
+			mvprintw(MAXY+2,0,"log process %d killed",i);
+		}else{
+			perror("le process is still alive");
+			exit(-1);
+		}
 	}
 
 	for (i = 0; i < NUM_LANES; i++)
 	{
 		for (j = 0; j < NUM_CARS; j++)
 		{
-			kill(game.carTable[i][j].pid,0);
+			if(kill(game.carTable[i][j].pid,SIGTERM) == 0){
+				mvprintw(MAXY+3,0,"car process %d in row %d killed",j,i);
+			}else{
+				perror("le process is still alive");
+				exit(-1);
+			}
 		}
 	}
 }
@@ -679,7 +752,7 @@ void spider(Entity log, int pipewrite)
 	Entity spider;
 
 	spider.lives = 1;
-	spider.color = MAGENTA;
+	//spider.color = MAGENTA;
 	spider.dir = log.dir;
 	spider.row = log.row;
 
@@ -807,7 +880,7 @@ void spit(int pipewrite, Hitbox pH)
     spitball.lives = 1;
     spitball.box.topLeft.x = spitball.box.botRight.x = pH.botRight.x-1;
     spitball.box.topLeft.y = spitball.box.botRight.y = pH.botRight.y+1;
-    spitball.color = MAGENTA;
+    //spitball.color = MAGENTA;
     spitball.dir = S;
     spitball.et = SPITBALL;
 
@@ -827,7 +900,7 @@ void moveSpitBall(int pipewrite, Entity projectile)
         if (projectile.box.topLeft.x <= 1) {
             projectile.lives = 0;
             updateEntity(projectile,pipewrite);
-            kill(projectile.pid, 1);
+            kill(projectile.pid, SIGTERM);
             return;
         }
 
@@ -837,7 +910,8 @@ void moveSpitBall(int pipewrite, Entity projectile)
     }
 }
 
-void spitballCollisions(Entity spit){
+void spitballCollisions(Entity spit)
+{
 	int i,j;
 
 	for(i = 0; i < NUM_LANES; i++){
@@ -849,6 +923,7 @@ void spitballCollisions(Entity spit){
 		}
 	}
 }
+
 /*
 	// verifica delle collisioni della bomba
 	void projectileCollisions(Entity currentMissile, int pipewrite)

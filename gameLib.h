@@ -14,6 +14,7 @@
 #define NUM_LANES 3
 #define NUM_CARS 3
 #define NUM_DENS 5
+#define OUCH 5
 #define ENEMY_CHANCE 20
 #define ATTACK_CHANCE 20
 
@@ -25,7 +26,8 @@
 #define WIDTH_DENS 9
 #define MAXX 82
 #define MAXY 28
-#define PHROG_STARTING_LIVES 2
+#define PHROG_STARTING_LIVES 3
+#define TESTING 1
 
 //structures and type definitions
 
@@ -63,9 +65,9 @@ void moveLog(Entity log, int pipewrite);
 _Bool logCollisions(Entity phrog, Entity currentLog);
 
 void updateEntity(Entity temp, int pipewrite);
-void initializeData();
-int roadsAndPonds(int piperead, int pipewrite);
-_Bool denCollisions();
+void initializeData(_Bool dRegister[], int nDens);
+int roadsAndPonds(int piperead, int pipewrite, _Bool* dRegister, int nDens);
+int denCollisions();
 void killEverything();
 
 int calcRow(int playerRow);
