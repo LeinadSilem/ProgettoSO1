@@ -53,7 +53,7 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 		case 0:
 			close(gamePipe[0]);
 			close(lifeline[1]);
-			phrog(startingLives,gamePipe[1]);
+			phrog(startingLives,gamePipe[1],lifeline[0]);
 			exit(1);
 		break;
 		
@@ -86,7 +86,7 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 						break;
 
 						default:
-							result = roadsAndPonds(gamePipe[0],gamePipe[1],dRegister,NUM_DENS);	
+							result = roadsAndPonds(gamePipe[0],gamePipe[1],lifeline[1],dRegister,NUM_DENS);	
 						break;
 					}					
 				break;

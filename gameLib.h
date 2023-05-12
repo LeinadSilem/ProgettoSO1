@@ -45,8 +45,7 @@ typedef struct gamestate
 	int zoneLimitY[ZONES];
 }Gamestate;
 
-void phrog(int lives,int pipewrite);
-//void resetPhrog(int pipewrite);
+void phrog(int lives,int pipewrite, int isLogOnPipe);
 
 void carGenerator(int pipewrite);
 void moveCar(Entity car,int pipewrite);
@@ -66,9 +65,8 @@ _Bool logCollisions(Entity phrog, Entity currentLog);
 
 void updateEntity(Entity temp, int pipewrite);
 void initializeData(_Bool dRegister[], int nDens);
-int roadsAndPonds(int piperead, int pipewrite, _Bool* dRegister, int nDens);
+int roadsAndPonds(int piperead, int pipewrite, int isLogOnPipe, _Bool* dRegister, int nDens);
 int denCollisions();
-void killEverything();
 
 int calcRow(int playerRow);
 void drawMap();

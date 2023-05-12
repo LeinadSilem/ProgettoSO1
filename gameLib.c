@@ -5,7 +5,7 @@ Gamestate game;
 // SEZIONE GENERAZIONE E MOVIMENTO ENTITA
 
 // funzione per il movimento della rana
-void phrog(int lives,int pipewrite)
+void phrog(int lives,int pipewrite, int isOnLogPipe)
 {
     char input;
     int updated_life;
@@ -23,8 +23,11 @@ void phrog(int lives,int pipewrite)
     player.box.botRight.x = player.box.topLeft.x + PHROG_SIZE-1;
     player.box.botRight.y = player.box.topLeft.y + PHROG_SIZE-1;
 
+    Entity tempLog;
+
     while(true) {
 
+    	read(isOnLogPipe,&tempLog,sizeof(Entity));
         input=getch();
         switch(input) {
             case UP:
@@ -49,16 +52,14 @@ void phrog(int lives,int pipewrite)
 				if(player.box.topLeft.x > 1){
 					player.box.topLeft.x = player.box.topLeft.x - 3;	
 					player.box.botRight.x = player.box.botRight.x - 3;
-					player.col--;
 					player.dir = W;
 				}
 			break;
 
 			case RIGHT:
 				if(player.box.botRight.x < MAXX-1){
-					player.box.topLeft.x = player.box.topLeft.x + 3;	
-					player.box.botRight.x = player.box.botRight.x + 3;
-					player.col++;	  
+					player.box.topLeft.x = player.box.topLeft.x+3;	
+					player.box.botRight.x = player.box.botRight.x+3;  
 					player.dir = E;				
 				}
 			break;
@@ -66,6 +67,24 @@ void phrog(int lives,int pipewrite)
 			case ' ':
 				spit(pipewrite,player.box);
 			break;
+	    }
+
+	    if(tempLog.isOnLog){
+	    	if(!player.isOnLog){
+	    		player.isOnLog = true;
+	    	}
+	    	switch(tempLog.dir){
+	    		case W:
+	    			player.box.topLeft.x = player.box.topLeft.x--;	
+					player.box.botRight.x = player.box.botRight.x--;
+					player.dir = W;
+	    		break;
+	    		case E:
+	    			player.box.topLeft.x = player.box.topLeft.x++;	
+					player.box.botRight.x = player.box.botRight.x++;  
+					player.dir = E;		
+	    		break;
+	    	}
 	    }
         
         updateEntity(player,pipewrite);    
@@ -137,8 +156,6 @@ void carGenerator(int pipewrite)
 		}
 		sleep(6);
 	}
-
-	kill(myPid,SIGTERM);
 }
 
 void moveCar(Entity car,int pipewrite)
@@ -187,18 +204,6 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
     }  
 
     return false;
-}
-
-_Bool logCollisions(Entity phrog, Entity currentLog)
-{
-	if(verifyHitbox(phrog.box,currentLog.box)){
-		game.player.isOnLog = true;
-		currentLog.isOnLog = true;
-		return false;
-	}else{
-		bodyClearingSingleEntities(game.player);
-		return true;
-	}
 }
 
 void haltCar(int currentCar, int row)
@@ -278,8 +283,6 @@ void logGenerator(int pipewrite)
 			moveLog(logs[i],pipewrite);
 		}			
 	}
-
-	kill(myPid,0);
 }
 
 void moveLog(Entity log,int pipewrite)
@@ -319,6 +322,68 @@ void moveLog(Entity log,int pipewrite)
 	}
 }
 
+_Bool logCollisions(Entity phrog, Entity currentLog)
+{
+	if(verifyHitbox(phrog.box,currentLog.box)){
+		return true;
+	}else{
+		bodyClearingSingleEntities(game.player);
+		return false;
+	}
+}
+
+// funzione per la generazione degli sputi del ragno
+void spit(int pipewrite, Hitbox pH)
+{
+    Entity spitball;
+
+    spitball.lives = 1;
+    spitball.box.topLeft.x = spitball.box.botRight.x = pH.topLeft.x+1;
+    spitball.box.topLeft.y = spitball.box.botRight.y = pH.topLeft.y-1;
+    spitball.color = SPIT_ON_GRASS;
+    spitball.dir = N;
+    spitball.et = SPITBALL;
+
+    if(fork() == 0){
+        moveSpitBall(pipewrite,spitball);
+    }
+}
+
+// funzione per il movimento degli sputi
+void moveSpitBall(int pipewrite, Entity projectile)
+{
+    
+    projectile.pid = getpid();
+    while (true) {
+        projectile.box.topLeft.y--; 
+        projectile.box.botRight.y--;
+
+        if(projectile.box.topLeft.y <= 1){
+            projectile.lives = 0;
+            updateEntity(projectile,pipewrite);
+            kill(projectile.pid, 1);
+        }
+
+        updateEntity(projectile,pipewrite);
+
+        usleep(25000);         
+    }
+}
+
+void spitballCollisions(Entity spit)
+{
+	int i,j;
+
+	for(i = 0; i < NUM_LANES; i++){
+		for(j = 0; j < NUM_CARS; j++){
+			if(verifyHitbox(spit.box, game.carTable[i][j].box)){
+				bodyClearing(spit);
+				kill(spit.pid,1);
+			}
+		}
+	}
+}
+
 // SEZIONE GESTIONE GIOCO E GRAFICA
 void initializeData(_Bool dRegister[], int nDens)
 {
@@ -352,7 +417,7 @@ void initializeData(_Bool dRegister[], int nDens)
 	// initPlayer
 	game.player.lives = PHROG_STARTING_LIVES;
 	game.player.color = PHROG_ON_GRASS;
-	game.player.row = 9;
+	game.player.row = 8;
 	game.player.col = 1;
 	game.player.et = PHROG;
 
@@ -375,7 +440,7 @@ void initializeData(_Bool dRegister[], int nDens)
 
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
-		game.logs[i].row = i;
+		game.logs[i].row = i+1;
 	}
 
 	// init dens
@@ -415,16 +480,19 @@ void updateEntity(Entity temp, int pipewrite)
     write(pipewrite, &current, sizeof(Entity));
 }
 
-int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
+int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[], int nDens)
 {
     initializeData(dRegister,NUM_DENS);
     Entity tempEntity;
-    Hitbox origin;
 
     _Bool playerHit = false;
     _Bool denReached = false;
-    int result, denId;
+    _Bool playerIsDry;
+    int result, denId, currentRow;
+    FILE *debugLog;
 
+    debugLog = fopen("/home/leinad/Documenti/GitHub/ProgettoSO1/ProgettoSO1/debugLog.txt","a");
+    fprintf(debugLog,"----start of manche----\n");
     drawMap();
     
     while(!playerHit && !denReached)
@@ -439,32 +507,35 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
             	// se il player è sul tronco, muovilo col
             	mvprintw(1,MAXX+1,"phrog lives:%d",tempEntity.lives);
                 bodyClearing(game.player);  
-
-                game.player.dir = tempEntity.dir;
+                
                 game.player.pid = tempEntity.pid;
                 game.player.col = tempEntity.col;
                 game.player.color = tempEntity.color;
+                game.player.dir = tempEntity.dir;
+                game.player.row = tempEntity.row;
 
 				game.player.box.topLeft.y  = tempEntity.box.topLeft.y;
 				game.player.box.botRight.y = tempEntity.box.botRight.y;
 
-				if(game.player.box.topLeft.y < game.zoneLimitY[2]){
+				game.player.box.topLeft.x = tempEntity.box.topLeft.x;					
+				game.player.box.botRight.x = tempEntity.box.botRight.x;
 
-					switch(game.player.dir){
-						case W:
-							game.player.box.topLeft.x -= 3;					
-							game.player.box.botRight.x -= 3;
-						break;
+                if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
+                	playerIsDry = logCollisions(game.player,game.logs[game.player.row-2]);
+                	if(!playerIsDry){
+                		fprintf(debugLog, "player is in the water \n");
+                		fprintf(debugLog, "attempted to jump on log in row %d\n", game.player.row);
+                		playerHit = true;
+                	}
 
-						case E:
-							game.player.box.topLeft.x += 3;					
-							game.player.box.botRight.x += 3;
-						break;
-					}
-				}else{
-					game.player.box.topLeft.x = tempEntity.box.topLeft.x;					
-					game.player.box.botRight.x = tempEntity.box.botRight.x;
-				}
+                	if(playerIsDry && !playerHit){
+                		fprintf(debugLog, "player is dry and on log\n");
+                		game.logs[game.player.row].isOnLog = true;
+                		game.player.isOnLog = true;
+                		write(isOnLogPipe,&game.logs[game.player.row-2],sizeof(Entity));
+                	}
+
+                }
 
                 mvprintw(2,MAXX+1,"current player position x:%d, y:%d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
                	translateDirection(game.player.dir);
@@ -474,10 +545,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
                		printw("%d[%d]\t", i+1, game.Dens[i].visited);
                	}
 	            
-	            if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
-                	playerHit = logCollisions(game.player,game.logs[calcRow(game.player.row)]);
-                }
-
                 denId = denCollisions();
 
                 if(game.player.box.topLeft.y == 1){
@@ -514,7 +581,11 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
                 game.carTable[tempEntity.row][tempEntity.col].box.botRight.y = tempEntity.box.botRight.y;
                 game.carTable[tempEntity.row][tempEntity.col].pid = tempEntity.pid;  
 
-                playerHit = carCollisions(game.carTable[tempEntity.row][tempEntity.col],game.player);   
+                playerHit = carCollisions(game.carTable[tempEntity.row][tempEntity.col],game.player); 
+
+                if(playerHit){
+                	fprintf(debugLog, "player got run over by cars\n");
+                }  
 
                 printerCars(game.carTable[tempEntity.row][tempEntity.col]);
             break;
@@ -534,20 +605,20 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 
                 printerLogs(game.logs[tempEntity.row]);
 
-                if(game.logs[tempEntity.row].isOnLog){
+                if(game.logs[tempEntity.row].isOnLog && game.player.isOnLog){
                 	switch(game.logs[tempEntity.row].dir){
                 		case W:
-							game.player.box.topLeft.x -= 3;					
-							game.player.box.botRight.x -= 3;
-						break;
-
-						case E:
-							game.player.box.topLeft.x += 3;					
-							game.player.box.botRight.x += 3;
-						break;
+			    			game.player.box.topLeft.x = game.player.box.topLeft.x--;	
+							game.player.box.botRight.x = game.player.box.botRight.x--;
+			    		break;			    		
+			    		case E:
+			    			game.player.box.topLeft.x = game.player.box.topLeft.x++;	
+							game.player.box.botRight.x = game.player.box.botRight.x++;
+			    		break;
                 	}
-                	printerSingleEntities(game.player);
-                }       
+                	write(isOnLogPipe,&game.logs[tempEntity.row],sizeof(Entity));
+                	printerSingleEntities(game.player);               	
+                }
             break;
             
             case SPITBALL:
@@ -564,7 +635,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
         refresh();  
     }
 
-    //killEverything();
     erase();
     refresh();
 
@@ -576,6 +646,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
     	result = denId;
     }
 
+    fclose(debugLog);
     return result;
 }
 
@@ -718,32 +789,6 @@ int denCollisions()
 	return NUM_DENS;
 }
 
-void killEverything()
-{
-	int i,j;
-
-	for(i = 0; i < NUM_LOGS; i++){
-		if(kill(game.logs[i].pid,SIGTERM) == 0){
-			mvprintw(MAXY+2,0,"log process %d killed",i);
-		}else{
-			perror("le process is still alive");
-			exit(-1);
-		}
-	}
-
-	for (i = 0; i < NUM_LANES; i++)
-	{
-		for (j = 0; j < NUM_CARS; j++)
-		{
-			if(kill(game.carTable[i][j].pid,SIGTERM) == 0){
-				mvprintw(MAXY+3,0,"car process %d in row %d killed",j,i);
-			}else{
-				perror("le process is still alive");
-				exit(-1);
-			}
-		}
-	}
-}
 
 // SEZIONE NON IMPLEMENTATI
 
@@ -872,57 +917,7 @@ void spider(Entity log, int pipewrite)
     }
 }
 
-// funzione per la generazione degli sputi del ragno
-void spit(int pipewrite, Hitbox pH)
-{
-    Entity spitball;
 
-    spitball.lives = 1;
-    spitball.box.topLeft.x = spitball.box.botRight.x = pH.botRight.x-1;
-    spitball.box.topLeft.y = spitball.box.botRight.y = pH.botRight.y+1;
-    //spitball.color = MAGENTA;
-    spitball.dir = S;
-    spitball.et = SPITBALL;
-
-    if(fork() == 0){
-        moveSpitBall(pipewrite, spitball);
-    }
-}
-
-// funzione per il movimento degli sputi
-void moveSpitBall(int pipewrite, Entity projectile)
-{
-    
-    projectile.pid = getpid();
-    while (true) {
-        projectile.box.topLeft.y = projectile.box.botRight.y -=1;
-
-        if (projectile.box.topLeft.x <= 1) {
-            projectile.lives = 0;
-            updateEntity(projectile,pipewrite);
-            kill(projectile.pid, SIGTERM);
-            return;
-        }
-
-        updateEntity(projectile,pipewrite);
-
-        usleep(25000);         
-    }
-}
-
-void spitballCollisions(Entity spit)
-{
-	int i,j;
-
-	for(i = 0; i < NUM_LANES; i++){
-		for(j = 0; j < NUM_CARS; j++){
-			if(verifyHitbox(spit.box, game.carTable[i][j].box)){
-				bodyClearing(spit);
-				kill(spit.pid,0);
-			}
-		}
-	}
-}
 
 /*
 	// verifica delle collisioni della bomba

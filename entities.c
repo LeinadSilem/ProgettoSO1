@@ -333,6 +333,10 @@ void bodyClearingSingleEntities(Entity ent)
     		adjy = 1;
     	break;
 
+    	case S:
+    		adjy = -1;
+    	break;
+
     	case W:
     		adjx = 1;
     	break;
@@ -343,7 +347,7 @@ void bodyClearingSingleEntities(Entity ent)
     }
 
     for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
-        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
+        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
             mvaddch(y+i+adjy,x+j+adjx,' ');
         }
     }
@@ -351,7 +355,6 @@ void bodyClearingSingleEntities(Entity ent)
 
 _Bool verifyHitbox(Hitbox a, Hitbox b)
 {
-
     if(((a.topLeft.x >= b.topLeft.x && a.topLeft.x <= b.botRight.x) || (a.botRight.x >= b.topLeft.x && a.botRight.x <= b.botRight.x)) &&
        ((a.topLeft.y >= b.topLeft.y && a.topLeft.y <= b.botRight.y) || (a.botRight.y >= b.topLeft.y && a.botRight.y <= b.botRight.y))) {
         return true;
