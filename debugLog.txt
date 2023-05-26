@@ -1,1009 +1,1016 @@
 
 ----start of manche----
-player is in the water 
-attempted to jump on log in row 4
+player is dry and on log in position x:55 y:10 
+player is dry and on log in position x:55 y:10 
+player is dry and on log in position x:55 y:10 
+player is dry and on log in position x:52 y:10 
+player is dry and on log in position x:52 y:10 
+player is dry and on log in position x:52 y:10 
+player is dry and on log in position x:49 y:10 
+player is dry and on log in position x:49 y:10 
+player is dry and on log in position x:49 y:10 
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+----start of manche----
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:73 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:79 y:4 
+player is dry and on log in position x:79 y:4 
+player is dry and on log in position x:79 y:4 
+----start of manche----
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:4 y:7 
+player is dry and on log in position x:4 y:7 
+player is dry and on log in position x:4 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:7 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:10 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:13 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:16 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:19 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:22 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:25 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:28 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:31 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:34 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
 ----start of manche----
 player is in the water 
 attempted to jump on log in row 4
 ----start of manche----
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
+----start of manche----
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+----start of manche----
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+----start of manche----
+player is dry and on log in position x:10 y:10 
 player is in the water 
 attempted to jump on log in row 4
 ----start of manche----
-player is in the water 
-attempted to jump on log in row 4
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
 ----start of manche----
-player is in the water 
-attempted to jump on log in row 4
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:4 y:4 
+player is dry and on log in position x:4 y:4 
+player is dry and on log in position x:4 y:4 
 ----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 4
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:46 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:70 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:67 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:64 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:61 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:58 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:55 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:52 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:7 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
 ----start of manche----
-player got run over by cars
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:46 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:10 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:43 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:7 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:10 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
+player is dry and on log in position x:76 y:4 
 ----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:7 y:10 
+player is dry and on log in position x:7 y:10 
+player is dry and on log in position x:7 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:10 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:13 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:16 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:19 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:22 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:25 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:28 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:31 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:34 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:10 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:73 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:70 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:67 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:64 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:61 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:58 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:55 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:52 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:49 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:46 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
+player is dry and on log in position x:43 y:4 
 ----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 4
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 2
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 2
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 2
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 2
-----start of manche----
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 4
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 4
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 2
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
-----start of manche----
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is dry and on log
-player is in the water 
-attempted to jump on log in row 3
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:10 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:37 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:7 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:13 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:16 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:19 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:22 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:25 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:28 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:31 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:34 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:40 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 
+player is dry and on log in position x:37 y:4 

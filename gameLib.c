@@ -199,7 +199,7 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
     }
 
     if(verifyHitbox(currentCar.box,phrog.box)){
-    	bodyClearingSingleEntities(game.player);
+    	bodyClearingSingleEntities(game.player,game.gameWin);
     	return true;
     }  
 
@@ -327,7 +327,7 @@ _Bool logCollisions(Entity phrog, Entity currentLog)
 	if(verifyHitbox(phrog.box,currentLog.box)){
 		return true;
 	}else{
-		bodyClearingSingleEntities(game.player);
+		bodyClearingSingleEntities(game.player,game.gameWin);
 		return false;
 	}
 }
@@ -377,7 +377,7 @@ void spitballCollisions(Entity spit)
 	for(i = 0; i < NUM_LANES; i++){
 		for(j = 0; j < NUM_CARS; j++){
 			if(verifyHitbox(spit.box, game.carTable[i][j].box)){
-				bodyClearing(spit);
+				bodyClearing(spit,game.gameWin);
 				kill(spit.pid,1);
 			}
 		}
@@ -407,6 +407,7 @@ void initializeData(_Bool dRegister[], int nDens)
     init_pair(SPIT_ON_GRASS,COLOR_MAGENTA,COLOR_GREEN);
     init_pair(SPIT_ON_LOG,COLOR_MAGENTA,COLOR_CYAN);
 
+    game.gameWin = newwin(MAXY,MAXX,0,0);
 
     //delimitations calculations
     game.zoneLimitY[0] = 4;
@@ -480,6 +481,11 @@ void updateEntity(Entity temp, int pipewrite)
     write(pipewrite, &current, sizeof(Entity));
 }
 
+void screenRefresh(){
+	wrefresh(game.gameWin);
+	refresh();
+}
+
 int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[], int nDens)
 {
     initializeData(dRegister,NUM_DENS);
@@ -506,7 +512,7 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
             case PHROG:
             	// se il player è sul tronco, muovilo col
             	mvprintw(1,MAXX+1,"phrog lives:%d",tempEntity.lives);
-                bodyClearing(game.player);  
+                bodyClearing(game.player,game.gameWin);  
                 
                 game.player.pid = tempEntity.pid;
                 game.player.col = tempEntity.col;
@@ -528,8 +534,8 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
                 		playerHit = true;
                 	}
 
-                	if(playerIsDry && !playerHit){
-                		fprintf(debugLog, "player is dry and on log\n");
+                	if(playerIsDry){
+                		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
                 		game.logs[game.player.row].isOnLog = true;
                 		game.player.isOnLog = true;
                 		write(isOnLogPipe,&game.logs[game.player.row-2],sizeof(Entity));
@@ -556,20 +562,20 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
                 }                
               
                 if(game.player.lives > 0){
-                    printerSingleEntities(game.player);
+                    printerSingleEntities(game.player,game.gameWin);
                 }    
             break;
 
             case SPIDER:
-            	bodyClearingSingleEntities(tempEntity);
+            	bodyClearingSingleEntities(tempEntity,game.gameWin);
 
             	if(tempEntity.lives > 0){
-            		printerSingleEntities(tempEntity);
+            		printerSingleEntities(tempEntity,game.gameWin);
             	}
             break;
 
             case CAR:
-                bodyClearing(game.carTable[tempEntity.row][tempEntity.col]); 
+                bodyClearing(game.carTable[tempEntity.row][tempEntity.col],game.gameWin); 
 
                 game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
                 game.carTable[tempEntity.row][tempEntity.col].color = tempEntity.color;
@@ -587,11 +593,11 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
                 	fprintf(debugLog, "player got run over by cars\n");
                 }  
 
-                printerCars(game.carTable[tempEntity.row][tempEntity.col]);
+                printerCars(game.carTable[tempEntity.row][tempEntity.col],game.gameWin);
             break;
 
             case LOG:
-                bodyClearing(game.logs[tempEntity.row]); 
+                bodyClearing(game.logs[tempEntity.row],game.gameWin); 
 
                 game.logs[tempEntity.row].length = tempEntity.length;  
                 game.logs[tempEntity.row].color = tempEntity.color;
@@ -603,9 +609,10 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
                 game.logs[tempEntity.row].box.botRight.y = tempEntity.box.botRight.y;
                 game.logs[tempEntity.row].pid = tempEntity.pid;
 
-                printerLogs(game.logs[tempEntity.row]);
+                printerLogs(game.logs[tempEntity.row],game.gameWin);
 
                 if(game.logs[tempEntity.row].isOnLog && game.player.isOnLog){
+                	bodyClearing(game.player,game.gameWin);
                 	switch(game.logs[tempEntity.row].dir){
                 		case W:
 			    			game.player.box.topLeft.x = game.player.box.topLeft.x--;	
@@ -616,27 +623,29 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
 							game.player.box.botRight.x = game.player.box.botRight.x++;
 			    		break;
                 	}
-                	write(isOnLogPipe,&game.logs[tempEntity.row],sizeof(Entity));
-                	printerSingleEntities(game.player);               	
+                	write(isOnLogPipe,&game.logs[tempEntity.row],sizeof(Entity));  
+                	printerSingleEntities(game.player,game.gameWin);          	
                 }
+
+                
             break;
             
             case SPITBALL:
-            	bodyClearingSingleEntities(tempEntity);
+            	bodyClearingSingleEntities(tempEntity,game.gameWin);
 
             	spitballCollisions(tempEntity);
 
             	if(tempEntity.lives > 0){
-            		printerSingleEntities(tempEntity);
+            		printerSingleEntities(tempEntity,game.gameWin);
             	}            
             break;
         }
         
-        refresh();  
+        screenRefresh();  
     }
 
     erase();
-    refresh();
+    screenRefresh();
 
     if(playerHit){
     	result = OUCH;
@@ -662,7 +671,7 @@ int calcRow(int playerRow)
 }
 
 // funzioni per la stampa e la pulizia
-void drawMap()
+void drawMapOLD()
 {
     int i,j,k;
 
@@ -695,9 +704,15 @@ void drawMap()
     // limiting zones
 
     attron(COLOR_PAIR(SAFE_ZONE));
-    for(j = 0; j<ZONES; j++){
-    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	    
-	    for(i = 1;i<MAXX;i++){
+   
+    mvaddch(game.zoneLimitY[0],0,ACS_LTEE);	
+    for(i = 1; i < MAXX-1; i++){   	
+    }
+    mvaddch(game.zoneLimitY[0],MAXX,ACS_RTEE);
+
+    for(j = 1; j<ZONES; j++){
+    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	
+    	for(i = 1;i<MAXX;i++){
 	    	mvaddch(game.zoneLimitY[j],i,ACS_HLINE);
 	    }
 	    mvaddch(game.zoneLimitY[j],MAXX,ACS_RTEE);
@@ -739,6 +754,38 @@ void drawMap()
 	    	}
     	}  	
     } 
+    
+}
+
+void drawMap(){
+
+	int i,j,k;
+	//drawing border
+	attron(COLOR_PAIR(SAFE_ZONE));
+	box(game.gameWin,0,0);
+
+	for(i = 0; i < NUM_DENS; i++){
+		if(!game.Dens[i].visited){
+			mvwhline(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x,ACS_HLINE,WIDTH_DENS);
+			mvwvline(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x+WIDTH_DENS-1,ACS_VLINE,3);
+			mvwhline(game.gameWin,game.Dens[i].area.topLeft.y+2,game.Dens[i].area.topLeft.x,ACS_HLINE,WIDTH_DENS);
+			mvwvline(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x,ACS_VLINE,3);		
+			mvwaddch(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x,ACS_ULCORNER);
+		    mvwaddch(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x+WIDTH_DENS-1,ACS_URCORNER);
+		    mvwaddch(game.gameWin,game.Dens[i].area.topLeft.y+2,game.Dens[i].area.topLeft.x,ACS_LLCORNER);
+		    mvwaddch(game.gameWin,game.Dens[i].area.botRight.y,game.Dens[i].area.botRight.x,ACS_LRCORNER);		
+		}
+	}
+
+	for(j = 1; j<ZONES; j++){
+    	mvwaddch(game.gameWin,game.zoneLimitY[j],0,ACS_LTEE);	
+    	for(i = 1;i<MAXX;i++){
+	    	mvwaddch(game.gameWin,game.zoneLimitY[j],i,ACS_HLINE);
+	    }
+	    mvwaddch(game.gameWin,game.zoneLimitY[j],MAXX,ACS_RTEE);
+    }
+
+    wrefresh(game.gameWin);
     attroff(COLOR_PAIR(SAFE_ZONE));
 }
 

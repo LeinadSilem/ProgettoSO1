@@ -43,6 +43,7 @@ typedef struct gamestate
 	Entity logs[NUM_LOGS];
 	Den Dens[NUM_DENS];
 	int zoneLimitY[ZONES];
+	WINDOW* gameWin; 
 }Gamestate;
 
 void phrog(int lives,int pipewrite, int isLogOnPipe);

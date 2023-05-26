@@ -41,10 +41,10 @@ typedef struct data
     _Bool isOnLog;
 }Entity;
 
-void printerLogs(Entity ent);
-void printerCars(Entity ent);
-void bodyClearing(Entity ent);
-void bodyClearingSingleEntities(Entity ent);
-void printerSingleEntities(Entity ent);
+void printerLogs(Entity ent, WINDOW* win);
+void printerCars(Entity ent, WINDOW* win);
+void bodyClearing(Entity ent, WINDOW* win);
+void bodyClearingSingleEntities(Entity ent, WINDOW* win);
+void printerSingleEntities(Entity ent, WINDOW* win);
 _Bool verifyHitbox(Hitbox a, Hitbox b);
 #endif

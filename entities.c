@@ -1,13 +1,13 @@
 #include "entities.h"
 
 char phrogBody[PHROG_SIZE][PHROG_SIZE] = {
-    ",_,",
+    "\\_/",
     "(0)",
-    "' '"
+    "/ \\"
 };
 
 char spiderBody[1][PHROG_SIZE] = {
-	")0("
+	")O("
 };
 
 char carLeftFour[PHROG_SIZE][4] = {
@@ -111,9 +111,7 @@ char logTEST[PHROG_SIZE][18] = {
     "(================)",
     "o----------------o"
 };
-
-
-void printerCars(Entity ent)
+void printerCars(Entity ent, WINDOW* win)
 {
 	int i,j,y,x;
 
@@ -126,7 +124,7 @@ void printerCars(Entity ent)
     		case 4:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftFour[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftFour[i][j]);
 			        }
 			    }
     		break;
@@ -134,7 +132,7 @@ void printerCars(Entity ent)
     		case 5:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftFive[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftFive[i][j]);
 			        }
 			    }
     		break;
@@ -142,7 +140,7 @@ void printerCars(Entity ent)
     		case 6:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftSix[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftSix[i][j]);
 			        }
 			    }
     		break;
@@ -150,7 +148,7 @@ void printerCars(Entity ent)
     		case 7:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftSeven[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftSeven[i][j]);
 			        }
 			    }
     		break;
@@ -158,7 +156,7 @@ void printerCars(Entity ent)
     		case 8:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftEight[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftEight[i][j]);
 			        }
 			    }
     		break;
@@ -166,7 +164,7 @@ void printerCars(Entity ent)
     		case 9:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftNine[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftNine[i][j]);
 			        }
 			    }
     		break;
@@ -174,7 +172,7 @@ void printerCars(Entity ent)
     		case 10:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carLeftTen[i][j]);
+			            mvwaddch(win,y+i,x+j,carLeftTen[i][j]);
 			        }
 			    }
     		break;
@@ -184,7 +182,7 @@ void printerCars(Entity ent)
     		case 4:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightFour[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightFour[i][j]);
 			        }
 			    }
     		break;
@@ -192,7 +190,7 @@ void printerCars(Entity ent)
     		case 5:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightFive[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightFive[i][j]);
 			        }
 			    }
     		break;
@@ -200,7 +198,7 @@ void printerCars(Entity ent)
     		case 6:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightSix[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightSix[i][j]);
 			        }
 			    }
     		break;
@@ -208,7 +206,7 @@ void printerCars(Entity ent)
     		case 7:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightSeven[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightSeven[i][j]);
 			        }
 			    }
     		break;
@@ -216,7 +214,7 @@ void printerCars(Entity ent)
     		case 8:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightEight[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightEight[i][j]);
 			        }
 			    }
     		break;
@@ -224,7 +222,7 @@ void printerCars(Entity ent)
     		case 9:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightNine[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightNine[i][j]);
 			        }
 			    }
     		break;
@@ -232,7 +230,7 @@ void printerCars(Entity ent)
     		case 10:
     			for(i = 0; i < PHROG_SIZE; i++) {
 			        for(j = 0; j < ent.length; j++) {
-			            mvaddch(y+i,x+j,carRightTen[i][j]);
+			            mvwaddch(win,y+i,x+j,carRightTen[i][j]);
 			        }
 			    }
     		break;
@@ -241,7 +239,7 @@ void printerCars(Entity ent)
     attroff(COLOR_PAIR(ent.color));
 }
 
-void printerLogs(Entity ent)
+void printerLogs(Entity ent, WINDOW* win)
 {
 	int i,j,y,x;
 
@@ -253,9 +251,9 @@ void printerLogs(Entity ent)
 		for(i = 0; i < PHROG_SIZE; i++) {
 	        for(j = 0; j < ent.length; j++) {
 #if TESTING == 0
-	            mvaddch(y+i,x+j,logSix[i][j]);
+	            mvwaddch(win,y+i,x+j,logSix[i][j]);
 #else
-	            mvaddch(y+i,x+j,logTEST[i][j]);
+	            mvwaddch(win,y+i,x+j,logTEST[i][j]);
 #endif
 	        }
 	    }
@@ -263,9 +261,9 @@ void printerLogs(Entity ent)
 		for(i = 0; i < PHROG_SIZE; i++) {
 	        for(j = 0; j < ent.length; j++) {
 #if TESTING == 0
-	            mvaddch(y+i,x+j,logNine[i][j]);
+	            mvwaddch(win,y+i,x+j,logNine[i][j]);
 #else
-	            mvaddch(y+i,x+j,logTEST[i][j]);
+	            mvwaddch(win,y+i,x+j,logTEST[i][j]);
 #endif
 	        }
 	    }
@@ -273,7 +271,7 @@ void printerLogs(Entity ent)
 	attroff(COLOR_PAIR(ent.color));
 }
 
-void printerSingleEntities(Entity ent)
+void printerSingleEntities(Entity ent, WINDOW* win)
 {
 	int i,j,y,x;
 
@@ -287,7 +285,7 @@ void printerSingleEntities(Entity ent)
 	    case PHROG:
 		    for(i = 0; i < PHROG_SIZE; i++) {
 		        for(j = 0; j < PHROG_SIZE; j++) {
-		            mvaddch(y+i,x+j, phrogBody[i][j]);
+		            mvwaddch(win,y+i,x+j, phrogBody[i][j]);
 		        }
 		    }
 	    break;
@@ -295,19 +293,19 @@ void printerSingleEntities(Entity ent)
 	    case SPIDER:
 	    	for(i = 0; i < PHROG_SIZE; i++) {
 		        for(j = 0; j < PHROG_SIZE; j++) {
-		            mvaddch(y+i,x+j, spiderBody[i][j]);
+		            mvwaddch(win,y+i,x+j, spiderBody[i][j]);
 		        }
 		    }
 	    break;
 
 	    case SPITBALL:
-	    	mvaddch(y+i,x+j,'*');
+	    	mvwaddch(win,y+i,x+j,'*');
 	    break;
     }
     attroff(COLOR_PAIR(ent.color));
 }
 
-void bodyClearing(Entity ent)
+void bodyClearing(Entity ent, WINDOW* win)
 {
     int i,j,x,y;
 
@@ -316,12 +314,12 @@ void bodyClearing(Entity ent)
 
     for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
         for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
-            mvaddch(y+i,x+j,' ');
+            mvwaddch(win,y+i,x+j,' ');
         }
     }
 }
 
-void bodyClearingSingleEntities(Entity ent)
+void bodyClearingSingleEntities(Entity ent, WINDOW* win)
 {
     int i,j,x,y,adjx,adjy;
 
@@ -348,7 +346,7 @@ void bodyClearingSingleEntities(Entity ent)
 
     for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
         for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
-            mvaddch(y+i+adjy,x+j+adjx,' ');
+            mvwaddch(win,y+i+adjy,x+j+adjx,' ');
         }
     }
 }
