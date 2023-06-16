@@ -15,8 +15,8 @@
 #define NUM_CARS 3
 #define NUM_DENS 5
 #define OUCH 5
-#define ENEMY_CHANCE 20
-#define ATTACK_CHANCE 20
+#define ENEMY_CHANCE 10
+#define ATTACK_CHANCE 40
 
 #define MIN_ROW_CAR 16
 #define MAX_ROW_CAR 22
@@ -24,7 +24,7 @@
 #define MAX_ROW_LOG 10
 #define ZONES 4
 #define WIDTH_DENS 9
-#define MAXX 82
+#define MAXX 83
 #define MAXY 28
 #define PHROG_STARTING_LIVES 3
 #define TESTING 1
@@ -41,6 +41,7 @@ typedef struct gamestate
 	Entity player;
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
+	Entity spiders[NUM_LOGS];
 	Den Dens[NUM_DENS];
 	int zoneLimitY[ZONES];
 	WINDOW* gameWin; 
@@ -55,7 +56,7 @@ void haltCar(int currentCar, int row);
 
 void spider(Entity log, int pipewrite);
 
-// void spider(Entity log,int pipewrite);
+void spider(Entity log,int pipewrite);
 void spit(int pipewrite, Hitbox pH);
 void moveSpitBall(int pipewrite, Entity projectile);
 void spitballCollisions(Entity spit);

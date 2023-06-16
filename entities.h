@@ -39,6 +39,7 @@ typedef struct data
     int row,col,length;
     pid_t pid;
     _Bool isOnLog;
+    _Bool hasSpider;
 }Entity;
 
 void printerLogs(Entity ent, WINDOW* win);

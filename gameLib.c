@@ -28,6 +28,10 @@ void phrog(int lives,int pipewrite, int isOnLogPipe)
     while(true) {
 
     	read(isOnLogPipe,&tempLog,sizeof(Entity));
+    	if(tempLog.isOnLog){
+    		player.isOnLog = true;
+    	}
+
         input=getch();
         switch(input) {
             case UP:
@@ -69,10 +73,7 @@ void phrog(int lives,int pipewrite, int isOnLogPipe)
 			break;
 	    }
 
-	    if(tempLog.isOnLog){
-	    	if(!player.isOnLog){
-	    		player.isOnLog = true;
-	    	}
+	    if(player.isOnLog){
 	    	switch(tempLog.dir){
 	    		case W:
 	    			player.box.topLeft.x = player.box.topLeft.x--;	
@@ -86,7 +87,7 @@ void phrog(int lives,int pipewrite, int isOnLogPipe)
 	    		break;
 	    	}
 	    }
-        
+
         updateEntity(player,pipewrite);    
     }
 }
@@ -253,6 +254,7 @@ void logGenerator(int pipewrite)
 		logs[i].dir = dirRivers[i];
 		logs[i].et = LOG;
 		logs[i].color = LOGS;
+		logs[i].hasSpider = false;
 
 		
 		// deciding characteristics
@@ -311,12 +313,6 @@ void moveLog(Entity log,int pipewrite)
 				}		
 			break;
 		}
-
-/* i ragni che per ora disattivo che sono un pò incasinati
-		if(rand()%ENEMY_CHANCE == 0){
-			if(fork()==0) spider(log,pipewrite);
-		}
-*/
 		updateEntity(log,pipewrite);
 		usleep(100000);
 	}
@@ -331,6 +327,126 @@ _Bool logCollisions(Entity phrog, Entity currentLog)
 		return false;
 	}
 }
+
+void spider(Entity log, int pipewrite)
+{
+	Entity spider;
+
+	spider.lives = 1;
+	spider.color = SPIT_ON_LOG;
+	spider.dir = log.dir;
+	spider.row = log.row;
+	spider.et = SPIDER;
+	//col in the spiders will be used to signal in what section of the log they'll be located
+	//0: leftmost
+	//1: rightmost
+	//2: center
+	if(log.length == 6){
+		spider.col = rand()%2;
+	}else{
+		spider.col = rand()%3;
+	}
+
+	switch(spider.col){
+		case 0:
+			spider.box.topLeft.y = spider.box.botRight.y = log.box.topLeft.y+1;
+			spider.box.topLeft.x = log.box.topLeft.x;
+			spider.box.botRight.x = log.box.topLeft.x+2;
+		break;
+
+		case 1:
+			spider.box.topLeft.y = spider.box.botRight.y = log.box.topLeft.y+1;
+			spider.box.topLeft.x = log.box.botRight.x-2;
+			spider.box.botRight.x = log.box.botRight.x;			
+		break;
+
+		case 2:
+			spider.box.topLeft.y = spider.box.botRight.y = log.box.topLeft.y+1;
+			spider.box.topLeft.x = log.box.topLeft.x+3;
+			spider.box.botRight.x = log.box.botRight.x-3;		
+		break; 
+	}
+
+	while (true) {       
+
+    	switch(spider.col){
+			case 0:
+				switch(spider.dir){
+		    		case W:
+		    			if(spider.box.topLeft.x == 1){
+		    				spider.dir = E;
+		    			}else{
+		    				spider.box.topLeft.x--;
+							spider.box.botRight.x--;	
+		    			}    			
+		    		break;
+		    		
+		    		case E:
+		    			if(spider.box.botRight.x == MAXX-(PHROG_SIZE)-1){
+		    				spider.dir = W;
+		    			}else{
+		    				spider.box.topLeft.x++;
+							spider.box.botRight.x++;
+		    			}		    			
+		    		break;
+		    	}
+			break;
+
+			case 1:
+				switch(spider.dir){
+		    		case W:
+		    			if(spider.box.topLeft.x == (PHROG_SIZE+1)){
+		    				spider.dir = E;
+		    			}else{
+		    				spider.box.topLeft.x--;
+							spider.box.botRight.x--;	
+		    			}    			
+		    		break;
+		    		
+		    		case E:
+		    			if(spider.box.botRight.x == MAXX-1){
+		    				spider.dir = W;
+		    			}else{
+		    				spider.box.topLeft.x++;
+							spider.box.botRight.x++;
+		    			}		    			
+		    		break;
+		    	}
+			break;
+
+			case 2:
+				switch(spider.dir){
+		    		case W:
+		    			if(spider.box.topLeft.x == (PHROG_SIZE+1)){
+		    				spider.dir = E;
+		    			}else{
+		    				spider.box.topLeft.x--;
+							spider.box.botRight.x--;	
+		    			}    			
+		    		break;
+		    		
+		    		case E:
+		    			if(spider.box.botRight.x == MAXX-(PHROG_SIZE)-1){
+		    				spider.dir = W;
+		    			}else{
+		    				spider.box.topLeft.x++;
+							spider.box.botRight.x++;
+		    			}		    			
+		    		break;
+		    	}
+			break; 
+		}
+
+		if(rand()%ATTACK_CHANCE == 0){
+			spit(pipewrite,spider.box);
+		}
+
+        updateEntity(spider,pipewrite);
+
+        usleep(100000);         
+    }
+}
+
 
 // funzione per la generazione degli sputi del ragno
 void spit(int pipewrite, Hitbox pH)
@@ -389,13 +505,14 @@ void initializeData(_Bool dRegister[], int nDens)
 {
 	int i,j;
 
+	game.gameWin = newwin(MAXY,MAXX,0,0);
+
 	// init colors
 	init_pair(SAFE_ZONE,COLOR_WHITE,COLOR_GREEN);
 	init_pair(ROAD,COLOR_WHITE,COLOR_BLACK);
 	init_pair(WATER,COLOR_WHITE,COLOR_CYAN);
 
-    init_pair(LOGS,COLOR_YELLOW,COLOR_CYAN);
-    
+    init_pair(LOGS,COLOR_YELLOW,COLOR_CYAN);    
     init_pair(TRUCKS,COLOR_BLUE,COLOR_BLACK); 
     init_pair(CARS,COLOR_CYAN,COLOR_BLACK);
 
@@ -406,8 +523,21 @@ void initializeData(_Bool dRegister[], int nDens)
     init_pair(SPIT_ON_ROAD,COLOR_MAGENTA,COLOR_BLACK);
     init_pair(SPIT_ON_GRASS,COLOR_MAGENTA,COLOR_GREEN);
     init_pair(SPIT_ON_LOG,COLOR_MAGENTA,COLOR_CYAN);
+    init_pair(SPIDER,COLOR_MAGENTA,COLOR_YELLOW);
 
-    game.gameWin = newwin(MAXY,MAXX,0,0);
+    wattrset(game.gameWin, COLOR_PAIR(SAFE_ZONE));
+    wattrset(game.gameWin, COLOR_PAIR(ROAD));
+    wattrset(game.gameWin, COLOR_PAIR(WATER));
+    wattrset(game.gameWin, COLOR_PAIR(LOGS));
+    wattrset(game.gameWin, COLOR_PAIR(TRUCKS));
+    wattrset(game.gameWin, COLOR_PAIR(CARS));
+    wattrset(game.gameWin, COLOR_PAIR(PHROG_ON_ROAD));
+    wattrset(game.gameWin, COLOR_PAIR(PHROG_ON_GRASS));
+    wattrset(game.gameWin, COLOR_PAIR(PHROG_ON_LOG));
+    wattrset(game.gameWin, COLOR_PAIR(SPIT_ON_ROAD));
+    wattrset(game.gameWin, COLOR_PAIR(SPIT_ON_GRASS));
+    wattrset(game.gameWin, COLOR_PAIR(SPIT_ON_LOG));
+    wattrset(game.gameWin, COLOR_PAIR(SPIDER));
 
     //delimitations calculations
     game.zoneLimitY[0] = 4;
@@ -441,7 +571,7 @@ void initializeData(_Bool dRegister[], int nDens)
 
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
-		game.logs[i].row = i+1;
+		game.logs[i].row = i+2;
 	}
 
 	// init dens
@@ -536,14 +666,17 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
 
                 	if(playerIsDry){
                 		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
-                		game.logs[game.player.row].isOnLog = true;
+                		game.logs[game.player.row-2].isOnLog = true;
                 		game.player.isOnLog = true;
                 		write(isOnLogPipe,&game.logs[game.player.row-2],sizeof(Entity));
+                		for(int i = 0; i<NUM_LOGS; i++){
+                			if(game.logs[i].row != game.player.row) game.logs[i].isOnLog = false;
+                		}
                 	}
 
                 }
 
-                mvprintw(2,MAXX+1,"current player position x:%d, y:%d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
+                mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
                	translateDirection(game.player.dir);
 
                	mvprintw(3,MAXX+1,"visited dens: ");
@@ -568,6 +701,15 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
 
             case SPIDER:
             	bodyClearingSingleEntities(tempEntity,game.gameWin);
+
+            	game.spiders[tempEntity.row].color = tempEntity.color;
+            	game.spiders[tempEntity.row].dir = tempEntity.dir;
+
+            	game.spiders[tempEntity.row].box.topLeft.x = tempEntity.box.topLeft.x;
+                game.spiders[tempEntity.row].box.topLeft.y = tempEntity.box.topLeft.y;
+                game.spiders[tempEntity.row].box.botRight.x = tempEntity.box.botRight.x;
+                game.spiders[tempEntity.row].box.botRight.y = tempEntity.box.botRight.y;
+                game.spiders[tempEntity.row].pid = tempEntity.pid;
 
             	if(tempEntity.lives > 0){
             		printerSingleEntities(tempEntity,game.gameWin);
@@ -611,9 +753,16 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
 
                 printerLogs(game.logs[tempEntity.row],game.gameWin);
 
+                if(game.logs[tempEntity.row].box.topLeft.x == 1 || game.logs[tempEntity.row].box.botRight.x == MAXX-1){
+                	if(rand()%ENEMY_CHANCE == 0 && !game.logs[tempEntity.row].isOnLog && !game.logs[tempEntity.row].hasSpider){
+						game.logs[tempEntity.row].hasSpider = true;
+						if(fork()==0) spider(game.logs[tempEntity.row],pipewrite);
+					}
+                }
+                
                 if(game.logs[tempEntity.row].isOnLog && game.player.isOnLog){
                 	bodyClearing(game.player,game.gameWin);
-                	switch(game.logs[tempEntity.row].dir){
+                	switch(game.logs[game.player.row-2].dir){
                 		case W:
 			    			game.player.box.topLeft.x = game.player.box.topLeft.x--;	
 							game.player.box.botRight.x = game.player.box.botRight.x--;
@@ -626,8 +775,6 @@ int roadsAndPonds(int piperead, int pipewrite, int isOnLogPipe, _Bool dRegister[
                 	write(isOnLogPipe,&game.logs[tempEntity.row],sizeof(Entity));  
                 	printerSingleEntities(game.player,game.gameWin);          	
                 }
-
-                
             break;
             
             case SPITBALL:
@@ -670,100 +817,23 @@ int calcRow(int playerRow)
 	}
 }
 
-// funzioni per la stampa e la pulizia
-void drawMapOLD()
-{
-    int i,j,k;
-
-    // drawing border
-
-    for (j = 0; j <= MAXY; j++) {
-        i = 0;
-        if (j >= 1 && j < MAXY) {
-            mvaddch(j, i, ACS_VLINE);
-            mvaddch(j, MAXX, ACS_VLINE);
-        } else if (j == 0 || j == MAXY) {
-            for (i = 0; i < MAXX; i++) {
-                mvaddch(j, i, ACS_HLINE);
-                mvaddch(j, MAXX, ACS_HLINE);
-            }
-        }
-    }
-
-    // painting roads
-
-    // painting water
-
-    // painting safe zones
-    
-    mvaddch(0, 0, ACS_ULCORNER);
-    mvaddch(0, MAXX, ACS_URCORNER);
-    mvaddch(MAXY, MAXX, ACS_LRCORNER);
-    mvaddch(MAXY, 0, ACS_LLCORNER);
-
-    // limiting zones
-
-    attron(COLOR_PAIR(SAFE_ZONE));
-   
-    mvaddch(game.zoneLimitY[0],0,ACS_LTEE);	
-    for(i = 1; i < MAXX-1; i++){   	
-    }
-    mvaddch(game.zoneLimitY[0],MAXX,ACS_RTEE);
-
-    for(j = 1; j<ZONES; j++){
-    	mvaddch(game.zoneLimitY[j],0,ACS_LTEE);	
-    	for(i = 1;i<MAXX;i++){
-	    	mvaddch(game.zoneLimitY[j],i,ACS_HLINE);
-	    }
-	    mvaddch(game.zoneLimitY[j],MAXX,ACS_RTEE);
-    }
-
-    // drawing dens
-    for(i = 0; i < NUM_DENS; i++){
-    	if(!game.Dens[i].visited){
-    		switch(i){
-		    	case 0:
-		    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);
-		    		for(j=1;j<PHROG_SIZE+1;j++){
-		    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
-		    		}
-		    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);
-		    	break;
-
-		    	case NUM_DENS-1:
-		    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
-		    		for(j=1;j<PHROG_SIZE+1;j++){
-		    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
-		    		}
-		    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
-		    	break;
-
-		    	default:
-		    		mvaddch(0,game.Dens[i].area.topLeft.x,ACS_TTEE);
-		    		for(j=1;j<PHROG_SIZE+1;j++){
-		    			mvaddch(j,game.Dens[i].area.topLeft.x,ACS_VLINE);
-		    		}
-		    		mvaddch(4,game.Dens[i].area.topLeft.x,ACS_BTEE);
-		    		
-		    		mvaddch(0,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_TTEE);	    		
-		    		for(j=1;j<PHROG_SIZE+1;j++){
-		    			mvaddch(j,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_VLINE);
-		    		}
-		    		mvaddch(4,game.Dens[i].area.topLeft.x+WIDTH_DENS,ACS_BTEE);	    		
-		    	break;
-	    	}
-    	}  	
-    } 
-    
-}
-
 void drawMap(){
 
 	int i,j,k;
 	//drawing border
-	attron(COLOR_PAIR(SAFE_ZONE));
+	wattron(game.gameWin,COLOR_PAIR(ROAD));
 	box(game.gameWin,0,0);
 
+	for(j = 1; j<ZONES; j++){
+    	mvwaddch(game.gameWin,game.zoneLimitY[j],0,ACS_LTEE);	
+    	for(i = 1;i<MAXX;i++){
+	    	mvwaddch(game.gameWin,game.zoneLimitY[j],i,ACS_HLINE);
+	    }
+	    mvwaddch(game.gameWin,game.zoneLimitY[j],MAXX-1,ACS_RTEE);
+    }
+    wattroff(game.gameWin,COLOR_PAIR(ROAD));
+
+    wattron(game.gameWin,COLOR_PAIR(SAFE_ZONE));
 	for(i = 0; i < NUM_DENS; i++){
 		if(!game.Dens[i].visited){
 			mvwhline(game.gameWin,game.Dens[i].area.topLeft.y,game.Dens[i].area.topLeft.x,ACS_HLINE,WIDTH_DENS);
@@ -776,17 +846,9 @@ void drawMap(){
 		    mvwaddch(game.gameWin,game.Dens[i].area.botRight.y,game.Dens[i].area.botRight.x,ACS_LRCORNER);		
 		}
 	}
+	wattroff(game.gameWin,COLOR_PAIR(SAFE_ZONE));
 
-	for(j = 1; j<ZONES; j++){
-    	mvwaddch(game.gameWin,game.zoneLimitY[j],0,ACS_LTEE);	
-    	for(i = 1;i<MAXX;i++){
-	    	mvwaddch(game.gameWin,game.zoneLimitY[j],i,ACS_HLINE);
-	    }
-	    mvwaddch(game.gameWin,game.zoneLimitY[j],MAXX,ACS_RTEE);
-    }
-
-    wrefresh(game.gameWin);
-    attroff(COLOR_PAIR(SAFE_ZONE));
+    wrefresh(game.gameWin);   
 }
 
 void drawGridNums()
@@ -835,135 +897,6 @@ int denCollisions()
 
 	return NUM_DENS;
 }
-
-
-// SEZIONE NON IMPLEMENTATI
-
-void spider(Entity log, int pipewrite)
-{
-	Entity spider;
-
-	spider.lives = 1;
-	//spider.color = MAGENTA;
-	spider.dir = log.dir;
-	spider.row = log.row;
-
-	//col in the spiders will be used to signal in what section of the log they'll be located
-	//0: leftmost
-	//1: rightmost
-	//2: center
-	if(log.length == 6){
-		spider.col = rand()%2;
-	}else{
-		spider.col = rand()%3;
-	}
-
-	switch(spider.col){
-		case 0:
-			spider.box.topLeft.x = log.box.topLeft.x;
-			spider.box.topLeft.y = log.box.topLeft.y;
-
-			spider.box.botRight.x = log.box.topLeft.x+2;
-			spider.box.botRight.y = log.box.topLeft.y+2;
-		break;
-
-		case 1:
-			spider.box.botRight.x = log.box.botRight.x;
-			spider.box.botRight.y = log.box.botRight.y;
-			
-			spider.box.topLeft.x = log.box.botRight.x-2;
-			spider.box.topLeft.y = log.box.botRight.y-2;
-		break;
-
-		case 2:
-			spider.box.topLeft.x = log.box.topLeft.x+3;
-			spider.box.topLeft.y = log.box.topLeft.y+3;
-
-			spider.box.botRight.x = log.box.botRight.x-3;
-			spider.box.botRight.y = log.box.botRight.y-3;
-		break; 
-	}
-
-	while (true) {       
-
-    	switch(spider.col){
-			case 0:
-				switch(game.player.dir){
-		    		case W:
-		    			if(spider.box.topLeft.x == 1){
-		    				spider.dir = E;
-		    			}else{
-		    				spider.box.topLeft.x--;
-							spider.box.botRight.x--;	
-		    			}    			
-		    		break;
-		    		
-		    		case E:
-		    			if(spider.box.botRight.x == MAXX-(PHROG_SIZE)-1){
-		    				spider.dir = W;
-		    			}else{
-		    				spider.box.topLeft.x++;
-							spider.box.botRight.x++;
-		    			}		    			
-		    		break;
-		    	}
-			break;
-
-			case 1:
-				switch(game.player.dir){
-		    		case W:
-		    			if(spider.box.topLeft.x == (PHROG_SIZE+1)){
-		    				spider.dir = E;
-		    			}else{
-		    				spider.box.topLeft.x--;
-							spider.box.botRight.x--;	
-		    			}    			
-		    		break;
-		    		
-		    		case E:
-		    			if(spider.box.botRight.x == MAXX-1){
-		    				spider.dir = W;
-		    			}else{
-		    				spider.box.topLeft.x++;
-							spider.box.botRight.x++;
-		    			}		    			
-		    		break;
-		    	}
-			break;
-
-			case 2:
-				switch(game.player.dir){
-		    		case W:
-		    			if(spider.box.topLeft.x == (PHROG_SIZE+1)){
-		    				spider.dir = E;
-		    			}else{
-		    				spider.box.topLeft.x--;
-							spider.box.botRight.x--;	
-		    			}    			
-		    		break;
-		    		
-		    		case E:
-		    			if(spider.box.botRight.x == MAXX-(PHROG_SIZE)-1){
-		    				spider.dir = W;
-		    			}else{
-		    				spider.box.topLeft.x++;
-							spider.box.botRight.x++;
-		    			}		    			
-		    		break;
-		    	}
-			break; 
-		}
-
-		if(rand()%ATTACK_CHANCE == 0){
-			spit(pipewrite,spider.box);
-		}
-
-        updateEntity(spider,pipewrite);
-
-        usleep(100000);         
-    }
-}
-
 
 
 /*

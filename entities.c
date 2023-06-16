@@ -118,7 +118,7 @@ void printerCars(Entity ent, WINDOW* win)
 	y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
 
-    attron(COLOR_PAIR(ent.color));
+    wattron(win,COLOR_PAIR(ent.color));
     if(ent.dir == W){
     	switch(ent.length){
     		case 4:
@@ -236,7 +236,7 @@ void printerCars(Entity ent, WINDOW* win)
     		break;
     	}
     }
-    attroff(COLOR_PAIR(ent.color));
+    wattroff(win,COLOR_PAIR(ent.color));
 }
 
 void printerLogs(Entity ent, WINDOW* win)
@@ -246,7 +246,7 @@ void printerLogs(Entity ent, WINDOW* win)
 	y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
 
-    attron(COLOR_PAIR(ent.color));
+    wattron(win,COLOR_PAIR(ent.color));
 	if(ent.length == 6){
 		for(i = 0; i < PHROG_SIZE; i++) {
 	        for(j = 0; j < ent.length; j++) {
@@ -268,7 +268,7 @@ void printerLogs(Entity ent, WINDOW* win)
 	        }
 	    }
 	}
-	attroff(COLOR_PAIR(ent.color));
+	wattroff(win,COLOR_PAIR(ent.color));
 }
 
 void printerSingleEntities(Entity ent, WINDOW* win)
@@ -279,7 +279,7 @@ void printerSingleEntities(Entity ent, WINDOW* win)
     x = ent.box.topLeft.x;
 
     // individuazione entità...
-    attron(COLOR_PAIR(ent.color));
+    wattron(win,COLOR_PAIR(ent.color));
     switch(ent.et) {
 	    // giocatore
 	    case PHROG:
@@ -302,7 +302,7 @@ void printerSingleEntities(Entity ent, WINDOW* win)
 	    	mvwaddch(win,y+i,x+j,'*');
 	    break;
     }
-    attroff(COLOR_PAIR(ent.color));
+    wattroff(win,COLOR_PAIR(ent.color));
 }
 
 void bodyClearing(Entity ent, WINDOW* win)
