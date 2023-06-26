@@ -32,10 +32,11 @@ void gameEnd(){
 int gameStart(int startingLives, _Bool dRegister[], int nDens){
 
 	int gamePipe[2];
-	int lifeline[2];
 	int result;
 
-	pid_t carPid,logPid,playerPid;
+	pid_t carPid;
+	pid_t logPid;
+	pid_t playerPid;
 
 	if (pipe(gamePipe) == -1)
 	{
@@ -43,8 +44,7 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 		exit(-1);
 	}
 
-	playerPid = fork();
-	switch(playerPid){
+	switch(playerPid = fork()){
 		case -1:
 			perror("eee la fin del fork player");
 			exit(-1);
@@ -52,11 +52,10 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 
 		case 0:
 			close(gamePipe[0]);
-			close(lifeline[1]);
-			phrog(startingLives,gamePipe[1],lifeline[0]);
+			phrog(startingLives,gamePipe[1]);
 			exit(1);
 		break;
-		
+		//default order of things happening	
 		default:
 			carPid = fork();
 			switch(carPid){
@@ -86,12 +85,11 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 						break;
 
 						default:
-							result = roadsAndPonds(gamePipe[0],gamePipe[1],lifeline[1],dRegister,NUM_DENS);	
+							result = roadsAndPonds(gamePipe[0],gamePipe[1],dRegister,NUM_DENS);	
 						break;
 					}					
 				break;
-			}
-			
+			}		
 		break;
 	}
 

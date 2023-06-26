@@ -6,9 +6,7 @@ char phrogBody[PHROG_SIZE][PHROG_SIZE] = {
     "/ \\"
 };
 
-char spiderBody[1][PHROG_SIZE] = {
-	")O("
-};
+char spiderBody[PHROG_SIZE] = {")O("};
 
 char carLeftFour[PHROG_SIZE][4] = {
     "o--o",
@@ -111,6 +109,7 @@ char logTEST[PHROG_SIZE][18] = {
     "(================)",
     "o----------------o"
 };
+
 void printerCars(Entity ent, WINDOW* win)
 {
 	int i,j,y,x;
@@ -291,15 +290,13 @@ void printerSingleEntities(Entity ent, WINDOW* win)
 	    break;
 
 	    case SPIDER:
-	    	for(i = 0; i < PHROG_SIZE; i++) {
-		        for(j = 0; j < PHROG_SIZE; j++) {
-		            mvwaddch(win,y+i,x+j, spiderBody[i][j]);
-		        }
-		    }
+	    	for(j = 0; j < PHROG_SIZE; j++) {
+	            mvwaddch(win,y,x+j, spiderBody[j]);
+	        }
 	    break;
 
 	    case SPITBALL:
-	    	mvwaddch(win,y+i,x+j,'*');
+	    	mvwaddch(win,y,x,'*');
 	    break;
     }
     wattroff(win,COLOR_PAIR(ent.color));
@@ -312,8 +309,8 @@ void bodyClearing(Entity ent, WINDOW* win)
     y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
 
-    for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
-        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1) ; j++){
+    for(i = 0; i < (ent.box.botRight.y - ent.box.topLeft.y +1); i++){
+        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x +1) ; j++){
             mvwaddch(win,y+i,x+j,' ');
         }
     }
@@ -344,11 +341,15 @@ void bodyClearingSingleEntities(Entity ent, WINDOW* win)
     	break;
     }
 
-    for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
-        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
-            mvwaddch(win,y+i+adjy,x+j+adjx,' ');
-        }
-    }
+    if(ent.et == SPITBALL){
+    	 mvwaddch(win,y+adjy,x,' ');
+	}else {
+		for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
+	        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
+	            mvwaddch(win,y+i+adjy,x+j+adjx,' ');
+	        }
+	    }
+	}  
 }
 
 _Bool verifyHitbox(Hitbox a, Hitbox b)
