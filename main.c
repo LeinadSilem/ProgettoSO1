@@ -1,9 +1,9 @@
 #include "gameLib.h"
 
 void initialize();
-int gameStart(int startingLives, _Bool dRegister[], int nDens);
 void gameEnd();
 void gameLoop();
+int gameStart(int startingLives, _Bool dRegister[]);
 
 int main(){
 	initialize();
@@ -29,7 +29,8 @@ void gameEnd(){
 	endwin();
 }
 
-int gameStart(int startingLives, _Bool dRegister[], int nDens){
+
+int gameStart(int startingLives, _Bool dRegister[]){
 
 	int gamePipe[2];
 	int result;
@@ -102,6 +103,7 @@ int gameStart(int startingLives, _Bool dRegister[], int nDens){
 	return result;
 }
 
+
 void gameLoop(){
 
 	int totalLives = PHROG_STARTING_LIVES;
@@ -110,7 +112,7 @@ void gameLoop(){
 	_Bool denRegister[NUM_DENS] = {false,false,false,false,false};
 	
 	while(densVisited < 5 && totalLives > 0){
-		resultOfMatch = gameStart(totalLives,denRegister,NUM_DENS);
+		resultOfMatch = gameStart(totalLives,denRegister);
 
 		//verify the result
 		if(resultOfMatch < NUM_DENS && !denRegister[resultOfMatch]){

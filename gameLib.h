@@ -10,8 +10,8 @@
 #define NUM_CARS 3
 #define NUM_DENS 5
 #define OUCH 5
-#define ENEMY_CHANCE 10
-#define ATTACK_CHANCE 40
+#define ENEMY_CHANCE 5
+#define ATTACK_CHANCE 20
 
 #define MIN_ROW_CAR 16
 #define MAX_ROW_CAR 22
@@ -23,7 +23,7 @@
 #define MAXY 28
 #define PHROG_STARTING_LIVES 3
 #define DELAY 3000
-#define TESTING 1
+#define TESTING 0
 
 //structures and type definitions
 
@@ -54,7 +54,7 @@ void haltCar(int currentCar, int row);
 void spider(Entity log,int pipewrite);
 void spit(int pipewrite, Hitbox pH, EntityType et);
 void moveSpitBall(int pipewrite, Entity projectile, EntityType et);
-void spitballCollisions(Entity spit);
+int spitballCollisions(Entity spit);
 
 void logGenerator(int pipewrite);
 void moveLog(Entity log, int pipewrite);
