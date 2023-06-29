@@ -60,9 +60,8 @@ void phrog(int lives,int pipewrite)
 					}
 				break;
 
-				case ' ':
-					tempPlayer.dir = FIXED;
-					spit(pipewrite,localCoords,tempPlayer.et);
+				case 'f':
+					tempPlayer.dir = FIRE;
 				break;
 
 #if TESTING == 1
@@ -71,9 +70,6 @@ void phrog(int lives,int pipewrite)
 					tempPlayer.lives = 0;
 				break;
 #endif
-				default:
-					tempPlayer.dir = FIXED;
-				break;
 		    }
 
 		tempPlayer.length = input;
@@ -309,11 +305,21 @@ void moveLog(Entity log,int pipewrite)
 	}
 }
 
-_Bool logCollisions(Entity phrog, Entity currentLog)
+_Bool logCollisions()
 {
-	if(verifyHitbox(phrog.box,currentLog.box) && !currentLog.hasSpider){
-		return true;
-	}else{
+	int i,misses=0;
+
+	for(i = 0; i < NUM_LOGS; i++){
+		if(verifyHitbox(game.player.box,game.logs[i].box) && !game.logs[i].hasSpider){
+			game.logs[i].isOnLog = true;
+    		game.player.isOnLog = true;
+			return true;
+		}else{
+			misses +=1;
+		}
+	}
+
+	if(misses == NUM_LOGS){
 		bodyClearingSingleEntities(game.player,game.gameWin);
 		return false;
 	}
@@ -462,29 +468,35 @@ void spit(int pipewrite, Hitbox pH, EntityType et)
     spitball.lives = 1;
     spitball.box.topLeft.x = spitball.box.botRight.x = pH.topLeft.x+1;
     spitball.box.topLeft.y = spitball.box.botRight.y = pH.topLeft.y-1;
-    spitball.color = COLOR_MAGENTA;
-    spitball.dir = N;
     spitball.et = SPITBALL;
 
+    if(et == PHROG){
+    	spitball.color = PHROG_ON_ROAD;
+    	spitball.dir = N;
+    }else{
+    	spitball.color = SPIDER_COLOR;
+    	spitball.dir = S;
+    }
+
     if(fork() == 0){
-        moveSpitBall(pipewrite,spitball,et);
+        moveSpitBall(pipewrite,spitball);
     }
 }
 
 // funzione per il movimento degli sputi
-void moveSpitBall(int pipewrite, Entity projectile, EntityType type)
+void moveSpitBall(int pipewrite, Entity projectile)
 {
     
     projectile.pid = getpid();
     while (true) {
 
-        switch(type){
-    		case PHROG:
+        switch(projectile.dir){
+    		case N:
     			projectile.box.topLeft.y--; 
         		projectile.box.botRight.y--;
         		projectile.dir = N;
 			break;
-			case SPIDER:
+			case S:
 				projectile.box.topLeft.y++; 
 	        	projectile.box.botRight.y++;
 	        	projectile.dir = S;
@@ -517,15 +529,15 @@ int spitballCollisions(Entity spit)
 	}
 
 	for(i = 0; i < NUM_LOGS; i++){
-		if(verifyHitbox(spit.box, game.spiders[i].box)){
+		if(verifyHitbox(spit.box, game.spiders[i].box) && spit.dir == N){
 			game.spiders[i].lives = 0;
 			bodyClearingSingleEntities(spit,game.gameWin);
 			return 2;
 		}
 	}
 
-	if(verifyHitbox(spit.box,game.player.box)){
-		bodyClearing(spit,game.gameWin);
+	if(verifyHitbox(spit.box,game.player.box) && spit.dir == S){
+		bodyClearingSingleEntities(spit,game.gameWin);
 		return 3;
 	}
 
@@ -533,7 +545,7 @@ int spitballCollisions(Entity spit)
 }
 
 // SEZIONE GESTIONE GIOCO E GRAFICA
-void initializeData(_Bool dRegister[], int nDens)
+void initializeData(_Bool dRegister[])
 {
 	int i,j;
 
@@ -605,8 +617,10 @@ void initializeData(_Bool dRegister[], int nDens)
 	// init logs
 	for(i = 0; i < NUM_LOGS; i++){
 		game.logs[i].row = i;
+		game.logs[i].et = LOG;
 		game.spiders[i].row = i;
 		game.spiders[i].et = SPIDER;
+		game.spiders[i].lives = 1;
 	}
 
 	// init dens
@@ -619,47 +633,17 @@ void initializeData(_Bool dRegister[], int nDens)
 	}
 }
 
-void updateEntity(Entity temp, int pipewrite)
+
+
+int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 {
-    Entity current;
-
-    if(temp.et == SPITBALL) {
-        current.box.topLeft.x = current.box.botRight.x = temp.box.topLeft.x;
-        current.box.topLeft.y = current.box.botRight.y = temp.box.topLeft.y;
-    } else {
-        current.box.topLeft.x = temp.box.topLeft.x;
-        current.box.topLeft.y = temp.box.topLeft.y;
-        current.box.botRight.x = temp.box.botRight.x;
-        current.box.botRight.y = temp.box.botRight.y;
-    }
-
-    current.lives = temp.lives;
-    current.et = temp.et;
-    current.color = temp.color;
-    current.dir = temp.dir;
-    current.pid = temp.pid;
- 	
- 	current.row = temp.row;
- 	current.col = temp.col;
- 	current.length = temp.length;
-
-    write(pipewrite, &current, sizeof(Entity));
-}
-
-void screenRefresh(){
-	wrefresh(game.gameWin);
-	wrefresh(game.statWin);
-}
-
-int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
-{
-    initializeData(dRegister,NUM_DENS);
+    initializeData(dRegister);
     Entity tempEntity, tempProjectile;
 
     _Bool playerHit = false;
     _Bool denReached = false;
     _Bool playerIsDry;
-    int result, denId, resultOfSpitCollision;
+    int result, denId, resultOfSpitCollision,i;
     int countdown = 0;
     time_t currentTime, startTime;
     FILE *debugLog;
@@ -670,11 +654,9 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
     
     countdown = DELAY;
     time(&startTime);
-    fclose(debugLog);
     while(!playerHit && !denReached)
     {   
     	time(&currentTime);
-    	debugLog = fopen("debugLog.txt","a");
     	if(difftime(currentTime,startTime) >= DELAY){
     		playerHit = true;
     		fprintf(debugLog, "time is up, gg");
@@ -687,7 +669,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	        switch (tempEntity.et)
 	        {
 	            case PHROG:
-	            	fprintf(debugLog, "reading phrog\n");
+
 	            	// se il player è sul tronco, muovilo col
 	            	mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n",tempEntity.lives);
 	                bodyClearing(game.player,game.gameWin);  
@@ -729,17 +711,19 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 								game.player.box.botRight.x += 3;  			
 							}
 						break;
+						case FIRE:
+							spit(pipewrite, game.player.box,game.player.et);
+						break;
+
 	                }         
 
-	                fprintf(debugLog, "input recieved from the child : %d\n", game.player.length);
-
-	                mvprintw(1,MAXX+1,"is player on log in game: %d, is player on log fr: %d",game.player.isOnLog,tempEntity.isOnLog);
-	                mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
+	               	mvprintw(1,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
+	                mvprintw(2,MAXX+1,"is player on log in game: %d",game.player.isOnLog);
 	               	translateDirection(game.player.dir);       
 					
-	                if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
-	                	playerIsDry = logCollisions(game.player,game.logs[game.player.row-1]);
-	                	
+	                if(game.player.row <= 3 && game.player.row >= 1){
+	                	playerIsDry = logCollisions();
+
 	                	if(!playerIsDry && game.logs[game.player.row-1].hasSpider){
 	                		fprintf(debugLog, "attempted to jump on log with a spider in row %d\n", game.player.row);
 	                		playerHit = true;
@@ -748,26 +732,26 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	                		playerHit = true;
 	                	}else if(playerIsDry){
 	                		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
-	                		game.logs[game.player.row-1].isOnLog = true;
-	                		game.player.isOnLog = true;
-	                		for(int i = 0; i<NUM_LOGS; i++){
-	                			if(game.logs[i].row != game.player.row) game.logs[i].isOnLog = false;
+	                		for(i = 0; i<NUM_LOGS; i++){
+	                			if(game.logs[i].row != game.player.row-1) game.logs[i].isOnLog = false;
 	                		}
 	                	}
 	                }
-   
-	                denId = denCollisions();
 
-	                if(game.player.box.topLeft.y == 1){
-		                if(denId < NUM_DENS){
-		                	denReached = true;
-		                }else{
-		                	playerHit = true;
-		                }
-	                }     
-	                	               	
+	                if(game.player.row == 0){
+	                	denId = denCollisions();
+
+		                if(game.player.box.topLeft.y == 1){
+			                if(denId < NUM_DENS){
+			                	denReached = true;
+			                }else{
+			                	playerHit = true;
+			                }
+		                } 
+	                }
+                  	
 	               	mvwprintw(game.statWin,3,1,"visited dens: ");
-	               	for(int i = 0; i < NUM_DENS; i++){
+	               	for(i = 0; i < NUM_DENS; i++){
 	               		wprintw(game.statWin,"%d[%d]\t", i+1, game.Dens[i].visited);
 	               	}           
 	              
@@ -779,9 +763,10 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            break;
 
 	            case SPIDER:
-	            	fprintf(debugLog, "reading spider\n");
+
 	            	bodyClearingSingleEntities(game.spiders[tempEntity.row],game.gameWin);
 
+	            	game.spiders[tempEntity.row].lives = tempEntity.lives;
 	            	game.spiders[tempEntity.row].color = tempEntity.color;
 	            	game.spiders[tempEntity.row].dir = tempEntity.dir;
 	            	game.spiders[tempEntity.row].et = tempEntity.et;
@@ -799,7 +784,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            break;
 
 	            case CAR:
-	            	fprintf(debugLog, "reading car\n");
+
 	                bodyClearing(game.carTable[tempEntity.row][tempEntity.col],game.gameWin); 
 
 	                game.carTable[tempEntity.row][tempEntity.col].length = tempEntity.length;  
@@ -822,7 +807,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            break;
 
 	            case LOG:
-	            	fprintf(debugLog, "reading log\n");
+
 	                bodyClearing(game.logs[tempEntity.row],game.gameWin); 
 
 	                game.logs[tempEntity.row].length = tempEntity.length;  
@@ -837,7 +822,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 
 	                printerLogs(game.logs[tempEntity.row],game.gameWin);
 
-
 	                if(game.logs[tempEntity.row].box.topLeft.x == 1 || game.logs[tempEntity.row].box.botRight.x == MAXX-1){ 	
 						if(rand()%ENEMY_CHANCE == 0 && !game.player.isOnLog && !game.logs[tempEntity.row].hasSpider){
 							game.logs[tempEntity.row].hasSpider = true;
@@ -851,8 +835,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	                	bodyClearing(game.spiders[tempEntity.row],game.gameWin);
 	                	printerSingleEntities(game.player,game.gameWin);
 	                }
-	                
-	               	
+	                	               	
 	                if(game.logs[tempEntity.row].isOnLog && game.player.isOnLog){
 	                	bodyClearing(game.player,game.gameWin);
 	                	switch(game.logs[tempEntity.row].dir){
@@ -867,6 +850,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 								game.player.dir = E;
 				    		break;
 	                	}  
+	                	fprintf(debugLog, "moving car in log %d\n", game.logs[tempEntity.row].dir);
 	                	printerSingleEntities(game.player,game.gameWin);
 	                	mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);          	
 	                }
@@ -874,7 +858,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            break;
 	            
 	            case SPITBALL:
-	            	fprintf(debugLog, "reading spitball\n");
 	            	bodyClearingSingleEntities(tempEntity,game.gameWin);
 
 	            	tempProjectile.box.topLeft.x = tempEntity.box.topLeft.x;
@@ -907,19 +890,19 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            			tempProjectile.lives = 0;
 	            			kill(tempProjectile.pid,1);
 	            			for(int i = 0; i<NUM_LOGS; i++){
-	            				if(game.spiders[i].lives <= 0){
-	       							for(int j=0; j < NUM_LOGS; j++){
-	       								if(game.spiders[i].row == game.logs[j].row){
-	       									game.logs[i].hasSpider = false;
-	       									bodyClearingSingleEntities(game.spiders[i],game.gameWin);
-	    			            			kill(game.spiders[i].pid,1); //sighup here
+	            				if(game.spiders[i].lives <= 0){       							
+	            					for(int j=0; j < NUM_LOGS; j++){
+		   								if(game.spiders[i].row == game.logs[j].row){
+		   									game.logs[i].hasSpider = false;
+		   									kill(game.spiders[i].pid,1);
+		   									bodyClearingSingleEntities(game.spiders[i],game.gameWin);
 			            					fprintf(debugLog,"for real \n");
-	       								}
-	       							}
-	            					
+			            					break;
+		   								}
+		   							}
 	            				}
 	            			}
-
+	            			
 	            		break;
 	            		// collision w/ player
 	            		case 3:
@@ -933,14 +916,19 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
 	            break;
 	        }
 	        
+	        for(int i = 0; i < NUM_LOGS; i++){
+	        	mvprintw(5+i,MAXX+1,"log in row [+1 adj]: %d - hasSpider?: %d - hasPlayer?: %d",game.logs[i].row+1, game.logs[i].hasSpider, game.logs[i].isOnLog);
+	        }
+
 	        screenRefresh();
 	    }       
-	    countdown--; 
-	    fclose(debugLog);
+	    countdown--;    
     }
 
     erase();
     screenRefresh();
+    fclose(debugLog);
+    clearRiverInteractions();
 
     if(playerHit){
     	result = OUCH;
@@ -950,17 +938,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[], int nDens)
     	result = denId;
     }
     return result;
-}
-
-int calcRow(int playerRow)
-{
-	// 2,3,4 rivers 
-	// 6,7,8 roads
-	if(playerRow > 1 && playerRow <= 4){
-		return playerRow - (NUM_RIVERS-1);
-	}else if(playerRow > 5 && playerRow <= 8){
-		return playerRow - (NUM_LANES*2);
-	}
 }
 
 void drawMap()
@@ -1000,17 +977,49 @@ void drawMap()
  
 }
 
-void drawGridNums()
+void updateEntity(Entity temp, int pipewrite)
 {
+    Entity current;
+
+    if(temp.et == SPITBALL) {
+        current.box.topLeft.x = current.box.botRight.x = temp.box.topLeft.x;
+        current.box.topLeft.y = current.box.botRight.y = temp.box.topLeft.y;
+    } else {
+        current.box.topLeft.x = temp.box.topLeft.x;
+        current.box.topLeft.y = temp.box.topLeft.y;
+        current.box.botRight.x = temp.box.botRight.x;
+        current.box.botRight.y = temp.box.botRight.y;
+    }
+
+    current.lives = temp.lives;
+    current.et = temp.et;
+    current.color = temp.color;
+    current.dir = temp.dir;
+    current.pid = temp.pid;
+ 	
+ 	current.row = temp.row;
+ 	current.col = temp.col;
+ 	current.length = temp.length;
+
+    write(pipewrite, &current, sizeof(Entity));
+}
+
+void screenRefresh(){
+	wrefresh(game.gameWin);
+	wrefresh(game.statWin);
+	refresh();
+}
+
+void clearRiverInteractions(){
 	int i;
 
-	for(i = 0; i <= MAXX; i++){
-		mvprintw(MAXY+1,i,"%d",i%10);
+	for(i = 0; i < NUM_LOGS; i++){
+		game.logs[i].isOnLog = false;
+		game.logs[i].hasSpider = false;
+		game.spiders[i].lives = 0;
 	}
 
-	for(i = 0; i <= MAXY; i++){
-		mvprintw(i,MAXX+1,"%d",i);
-	}
+	game.player.isOnLog = false;
 }
 
 void translateDirection(Direction dir)

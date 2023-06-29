@@ -18,7 +18,7 @@ typedef enum {ROAD,WATER,
               PHROG_ON_ROAD,PHROG_ON_GRASS,PHROG_ON_LOG,
               SPIT_ON_ROAD,SPIT_ON_GRASS,SPIT_ON_LOG,SAFE_ZONE
               }Color;
-typedef enum {N,S,W,E,FIXED}Direction;
+typedef enum {N,S,W,E,FIRE,FIXED}Direction;
 typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL}EntityType;
 
 typedef struct position

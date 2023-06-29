@@ -86,7 +86,7 @@ int gameStart(int startingLives, _Bool dRegister[]){
 						break;
 
 						default:
-							result = roadsAndPonds(gamePipe[0],gamePipe[1],dRegister,NUM_DENS);	
+							result = roadsAndPonds(gamePipe[0],gamePipe[1],dRegister);	
 						break;
 					}					
 				break;

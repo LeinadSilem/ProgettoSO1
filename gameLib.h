@@ -53,21 +53,20 @@ void haltCar(int currentCar, int row);
 
 void spider(Entity log,int pipewrite);
 void spit(int pipewrite, Hitbox pH, EntityType et);
-void moveSpitBall(int pipewrite, Entity projectile, EntityType et);
+void moveSpitBall(int pipewrite, Entity projectile);
 int spitballCollisions(Entity spit);
 
 void logGenerator(int pipewrite);
 void moveLog(Entity log, int pipewrite);
-_Bool logCollisions(Entity phrog, Entity currentLog);
+_Bool logCollisions();
 
 void updateEntity(Entity temp, int pipewrite);
-void initializeData(_Bool dRegister[], int nDens);
-int roadsAndPonds(int piperead, int pipewrite, _Bool* dRegister, int nDens);
+void initializeData(_Bool dRegister[]);
+int roadsAndPonds(int piperead, int pipewrite, _Bool* dRegister);
 int denCollisions();
 
-int calcRow(int playerRow);
 void drawMap();
-void drawGridNums();
+void clearRiverInteractions();
 void translateDirection(Direction dir);
 void screenRefresh();
 
