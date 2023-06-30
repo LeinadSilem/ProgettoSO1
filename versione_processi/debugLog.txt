@@ -25,3 +25,471 @@ moving car in log 2
 player is dry and on log in position x:38 y:7 
 moving car in log 2
 missed the log in row 1
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spooder generated
+spooder generated
+spitball killed a spider 
+for real 
+spooder generated
+spitball hit the car 
+player is dry and on log in position x:58 y:10 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:56 y:10 
+spitball killed a spider 
+for real 
+for real 
+moving car in log 2
+spitball hit the car 
+missed the log in row 3
+----start of manche----
+spooder generated
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+player is dry and on log in position x:13 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:11 y:10 
+moving car in log 2
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:39 y:10 
+spitball killed a spider 
+for real 
+for real 
+moving car in log 3
+player is dry and on log in position x:40 y:10 
+spitball killed a spider 
+for real 
+for real 
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:42 y:7 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:30 y:7 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+player is dry and on log in position x:64 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:57 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+player is dry and on log in position x:41 y:7 
+moving car in log 3
+spitball killed the player 
+----start of manche----
+spitball hit the car 
+spitball hit the car 
+spooder generated
+player got run over by cars
+----start of manche----
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spooder generated
+spitball hit the car 
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+missed the log in row 3
+----start of manche----
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+missed the log in row 3
+----start of manche----
+player got run over by cars
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spooder generated
+spitball killed the player 
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed the player 
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spitball hit the car 
+spitball hit the car 
+----start of manche----
+----start of manche----
+----start of manche----
+spooder generated
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+----start of manche----
+----start of manche----
+----start of manche----
+spooder generated
+player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+----start of manche----
+----start of manche----
+----start of manche----
+spooder generated
+spooder generated
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+----start of manche----
+----start of manche----

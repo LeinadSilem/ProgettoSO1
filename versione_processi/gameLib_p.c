@@ -629,11 +629,13 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 {
     
     Entity tempEntity, tempProjectile;
-	clock_t startTime;
-	double timeSpent;
+	//clock_t startTime;
+	//double timeSpent;
     _Bool playerHit = false;
     _Bool denReached = false;
     _Bool playerIsDry;
+    time_t start, end;
+    int timeSpent, timeRemaining;
     int result, denId, resultOfSpitCollision,i;
     FILE *debugLog;
 
@@ -642,18 +644,24 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 
     initializeData(dRegister);
     drawMap();
-    startTime=clock();
-    timeSpent = (double)(clock()-startTime)/CLOCKS_PER_SEC;
-    mvwprintw(game.statWin,1,1,"[·phrog lives:  ·]\n");
-    mvwprintw(game.statWin,2,1,"[·time left:    ·]\n",timeSpent);
+    //startTime=clock();
+    //timeSpent = (double)(clock()-startTime)/CLOCKS_PER_SEC;
+    time(&start);
+    mvwprintw(game.statWin,1,1,"[·phrog lives:  ·] ");
+    mvwprintw(game.statWin,2,1,"[·time left:    ·]\n");
     
-    while(!playerHit && !denReached && timeSpent <= DELAY_SECONDS)
+    while(!playerHit && !denReached && timeSpent <= TIMER)
     {          
-    	timeSpent = (double)(clock()-startTime)/CLOCKS_PER_SEC;
+    	   //timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
+    	   time(&end);
         drawMap();
         read(piperead, &tempEntity, sizeof(Entity));
         
-        mvwprintw(game.statWin,2,1,"[·time left:%lf·]\n",timeSpent);
+ 	   timeSpent = difftime(end, start);
+ 	   timeRemaining = TIMER - timeSpent;
+        
+        //mvwprintw(game.statWin,2,1,"[·time left:%lf·] [sec passed:%d ]\n",timeSpent);
+        mvwprintw(game.statWin,2,1,"[·time left:%d ·]\n", timeRemaining); 
         
         switch (tempEntity.et)
         {
@@ -712,7 +720,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 
                	mvprintw(1,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
                 mvprintw(2,MAXX+1,"is player on log in game: %d",game.player.isOnLog);
-                mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n",game.player.lives);  
+                mvwprintw(game.statWin,1,1,"[·phrog lives:%d·] ",game.player.lives);  
                	translateDirection(game.player.dir);       
 				
                 if(game.player.row <= 3 && game.player.row >= 1){
@@ -918,7 +926,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     fclose(debugLog);
     clearRiverInteractions();
 
-    if(playerHit || timeSpent >= DELAY_SECONDS){
+    if(playerHit || timeSpent >= TIMER){
     	result = OUCH;
     }
 
