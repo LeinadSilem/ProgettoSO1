@@ -1,4 +1,4 @@
-#include "entities.h"
+#include "entities_t.h"
 
 char phrogBody[PHROG_SIZE][PHROG_SIZE] = {
     "\\_/",

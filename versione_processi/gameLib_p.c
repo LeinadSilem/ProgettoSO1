@@ -1,4 +1,4 @@
-#include "gameLib.h"
+#include "gameLib_p.h"
 
 Gamestate game;
 

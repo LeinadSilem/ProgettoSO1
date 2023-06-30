@@ -1,4 +1,4 @@
-#include "gameLib.h"
+#include "gameLib_t.h"
 
 void initialize();
 void gameEnd();

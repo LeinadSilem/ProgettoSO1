@@ -1,7 +1,7 @@
 #ifndef GATCHA_CROSSY_ROAD
 #define GATCHA_CROSSY_ROAD
 
-#include "entities.h"
+#include "entities_t.h"
 #include <fcntl.h>
 #include <pthread.h>
 

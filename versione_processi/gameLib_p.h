@@ -1,7 +1,7 @@
 #ifndef GATCHA_CROSSY_ROAD
 #define GATCHA_CROSSY_ROAD
 
-#include "entities.h"
+#include "entities_p.h"
 #include <fcntl.h>
 
 #define NUM_LOGS 3

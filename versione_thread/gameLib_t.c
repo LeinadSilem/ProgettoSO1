@@ -1,4 +1,4 @@
-#include "gameLib.h"
+#include "gameLib_t.h"
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 Gamestate game;

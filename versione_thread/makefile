@@ -1,14 +1,14 @@
-threadP: main.o gameLib.o entities.o
-	gcc main.o gameLib.o entities.o -o succ -lncurses -lpthread
+threadP: main_t.o gameLib_t.o entities_t.o
+	gcc main_t.o gameLib_t.o entities_t.o -o succ -lncurses
 
-main.o: main.c 
-	gcc -c main.c
+main_t.o: main_t.c 
+	gcc -c main_t.c
 
-gameLib.o: gameLib.c gameLib.h 
-	gcc -c gameLib.c -lncurses
+gameLib_t.o: gameLib_t.c gameLib_t.h 
+	gcc -c gameLib_t.c -lncurses
 
-entities.o: entities.c entities.h
-	gcc -c entities.c -lncurses
+entities_t.o: entities_t.c entities_t.h
+	gcc -c entities_t.c -lncurses
 
 clean:
 	rm -r *o
