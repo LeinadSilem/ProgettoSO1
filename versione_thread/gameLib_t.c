@@ -8,38 +8,40 @@ Gamestate game;
 int gameStart(int startingLives, _Bool dRegister[])
 {
 
+	int* lives = malloc(sizeof(startingLives));
+	*lives = startingLives;
 	int result = 0;
 	pthread_t plThread, logThread, carThread, fieldThread;
 
 	pthread_mutex_init(&mutex,NULL);
 
-	//initializeData()
-
-	pthread_create(&plThread,NULL,&phrog,(void*)startingLives);
-    //pthread_create(&logThread,NULL,&logGenerator,NULL);
-    //pthread_create(&carThread,NULL,&carGenerator,NULL);
-    pthread_create(&fieldThread,NULL,&roadsAndPonds,(void*)dRegister);
+	pthread_create(&plThread,NULL,&phrog,(void*)lives);
+    pthread_create(&logThread,NULL,&logGenerator,NULL);
+    pthread_create(&carThread,NULL,&carGenerator,NULL);
+    result = roadsAndPonds(dRegister);
 
 
 	if(result > -1){
 		pthread_join(plThread,NULL);
-		//pthread_join(logThread,NULL);
-		//pthread_join(carThread,NULL);
-		pthread_join(fieldThread,NULL);
+		pthread_join(logThread,NULL);
+		pthread_join(carThread,NULL);
 	}
 
 	return result;
 }
 
-// funzione per il movimento della rana
+// player -------------------------------
+
 void* phrog(void* param)
 {
 	char input;
 
-	game.player.lives = (int)param; 
+	game.player.lives = *((int*)param); 
 	game.player.id = pthread_self();
+
+	game.gameReady = true;
 	   
-    while(true) {
+    while(game.player.lives > 0) {
 
     	input=getchar();
         switch(input) {
@@ -48,7 +50,8 @@ void* phrog(void* param)
 				if(game.player.box.topLeft.y > 1){
 					game.player.box.topLeft.y -= 3;
 					game.player.box.botRight.y -= 3;
-					game.player.dir = N;	
+					game.player.dir = N;
+					game.player.row--;	
 				}	
 				pthread_mutex_unlock(&mutex);
 			break;
@@ -58,7 +61,8 @@ void* phrog(void* param)
 				if(game.player.box.botRight.y < MAXY-1){
 					game.player.box.topLeft.y += 3;
 					game.player.box.botRight.y += 3;
-					game.player.dir = S;	
+					game.player.dir = S;
+					game.player.row++;	
 				}
 				pthread_mutex_unlock(&mutex);
 			break;
@@ -83,21 +87,13 @@ void* phrog(void* param)
 				pthread_mutex_unlock(&mutex);
 			break;
 
-			case ' ':
+			case 'f':
 				pthread_mutex_lock(&mutex);
-				game.player.dir = FIXED;
+				game.player.dir = FIRE;
 				//spit(pipewrite,game.player.box,game.player.et);
 				pthread_mutex_unlock(&mutex);
 			break;
 
-#if TESTING == 1
-			//suicide button only for debug
-			case 'q':
-				pthread_mutex_lock(&mutex);
-				game.player.lives = 0;
-				pthread_mutex_unlock(&mutex);
-			break;
-#endif
 			default:
 				pthread_mutex_lock(&mutex);
 				game.player.dir = FIXED;
@@ -107,9 +103,273 @@ void* phrog(void* param)
 
         usleep(3000);
     }
+
+    return NULL;
 }
 
-// SEZIONE GESTIONE GIOCO E GRAFICA
+// cars ---------------------------------
+
+void* carGenerator()
+{
+	int i,j;
+	Direction dirLanes[NUM_LANES];
+
+
+	if(rand()%2 == 0){
+		dirLanes[0] = W;
+	}else{
+		dirLanes[0] = E;
+	}
+
+	for(i = 1; i < NUM_LANES; i++){
+		switch(dirLanes[i-1]){
+		case W:
+			dirLanes[i] = E;
+			break;
+		case E:
+			dirLanes[i] = W;
+			break;
+		}
+	}
+	
+	for(i = 0; i < NUM_LANES; i++){
+		for(j = 0; j < NUM_CARS; j++){
+
+			// deciding map position and direction
+			game.carTable[i][j].row = i;
+			game.carTable[i][j].col = j;
+			game.carTable[i][j].dir = dirLanes[i];
+			game.carTable[i][j].et = CAR;
+
+			// deciding characteristics
+			game.carTable[i][j].length = (4 +rand()%6);
+			if(game.carTable[i][j].length > 6){
+				game.carTable[i][j].color = TRUCKS;
+			}else {
+				game.carTable[i][j].color = CARS;
+			}
+
+			// deciding starting methods and hitbox measurements
+			if(game.carTable[i][j].dir == W){
+				game.carTable[i][j].box.topLeft.x = MAXX+1;
+			}else{				
+				game.carTable[i][j].box.topLeft.x = 0 - game.carTable[i][j].length;
+			}
+
+			game.carTable[i][j].box.topLeft.y = MIN_ROW_CAR + (i*PHROG_SIZE);
+			
+			game.carTable[i][j].box.botRight.x = game.carTable[i][j].box.topLeft.x + game.carTable[i][j].length-1;
+			game.carTable[i][j].box.botRight.y = game.carTable[i][j].box.topLeft.y + PHROG_SIZE-1;
+		}
+	}
+
+	while(!game.gameReady){
+		usleep(1000);
+	}
+
+	for(j = 0; j < NUM_CARS; j++){
+		for(i = 0; i < NUM_LANES; i++){
+			pthread_create(&game.carTable[i][j].id,NULL,&moveCar,(void*)&game.carTable[i][j]);		
+		}
+		sleep(6);
+	}
+
+	return NULL;
+}
+
+void* moveCar(void* param)
+{
+
+	Entity *tempCar = (Entity*)param;
+
+	int i = tempCar->row;
+	int j = tempCar->col;
+
+	game.carTable[i][j].id = pthread_self();
+
+	while(true){
+		switch(game.carTable[i][j].dir){
+			case W:
+				pthread_mutex_lock(&mutex);
+				if(game.carTable[i][j].box.botRight.x == 0){
+					game.carTable[i][j].box.topLeft.x = MAXX+1;
+				}else{
+					game.carTable[i][j].box.topLeft.x -=1;
+				}
+				game.carTable[i][j].box.botRight.x = game.carTable[i][j].box.topLeft.x + game.carTable[i][j].length-1;
+				pthread_mutex_unlock(&mutex);
+			break;
+
+			case E:
+				pthread_mutex_lock(&mutex);
+				if(game.carTable[i][j].box.topLeft.x == MAXX){
+					game.carTable[i][j].box.topLeft.x = 0-game.carTable[i][j].length;
+				}else{
+					game.carTable[i][j].box.topLeft.x +=1;
+				}		
+				game.carTable[i][j].box.botRight.x = game.carTable[i][j].box.topLeft.x + game.carTable[i][j].length-1;
+				pthread_mutex_unlock(&mutex);
+			break;
+		}
+		usleep(100000);
+	}
+}
+
+_Bool carCollisions(Entity currentCar, Entity phrog)
+{
+	int i;
+
+	//for(i = 0; i < NUM_CARS; i++){
+    //	  if(verifyHitbox(currentCar.box,game.carTable[currentCar.row][i].box) && currentCar.id != game.carTable[currentCar.row][i].id){
+    //	  	  haltCar(currentCar.col,currentCar.row);
+    //	  }
+    //}
+
+    if(verifyHitbox(currentCar.box,phrog.box)){
+    	bodyClearing(game.player,game.gameWin);
+    	return true;
+    }  
+
+    return false;
+}
+
+void haltCar(int currentCar, int row)
+{
+	switch(game.carTable[row][currentCar].dir){
+		case W:
+			game.carTable[row][currentCar].box.topLeft.x++;
+			game.carTable[row][currentCar].box.botRight.x++;
+		break;
+
+		case E:
+			game.carTable[row][currentCar].box.topLeft.x--;
+			game.carTable[row][currentCar].box.botRight.x--;
+		break;
+	}
+}
+
+// logs ---------------------------------
+
+void* logGenerator()
+{
+	int i;
+
+	Direction dirRivers[NUM_LANES];
+
+	if(rand()%2 == 0){
+		dirRivers[0] = W;
+	}else{
+		dirRivers[0] = E;
+	}
+
+	for(i = 1; i < NUM_LOGS; i++){
+		switch(dirRivers[i-1]){
+		case W:
+			dirRivers[i] = E;
+			break;
+		case E:
+			dirRivers[i] = W;
+			break;
+		}
+	}
+	
+	for(i = 0; i < NUM_LOGS; i++){
+		// deciding map position and direction
+		game.logs[i].row = i;
+		game.logs[i].dir = dirRivers[i];
+		game.logs[i].et = LOG;
+		game.logs[i].color = LOGS;
+		game.logs[i].hasSpider = false;
+
+		
+		// deciding characteristics
+#if TESTING == 0
+		if(rand()%2 == 0){
+			game.logs[i].length = 6;
+		}else{
+			game.logs[i].length = 9;
+		}
+#else 
+		game.logs[i].length = 18;
+#endif
+
+		// deciding starting methods and hitbox measurements
+		if(game.logs[i].dir == W){
+			game.logs[i].box.topLeft.x = MAXX+1;
+		}else{				
+			game.logs[i].box.topLeft.x = 0 - game.logs[i].length;
+		}
+
+		game.logs[i].box.topLeft.y = MIN_ROW_LOG + (i*PHROG_SIZE);
+		game.logs[i].box.botRight.x = game.logs[i].box.topLeft.x + game.logs[i].length-1;
+		game.logs[i].box.botRight.y = game.logs[i].box.topLeft.y + PHROG_SIZE-1;
+	}
+
+	for(i = 0; i < NUM_LOGS; i++){
+		pthread_create(&game.logs[i].id,NULL,&moveLog,(void*)&game.logs[i]);			
+	}
+}
+
+void* moveLog(void* param)
+{
+	//spitter random generation and forking
+
+	Entity *tempLog = (Entity*)param;
+
+	int i = tempLog->row;
+
+	game.logs[i].id = pthread_self();
+
+	while(true){
+		switch(game.logs[i].dir){
+			case W:
+				pthread_mutex_lock(&mutex);
+				if(game.logs[i].box.topLeft.x == 1){
+					game.logs[i].dir = E;
+				}else{
+					game.logs[i].box.topLeft.x -=1;
+					game.logs[i].box.botRight.x = game.logs[i].box.topLeft.x + game.logs[i].length-1;
+				}
+				pthread_mutex_unlock(&mutex);
+			break;
+
+			case E:
+				pthread_mutex_lock(&mutex);
+				if(game.logs[i].box.botRight.x == MAXX-1){
+					game.logs[i].dir = W;
+				}else{
+					game.logs[i].box.topLeft.x +=1;
+					game.logs[i].box.botRight.x = game.logs[i].box.topLeft.x + game.logs[i].length-1;
+				}	
+				pthread_mutex_unlock(&mutex);	
+			break;
+		}
+		usleep(100000);
+	}
+}
+
+_Bool logCollisions()
+{
+	int i,misses=0;
+
+	for(i = 0; i < NUM_LOGS; i++){
+		if(verifyHitbox(game.player.box,game.logs[i].box) && !game.logs[i].hasSpider){
+			game.logs[i].isOnLog = true;
+    		game.player.isOnLog = true;
+			return true;
+		}else{
+			misses +=1;
+		}
+	}
+
+	if(misses == NUM_LOGS){
+		bodyClearing(game.player,game.gameWin);
+		return false;
+	}
+}
+
+// game --------------------------------
+
 void initializeData(_Bool dRegister[])
 {
 	int i,j;
@@ -221,175 +481,149 @@ void screenRefresh()
 	refresh();
 }
 
-void* roadsAndPonds(void* param)
+int roadsAndPonds(_Bool dRegister[])
 {
-	_Bool dRegister = (_Bool*)param;
-    initializeData(&dRegister);
-    Entity tempEntity, tempProjectile;
-
+	//clock_t startTime;
+	//double timeSpent;
     _Bool playerHit = false;
     _Bool denReached = false;
     _Bool playerIsDry;
-    int result, denId, currentRow;
-    int countdown = 0;
-    time_t currentTime, startTime;
+    time_t start, end;
+    int timeSpent, timeRemaining;
+    int result, denId, resultOfSpitCollision,i,j;
     FILE *debugLog;
+    entityNode *iter;
 
     debugLog = fopen("debugLog.txt","a");
     fprintf(debugLog,"----start of manche----\n");
+
+    initializeData(dRegister);
     drawMap();
-    
-    countdown = DELAY;
-    time(&startTime);
-    while(!playerHit && !denReached)
-    {   
-    	time(&currentTime);
+    time(&start);
+    mvwprintw(game.statWin,1,1,"[·phrog lives:  ·] ");
+      
+    do{          
+    	 	
+    	time(&end);
+        drawMap();
+        
+	 	timeSpent = difftime(end, start);
+	 	timeRemaining = TIMER - timeSpent;
+ 	
+	 	pthread_mutex_lock(&mutex);
 
-    	if(difftime(currentTime,startTime) >= DELAY){
-    		playerHit = true;
-    		fprintf(debugLog, "time is up, gg");
-    	}else{    
-        	mvwprintw(game.statWin,2,1,"[·time:%d·]",countdown);
-	       
-	        drawMap();
-	        read(piperead, &tempEntity, sizeof(Entity));
-	        mvprintw(0,MAXX+1,"entity read:%d",tempEntity.et);
+	 	bodyClearingPlayer(game.player,game.gameWin);
+	 	
+	 	//	if(game.player.dir == FIRE){
+	 	//		pthread_t projThread;
+	 	//		pthread_create(&projThread,NULL,spit,(void*)game.player);
+	 	//	}
 
-	        switch (tempEntity.et)
-	        {
-	            case PHROG:
-	            	// se il player è sul tronco, muovilo col
-	            	mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n",tempEntity.lives);
-	                bodyClearing(game.player,game.gameWin);  
-	                
-	                game.player.id = tempEntity.id;
-	                game.player.col = tempEntity.col;
-	                game.player.color = tempEntity.color;
-	                game.player.length = tempEntity.length;
-	                game.player.dir = tempEntity.dir;
+        if(game.player.row == 0){
+        	denId = denCollisions();
+        	mvprintw(3,MAXX+1,"den collided:%d",denId);
+            if(game.player.box.topLeft.y == 1){
+                if(denId < NUM_DENS){
+                	denReached = true;
+                }else{
+                	playerHit = true;
+                }
+            } 
+        }
 
-	                switch(game.player.dir){
-	                	case N:
-							if(game.player.box.topLeft.y > 1){
-								game.player.box.topLeft.y -= 3;
-								game.player.box.botRight.y -= 3;
-								game.player.row--; 	
-							}	
-						break;
+        if(game.player.row <= 3 && game.player.row >= 1){
+	    	playerIsDry = logCollisions();
+			
+	    	if(!playerIsDry && game.logs[game.player.row-1].hasSpider){
+	    		fprintf(debugLog, "attempted to jump on log with a spider in row %d\n", game.player.row);
+	    		playerHit = true;
+	    	}else if(!playerIsDry && !game.logs[game.player.row-1].hasSpider){
+	    		fprintf(debugLog, "missed the log in row %d\n", game.player.row);
+	    		playerHit = true;
+	    	}else if(playerIsDry){
+	    		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
+	    		for(i = 0; i<NUM_LOGS; i++){
+	    			if(game.logs[i].row != game.player.row-1) game.logs[i].isOnLog = false;
+	    		}
+	    	}
+        }
 
-						case S:
-							if(game.player.box.botRight.y < MAXY-1){
-								game.player.box.topLeft.y += 3;
-								game.player.box.botRight.y += 3;
-								game.player.row++;  									
-							}
-						break;
+	 	mvprintw(1,MAXX+1,"player x: %d, y: %d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
+	 	translateDirection(game.player.dir);
+	 	printerSingleEntities(game.player,game.gameWin);
 
-						case W:
-							if(game.player.box.topLeft.x > 1){
-								game.player.box.topLeft.x -= 3;	
-								game.player.box.botRight.x -= 3;
-								
-							}
-						break;
+		for(i = 0; i < NUM_LANES; i++){
+			for(j = 0; j < NUM_CARS; j++){
+				bodyClearing(game.carTable[i][j],game.gameWin);
+				playerHit = carCollisions(game.carTable[i][j],game.player);
 
-						case E:
-							if(game.player.box.botRight.x < MAXX-1){
-								game.player.box.topLeft.x += 3;	
-								game.player.box.botRight.x += 3;  			
-							}
-						break;
-	                }         
+				if(playerHit){
+					result = OUCH;
+					break;
+				}
 
-	                fprintf(debugLog, "input recieved from the child : %d\n", game.player.length);
+				printerCars(game.carTable[i][j],game.gameWin);
+			}
+			if(playerHit){
+				break;
+			}
+		}
 
-	                mvprintw(1,MAXX+1,"is player on log in game: %d, is player on log fr: %d",game.player.isOnLog,tempEntity.isOnLog);
-	                mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
-	               	translateDirection(game.player.dir);       
-					
-	                if(game.player.box.topLeft.y >= MIN_ROW_LOG && game.player.box.topLeft.y <= MAX_ROW_LOG){
-	                	playerIsDry = logCollisions(game.player,game.logs[game.player.row-1]);
-	                	
-	                	if(!playerIsDry && game.logs[game.player.row-1].hasSpider){
-	                		fprintf(debugLog, "attempted to jump on log with a spider in row %d\n", game.player.row);
-	                		playerHit = true;
-	                	}else if(!playerIsDry && !game.logs[game.player.row-1].hasSpider){
-	                		fprintf(debugLog, "missed the log in row %d\n", game.player.row);
-	                		playerHit = true;
-	                	}else if(playerIsDry){
-	                		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
-	                		game.logs[game.player.row-1].isOnLog = true;
-	                		game.player.isOnLog = true;
-	                		for(int i = 0; i<NUM_LOGS; i++){
-	                			if(game.logs[i].row != game.player.row) game.logs[i].isOnLog = false;
-	                		}
-	                	}
-	                }
-   
-	                denId = denCollisions();
+		for(i = 0; i < NUM_LOGS; i++){
+			bodyClearing(game.logs[i],game.gameWin);
+			printerLogs(game.logs[i],game.gameWin);
+			if(game.logs[i].hasSpider){
+				bodyClearing(game.spiders[i],game.gameWin);
+				printerSingleEntities(game.spiders[i],game.gameWin);
+			}
+			if(game.player.row-1 == game.logs[i].row){
+				bodyClearing(game.player,game.gameWin);
+				switch(game.logs[i].dir){
+            		case W:
+		    			game.player.box.topLeft.x--;	
+						game.player.box.botRight.x--;
+						game.player.dir = W;
+		    		break;			    		
+		    		case E:
+		    			game.player.box.topLeft.x++;	
+						game.player.box.botRight.x++;
+						game.player.dir = E;
+		    		break;
+            	}
+            	printerSingleEntities(game.player,game.gameWin);
+			}
+		}
 
-	                if(game.player.box.topLeft.y == 1){
-		                if(denId < NUM_DENS){
-		                	denReached = true;
-		                }else{
-		                	playerHit = true;
-		                }
-	                }     
-	                	               	
-	               	mvwprintw(game.statWin,3,1,"visited dens: ");
-	               	for(int i = 0; i < NUM_DENS; i++){
-	               		wprintw(game.statWin,"%d[%d]\t", i+1, game.Dens[i].visited);
-	               	}           
-	              
-	                if(game.player.lives > 0){
-	                    printerSingleEntities(game.player,game.gameWin);
-	                }else{
-	                	playerHit = true;
-	                }    
-	            break;
+	 	// (projectiles have to be put in a list)
+		// 	iter = game.entityList->head;
+		// 	while(iter != NULL){
+		// 		bodyClearing(iter->data,game.gameWin);
+		// 		// collision controls
+		// 		printerSingleEntities(iter->data,game.gameWin);
+		// 		iter = iter->next;
+		// 	}
+	 	
+        mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n", game.player.lives);       
+        mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining);       
+        screenRefresh(); 
 
-	            case SPIDER:
-	            break;
+    	pthread_mutex_unlock(&mutex);
+    }while(!playerHit && !denReached && timeSpent <= TIMER);
 
-	            case CAR:
-	            break;
-
-	            case LOG:
-	            break;
-	            
-	            case SPITBALL:
-	            break;
-	        }
-	        
-	        screenRefresh();
-	    }       
-	    countdown--; 
-    }
-
-    erase();
+    werase(game.gameWin);
+    werase(game.statWin);
     screenRefresh();
+    fclose(debugLog);
+    //clearRiverInteractions();
 
-    if(playerHit){
+    if(playerHit || timeSpent >= TIMER){
     	result = OUCH;
     }
 
     if(denReached){
     	result = denId;
     }
-
-    fclose(debugLog);
     return result;
-}
-
-int calcRow(int playerRow)
-{
-	// 2,3,4 rivers 
-	// 6,7,8 roads
-	if(playerRow > 1 && playerRow <= 4){
-		return playerRow - (NUM_RIVERS-1);
-	}else if(playerRow > 5 && playerRow <= 8){
-		return playerRow - (NUM_LANES*2);
-	}
 }
 
 void drawMap()
@@ -462,81 +696,3 @@ int denCollisions()
 
 	return NUM_DENS;
 }
-
-
-/*
-	// verifica delle collisioni della bomba
-	void projectileCollisions(Entity currentMissile, int pipewrite)
-	{
-	    for (int i = 0; i < ALIENS_ALLOWED*WAVES ; i++) {
-	        if (game.aliensLVL1[i].lives > 0) {
-	            if (verifyHitbox(game.aliensLVL1[i].box,currentMissile.box)) {
-
-	                pid_t alien2p;
-
-	                game.carTable[i].col = game.aliensLVL1[i].col;
-	                game.carTable[i].d = game.aliensLVL1[i].d;
-	                game.carTable[i].box.topLeft.x = game.aliensLVL1[i].box.topLeft.x-2;
-	                game.carTable[i].box.topLeft.y = game.aliensLVL1[i].box.topLeft.y-1;
-	                game.carTable[i].box.botRight.x = game.aliensLVL1[i].box.botRight.x+2;
-	                game.carTable[i].box.botRight.y = game.aliensLVL1[i].box.botRight.y+2;
-	                game.aliensLvl2Alive++;
-
-	                game.aliensLvl1Alive--;
-	                game.aliensLVL1[i].lives = 0;
-	                bodyClearing(currentMissile);
-	                bodyClearing(game.aliensLVL1[i]);
-	                kill(currentMissile.pid, 1);
-	                kill(game.aliensLVL1[i].pid, 1);
-
-	                if((alien2p = fork()) == 0){
-	                    alien2(pipewrite, game.carTable[i]);
-	                }
-	                return;
-	            }
-	        }
-	    }
-
-	    for (int i = 0; i < ALIENS_ALLOWED*WAVES; i++) {
-	        if (game.carTable[i].lives > 0) {
-	            if (verifyHitbox(game.carTable[i].box, currentMissile.box)) {
-
-	                game.carTable[i].lives-=1;
-	                bodyClearing(currentMissile);
-	                kill(currentMissile.pid, 1);
-	                
-	                if (game.carTable[i].lives <= 0) {
-	                    game.aliensLvl2Alive--;
-	                    bodyClearing(game.carTable[i]);                    
-	                    kill(game.carTable[i].pid, 1);                    
-	                }
-	                return;               
-	            }
-	        }
-	    }
-	}
-
-	// verifica delle collisioni con la nave
-	void shipCollisions(Entity temp)
-	{
-
-	    if (verifyHitbox(game.player.box, temp.box)){
-	        game.player.lives = 0;
-	        bodyClearing(game.player);
-	        bodyClearing(temp);        
-	        kill(game.player.pid, 1);
-	        kill(temp.pid, 1);      
-	        game.running = false;  
-	        refresh();
-	    }
-	}
-
-	// controllo per verificare se gli alieni hanno oltrepassato il confine sinistro della mappa
-	void checkBorderProximity(int topLeftx)
-	{
-	    if (topLeftx <= 1) { //Ufo has reached the end of the area, the player has lost
-	        game.running = false;
-	        refresh();
-	    }
-	}
-*/

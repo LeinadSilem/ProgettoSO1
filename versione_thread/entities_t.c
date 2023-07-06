@@ -302,6 +302,37 @@ void printerSingleEntities(Entity ent, WINDOW* win)
     wattroff(win,COLOR_PAIR(ent.color));
 }
 
+void bodyClearingPlayer(Entity ent, WINDOW* win){
+	int i,j,x,y;
+
+	y = ent.box.topLeft.y;
+	x = ent.box.topLeft.x;
+
+	switch(ent.dir){
+    	case N:
+    		y = ent.box.topLeft.y + 3;
+    	break;
+
+    	case S:
+    		y = ent.box.topLeft.y - 3;
+    	break;
+
+    	case W:
+    		x = ent.box.topLeft.x + 3;
+    	break;
+
+    	case E:
+    		x = ent.box.topLeft.x - 3;
+    	break;
+    }
+
+    for(i = 0; i < (ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
+        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
+            mvwaddch(win,y+i,x+j,' ');
+        }
+    }
+}
+
 void bodyClearing(Entity ent, WINDOW* win)
 {
     int i,j,x,y;
@@ -309,47 +340,33 @@ void bodyClearing(Entity ent, WINDOW* win)
     y = ent.box.topLeft.y;
     x = ent.box.topLeft.x;
 
-    for(i = 0; i < (ent.box.botRight.y - ent.box.topLeft.y +1); i++){
-        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x +1) ; j++){
-            mvwaddch(win,y+i,x+j,' ');
-        }
-    }
-}
-
-void bodyClearingSingleEntities(Entity ent, WINDOW* win)
-{
-    int i,j,x,y,adjx,adjy;
-
-    y = ent.box.topLeft.y;
-    x = ent.box.topLeft.x;
-
     switch(ent.dir){
     	case N:
-    		adjy = 1;
+    		y = ent.box.topLeft.y + 1;
     	break;
 
     	case S:
-    		adjy = -1;
+    		y = ent.box.topLeft.y - 1;
     	break;
 
     	case W:
-    		adjx = 1;
+    		x = ent.box.topLeft.x + 1;
     	break;
 
     	case E:
-    		adjx = -1;
+    		x = ent.box.topLeft.x - 1;
     	break;
     }
 
     if(ent.et == SPITBALL){
-    	 mvwaddch(win,y+adjy,x,' ');
+    	 mvwaddch(win,y,x,' ');
 	}else {
-		for(i = 0; i <(ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
+		for(i = 0; i < (ent.box.botRight.y - ent.box.topLeft.y + 1); i++){
 	        for(j = 0 ; j < (ent.box.botRight.x - ent.box.topLeft.x + 1); j++){
-	            mvwaddch(win,y+i+adjy,x+j+adjx,' ');
+	            mvwaddch(win,y+i,x+j,' ');
 	        }
 	    }
-	}  
+	}
 }
 
 _Bool verifyHitbox(Hitbox a, Hitbox b)

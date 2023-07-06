@@ -23,7 +23,7 @@
 #define MAXX 83
 #define MAXY 28
 #define PHROG_STARTING_LIVES 3
-#define DELAY 3000
+#define TIMER 30
 #define TESTING 1
 
 //structures and type definitions
@@ -39,17 +39,30 @@ typedef struct gamestate
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
 	Entity spiders[NUM_LOGS];
+	entityList *projectileList;
 	Den Dens[NUM_DENS];
 	int zoneLimitY[ZONES];
+	_Bool gameReady;
 	WINDOW *gameWin, *statWin; 
 }Gamestate;
 
 int gameStart(int startingLives, _Bool dRegister[]);
+
 void* phrog(void* param);
+
+void* carGenerator();
+void* moveCar(void* param);
+void haltCar(int currentCar, int row);
+_Bool carCollisions(Entity currentCar, Entity phrog);
+
+void* logGenerator();
+void* moveLog(void* param);
+_Bool logCollisions();
+
 void initializeData(_Bool dRegister[]);
+int roadsAndPonds(_Bool dRegister[]);
+
 void screenRefresh();
-void* roadsAndPonds(void* param);
-int calcRow(int playerRow);
 void drawMap();
 void translateDirection(Direction dir);
 int denCollisions();

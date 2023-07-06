@@ -18,7 +18,7 @@ typedef enum {ROAD,WATER,
               PHROG_ON_ROAD,PHROG_ON_GRASS,PHROG_ON_LOG,
               SPIT_ON_ROAD,SPIT_ON_GRASS,SPIT_ON_LOG,SAFE_ZONE
               }Color;
-typedef enum {N,S,W,E,FIXED}Direction;
+typedef enum {N,S,W,E,FIRE,FIXED}Direction;
 typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL}EntityType;
 
 typedef struct position
@@ -46,10 +46,22 @@ typedef struct data
     _Bool hasSpider;
 }Entity;
 
+typedef struct entNode{
+    struct entNode* prev;
+    Entity data;
+    struct entNode* next;
+}entityNode;
+
+typedef struct entList{
+    entityNode* head;
+    entityNode* tail;
+    int len;
+}entityList;
+
 void printerLogs(Entity ent, WINDOW* win);
 void printerCars(Entity ent, WINDOW* win);
 void bodyClearing(Entity ent, WINDOW* win);
-void bodyClearingSingleEntities(Entity ent, WINDOW* win);
+void bodyClearingPlayer(Entity ent, WINDOW* win);
 void printerSingleEntities(Entity ent, WINDOW* win);
 _Bool verifyHitbox(Hitbox a, Hitbox b);
 #endif

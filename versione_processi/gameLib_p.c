@@ -648,12 +648,11 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     //timeSpent = (double)(clock()-startTime)/CLOCKS_PER_SEC;
     time(&start);
     mvwprintw(game.statWin,1,1,"[·phrog lives:  ·] ");
-    mvwprintw(game.statWin,2,1,"[·time left:    ·]\n");
     
     while(!playerHit && !denReached && timeSpent <= TIMER)
     {          
-    	   //timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
-    	   time(&end);
+    	//timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
+    	time(&end);
         drawMap();
         read(piperead, &tempEntity, sizeof(Entity));
         
@@ -661,7 +660,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
  	   timeRemaining = TIMER - timeSpent;
         
         //mvwprintw(game.statWin,2,1,"[·time left:%lf·] [sec passed:%d ]\n",timeSpent);
-        mvwprintw(game.statWin,2,1,"[·time left:%d ·]\n", timeRemaining); 
+        mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining); 
         
         switch (tempEntity.et)
         {
@@ -702,8 +701,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 					case W:
 						if(game.player.box.topLeft.x > 1){
 							game.player.box.topLeft.x -= 3;	
-							game.player.box.botRight.x -= 3;
-							
+							game.player.box.botRight.x -= 3;							
 						}
 					break;
 
@@ -855,8 +853,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
                 	fprintf(debugLog, "moving car in log %d\n", game.logs[tempEntity.row].dir);
                 	printerSingleEntities(game.player,game.gameWin);
                 	mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);          	
-                }
-                
+                }                
             break;
             
             case SPITBALL:
@@ -936,7 +933,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     return result;
 }
 
-
 void drawMap()
 {
 	int i,j,k;
@@ -1001,13 +997,15 @@ void updateEntity(Entity temp, int pipewrite)
     write(pipewrite, &current, sizeof(Entity));
 }
 
-void screenRefresh(){
+void screenRefresh()
+{
 	wrefresh(game.gameWin);
 	wrefresh(game.statWin);
 	refresh();
 }
 
-void clearRiverInteractions(){
+void clearRiverInteractions()
+{
 	int i;
 
 	for(i = 0; i < NUM_LOGS; i++){
@@ -1053,80 +1051,3 @@ int denCollisions()
 	return NUM_DENS;
 }
 
-
-/*
-	// verifica delle collisioni della bomba
-	void projectileCollisions(Entity currentMissile, int pipewrite)
-	{
-	    for (int i = 0; i < ALIENS_ALLOWED*WAVES ; i++) {
-	        if (game.aliensLVL1[i].lives > 0) {
-	            if (verifyHitbox(game.aliensLVL1[i].box,currentMissile.box)) {
-
-	                pid_t alien2p;
-
-	                game.carTable[i].col = game.aliensLVL1[i].col;
-	                game.carTable[i].d = game.aliensLVL1[i].d;
-	                game.carTable[i].box.topLeft.x = game.aliensLVL1[i].box.topLeft.x-2;
-	                game.carTable[i].box.topLeft.y = game.aliensLVL1[i].box.topLeft.y-1;
-	                game.carTable[i].box.botRight.x = game.aliensLVL1[i].box.botRight.x+2;
-	                game.carTable[i].box.botRight.y = game.aliensLVL1[i].box.botRight.y+2;
-	                game.aliensLvl2Alive++;
-
-	                game.aliensLvl1Alive--;
-	                game.aliensLVL1[i].lives = 0;
-	                bodyClearing(currentMissile);
-	                bodyClearing(game.aliensLVL1[i]);
-	                kill(currentMissile.pid, 1);
-	                kill(game.aliensLVL1[i].pid, 1);
-
-	                if((alien2p = fork()) == 0){
-	                    alien2(pipewrite, game.carTable[i]);
-	                }
-	                return;
-	            }
-	        }
-	    }
-
-	    for (int i = 0; i < ALIENS_ALLOWED*WAVES; i++) {
-	        if (game.carTable[i].lives > 0) {
-	            if (verifyHitbox(game.carTable[i].box, currentMissile.box)) {
-
-	                game.carTable[i].lives-=1;
-	                bodyClearing(currentMissile);
-	                kill(currentMissile.pid, 1);
-	                
-	                if (game.carTable[i].lives <= 0) {
-	                    game.aliensLvl2Alive--;
-	                    bodyClearing(game.carTable[i]);                    
-	                    kill(game.carTable[i].pid, 1);                    
-	                }
-	                return;               
-	            }
-	        }
-	    }
-	}
-
-	// verifica delle collisioni con la nave
-	void shipCollisions(Entity temp)
-	{
-
-	    if (verifyHitbox(game.player.box, temp.box)){
-	        game.player.lives = 0;
-	        bodyClearing(game.player);
-	        bodyClearing(temp);        
-	        kill(game.player.pid, 1);
-	        kill(temp.pid, 1);      
-	        game.running = false;  
-	        refresh();
-	    }
-	}
-
-	// controllo per verificare se gli alieni hanno oltrepassato il confine sinistro della mappa
-	void checkBorderProximity(int topLeftx)
-	{
-	    if (topLeftx <= 1) { //Ufo has reached the end of the area, the player has lost
-	        game.running = false;
-	        refresh();
-	    }
-	}
-*/

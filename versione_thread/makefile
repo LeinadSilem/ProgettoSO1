@@ -1,5 +1,5 @@
 threadP: main_t.o gameLib_t.o entities_t.o
-	gcc main_t.o gameLib_t.o entities_t.o -o succ -lncurses
+	gcc main_t.o gameLib_t.o entities_t.o -o succ -lncurses -lpthread
 
 main_t.o: main_t.c 
 	gcc -c main_t.c
