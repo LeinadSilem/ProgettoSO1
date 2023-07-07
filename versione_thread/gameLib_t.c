@@ -7,26 +7,32 @@ Gamestate game;
 
 int gameStart(int startingLives, _Bool dRegister[])
 {
-
 	int* lives = malloc(sizeof(startingLives));
 	*lives = startingLives;
 	int result = 0;
 	pthread_t plThread, logThread, carThread, fieldThread;
 
 	pthread_mutex_init(&mutex,NULL);
-
+	
+	mvprintw(2,MAXX+1,"starting x: %d, lives: %d, dir:",startingLives,*lives);
+	
 	pthread_create(&plThread,NULL,&phrog,(void*)lives);
-    pthread_create(&logThread,NULL,&logGenerator,NULL);
-    pthread_create(&carThread,NULL,&carGenerator,NULL);
-    result = roadsAndPonds(dRegister);
-
+	if(startingLives == 3){
+		pthread_create(&logThread,NULL,&logGenerator,NULL);
+		pthread_create(&carThread,NULL,&carGenerator,NULL);
+	}
+     
+     result = roadsAndPonds(dRegister);
 
 	if(result > -1){
-		pthread_join(plThread,NULL);
-		pthread_join(logThread,NULL);
-		pthread_join(carThread,NULL);
+		//pthread_join(plThread,NULL);
+		//pthread_join(logThread,NULL);
+		//pthread_join(carThread,NULL);
+		pthread_cancel(plThread);
+		pthread_cancel(logThread);
+		pthread_cancel(carThread);
 	}
-
+	
 	return result;
 }
 
