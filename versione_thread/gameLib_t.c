@@ -96,7 +96,7 @@ void* phrog(void* param)
 			case 'f':
 				pthread_mutex_lock(&mutex);
 				game.player.dir = FIRE;
-				//spit(pipewrite,game.player.box,game.player.et);
+				//spit(game.player.box,game.player.et);
 				pthread_mutex_unlock(&mutex);
 			break;
 
@@ -321,6 +321,7 @@ void* moveLog(void* param)
 	//spitter random generation and forking
 
 	Entity *tempLog = (Entity*)param;
+	pthread_t spiderThread;
 
 	int i = tempLog->row;
 
@@ -350,6 +351,16 @@ void* moveLog(void* param)
 				pthread_mutex_unlock(&mutex);	
 			break;
 		}
+		
+		// Se un tronco raggiunge il bordo, viene generato un ragno
+		if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
+			if(/*rand()%ENEMY_CHANCE == 0 &&*/ !game.player.isOnLog && !game.logs[i].hasSpider){
+				game.logs[i].hasSpider = true;
+				pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
+				// 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
+			}
+		}
+		
 		usleep(100000);
 	}
 }
@@ -361,10 +372,12 @@ _Bool logCollisions()
 	for(i = 0; i < NUM_LOGS; i++){
 		if(verifyHitbox(game.player.box,game.logs[i].box) && !game.logs[i].hasSpider){
 			game.logs[i].isOnLog = true;
-    		game.player.isOnLog = true;
+    			game.player.isOnLog = true;
+    			flash();
 			return true;
 		}else{
 			misses +=1;
+			//flash();
 		}
 	}
 
@@ -372,6 +385,151 @@ _Bool logCollisions()
 		bodyClearing(game.player,game.gameWin);
 		return false;
 	}
+}
+
+void* spider(void* param){
+
+	Entity spider;
+	Entity *log = (Entity*)param;
+	
+	int i = log->row;
+	game.spiders[i].id = pthread_self();
+	
+	game.spiders[i].lives = 1;
+	game.spiders[i].color = SPIDER_COLOR;
+	game.spiders[i].dir = log->dir;
+	game.spiders[i].row = log->row;
+	game.spiders[i].et = SPIDER;
+
+	//col in the spiders will be used to signal in what section of the log they'll be located
+	//0: leftmost
+	//1: rightmost
+	//2: center
+	if(log->length == 6){
+		game.spiders[i].col = rand()%2;
+	}else{
+		game.spiders[i].col = rand()%3;
+	}
+	mvprintw(4,MAXX+1,"col :%d",game.spiders[i].col);
+
+	switch(spider.col){
+		case 0:
+			game.spiders[i].box.topLeft.y = game.spiders[i].box.botRight.y = log->box.topLeft.y+1;
+			game.spiders[i].box.topLeft.x = log->box.topLeft.x;
+			game.spiders[i].box.botRight.x = log->box.topLeft.x+2;
+		break;
+
+		case 1:
+			game.spiders[i].box.topLeft.y = game.spiders[i].box.botRight.y = log->box.topLeft.y+1;
+			game.spiders[i].box.topLeft.x = log->box.botRight.x-2;
+			game.spiders[i].box.botRight.x = log->box.botRight.x;			
+		break;
+
+		case 2:
+			game.spiders[i].box.topLeft.y = game.spiders[i].box.botRight.y = log->box.topLeft.y+1;
+			game.spiders[i].box.topLeft.x = log->box.topLeft.x+3;
+			game.spiders[i].box.botRight.x = log->box.botRight.x-3;		
+		break; 
+	}
+
+	while (true) {      
+	    	switch(game.spiders[i].col){
+	    		//left
+				case 0:
+					switch(game.spiders[i].dir){
+			    		case W:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.topLeft.x == 1){
+			    				game.spiders[i].dir = E;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x--;
+								game.spiders[i].box.botRight.x--;	
+			    			}    	
+			    			pthread_mutex_unlock(&mutex);		
+			    		break;
+			    		
+			    		case E:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.botRight.x == MAXX-(log->length-2)){
+			    				game.spiders[i].dir = W;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x++;
+								game.spiders[i].box.botRight.x++;
+			    			}	
+			    			pthread_mutex_unlock(&mutex);	    			
+			    		break;
+			    	}
+				break;
+
+				//right
+				case 1:
+					switch(game.spiders[i].dir){
+			    		case W:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.topLeft.x == (log->length-2)){
+			    				game.spiders[i].dir = E;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x--;
+								game.spiders[i].box.botRight.x--;	
+			    			}   
+			    			pthread_mutex_unlock(&mutex); 			
+			    		break;
+			    		
+			    		case E:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.botRight.x == MAXX-1){
+			    				game.spiders[i].dir = W;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x++;
+								game.spiders[i].box.botRight.x++;
+			    			}
+			    			pthread_mutex_unlock(&mutex);		    			
+			    		break;
+			    	}
+				break;
+
+				//central
+				case 2:
+					switch(game.spiders[i].dir){
+			    		case W:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.topLeft.x == (PHROG_SIZE+1)){
+			    				game.spiders[i].dir = E;
+			    				game.spiders[i].box.topLeft.x++;
+								game.spiders[i].box.botRight.x++;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x--;
+								spider.box.botRight.x--;	
+			    			}   
+			    			pthread_mutex_unlock(&mutex); 			
+			    		break;
+			    		
+			    		case E:
+			    			pthread_mutex_lock(&mutex); 
+			    			if(game.spiders[i].box.botRight.x == MAXX-(PHROG_SIZE)-1){
+			    				game.spiders[i].dir = W;
+			    				game.spiders[i].box.topLeft.x--;
+								game.spiders[i].box.botRight.x--;
+			    			}else{
+			    				game.spiders[i].box.topLeft.x++;
+								game.spiders[i].box.botRight.x++;
+			    			}	
+			    			pthread_mutex_unlock(&mutex);	    			
+			    		break;
+			    	}
+				break; 
+				
+		}
+
+		//if(rand()%ATTACK_CHANCE == 0){
+		//	spit(pipewrite,spider.box,spider.et);
+		//}
+
+        //updateEntity(spider,pipewrite);
+	   mvprintw(2,MAXX+1,"enemy x: %d, y: %d",game.spiders[i].box.botRight.x, game.spiders[i].row);
+        usleep(100000);         
+    }
+
 }
 
 // game --------------------------------
@@ -520,10 +678,10 @@ int roadsAndPonds(_Bool dRegister[])
 
 	 	bodyClearingPlayer(game.player,game.gameWin);
 	 	
-	 	//	if(game.player.dir == FIRE){
-	 	//		pthread_t projThread;
-	 	//		pthread_create(&projThread,NULL,spit,(void*)game.player);
-	 	//	}
+	 	//if(game.player.dir == FIRE){
+		//	pthread_t projThread;
+		// 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
+	 	//}
 
         if(game.player.row == 0){
         	denId = denCollisions();

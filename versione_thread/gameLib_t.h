@@ -59,6 +59,8 @@ void* logGenerator();
 void* moveLog(void* param);
 _Bool logCollisions();
 
+void* spider(void* param);
+
 void initializeData(_Bool dRegister[]);
 int roadsAndPonds(_Bool dRegister[]);
 

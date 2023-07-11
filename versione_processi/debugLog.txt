@@ -1773,3 +1773,27 @@ player is dry and on log in position x:45 y:7
 moving car in log 3
 moving car in log 3
 missed the log in row 1
+----start of manche----
+spooder generated
+spooder generated
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed the player 
