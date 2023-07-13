@@ -1797,3 +1797,110 @@ spitball killed a spider
 for real 
 for real 
 spitball killed the player 
+----start of manche----
+spooder generated
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spooder generated
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+player is dry and on log in position x:34 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:28 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:26 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:7 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:35 y:4 
+moving car in log 3

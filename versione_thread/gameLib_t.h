@@ -43,6 +43,7 @@ typedef struct gamestate
 	Den Dens[NUM_DENS];
 	int zoneLimitY[ZONES];
 	_Bool gameReady;
+	_Bool alreadyStarted;
 	WINDOW *gameWin, *statWin; 
 }Gamestate;
 

@@ -17,9 +17,11 @@ int gameStart(int startingLives, _Bool dRegister[])
 	mvprintw(2,MAXX+1,"starting x: %d, lives: %d, dir:",startingLives,*lives);
 	
 	pthread_create(&plThread,NULL,&phrog,(void*)lives);
-	if(startingLives == 3){
+	
+	if(game.alreadyStarted != true){	// Se e' la prima manche avvia i threads dei log e macchine, altrimenti no
 		pthread_create(&logThread,NULL,&logGenerator,NULL);
 		pthread_create(&carThread,NULL,&carGenerator,NULL);
+		game.alreadyStarted = true;
 	}
      
      result = roadsAndPonds(dRegister);
@@ -337,6 +339,13 @@ void* moveLog(void* param)
 					game.logs[i].box.topLeft.x -=1;
 					game.logs[i].box.botRight.x = game.logs[i].box.topLeft.x + game.logs[i].length-1;
 				}
+				
+				if(game.logs[i].isOnLog && logCollisions()){
+					game.player.box.topLeft.x--;	
+					game.player.box.botRight.x--;
+					game.player.dir = W;
+				}
+				
 				pthread_mutex_unlock(&mutex);
 			break;
 
@@ -348,6 +357,13 @@ void* moveLog(void* param)
 					game.logs[i].box.topLeft.x +=1;
 					game.logs[i].box.botRight.x = game.logs[i].box.topLeft.x + game.logs[i].length-1;
 				}	
+				
+				if(game.logs[i].isOnLog && logCollisions()){
+					game.player.box.topLeft.x++;	
+					game.player.box.botRight.x++;
+					game.player.dir = E;
+				}
+				
 				pthread_mutex_unlock(&mutex);	
 			break;
 		}
@@ -371,13 +387,16 @@ _Bool logCollisions()
 
 	for(i = 0; i < NUM_LOGS; i++){
 		if(verifyHitbox(game.player.box,game.logs[i].box) && !game.logs[i].hasSpider){
+			game.player.dir = E;
 			game.logs[i].isOnLog = true;
     			game.player.isOnLog = true;
-    			flash();
+    			
+    			mvprintw(5,MAXX+1,"log: %d",i);
 			return true;
 		}else{
 			misses +=1;
-			//flash();
+			game.logs[i].isOnLog = false;
+    			game.player.isOnLog = false;
 		}
 	}
 
@@ -532,6 +551,28 @@ void* spider(void* param){
 
 }
 
+/*void spit(entityList *list, Entity shooter){
+
+	Entity spitball;
+	pthread_t spitThread;
+	
+	spitball.lives = 1;
+	spitball.box.topLeft.x = spitball.box.botRight.x = shooter.box.topLeft.x+1;
+	spitball.box.topLeft.y = spitball.box.botRight.y = shooter.box.topLeft.y-1;
+	spitball.et = SPITBALL;
+
+	if(shooter.et == PHROG){
+		spitball.color = PHROG_ON_ROAD;
+		spitball.dir = N;
+	}else{
+		spitball.color = SPIDER_COLOR;
+		spitball.dir = S;
+	}
+
+	flash();
+
+}*/
+
 // game --------------------------------
 
 void initializeData(_Bool dRegister[])
@@ -678,10 +719,20 @@ int roadsAndPonds(_Bool dRegister[])
 
 	 	bodyClearingPlayer(game.player,game.gameWin);
 	 	
-	 	//if(game.player.dir == FIRE){
-		//	pthread_t projThread;
-		// 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
-	 	//}
+	 	/*if(game.player.dir == FIRE){
+	 		game.player.dir = E;
+	 		spit(iter, game.player.et);
+		 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
+	 	}*/
+	 	
+	 	// (projectiles have to be put in a list)
+		// 	iter = game.entityList->head;
+		// 	while(iter != NULL){
+		// 		bodyClearing(iter->data,game.gameWin);
+		// 		// collision controls
+		// 		printerSingleEntities(iter->data,game.gameWin);
+		// 		iter = iter->next;
+		// 	}
 
         if(game.player.row == 0){
         	denId = denCollisions();
@@ -694,7 +745,7 @@ int roadsAndPonds(_Bool dRegister[])
                 }
             } 
         }
-
+		mvprintw(6,MAXX+1,"prima: %d %d", logCollisions(), playerHit);
         if(game.player.row <= 3 && game.player.row >= 1){
 	    	playerIsDry = logCollisions();
 			
@@ -703,14 +754,21 @@ int roadsAndPonds(_Bool dRegister[])
 	    		playerHit = true;
 	    	}else if(!playerIsDry && !game.logs[game.player.row-1].hasSpider){
 	    		fprintf(debugLog, "missed the log in row %d\n", game.player.row);
+	    		//flash();
 	    		playerHit = true;
 	    	}else if(playerIsDry){
 	    		fprintf(debugLog, "player is dry and on log in position x:%d y:%d \n", game.player.box.topLeft.x, game.player.box.topLeft.y);
 	    		for(i = 0; i<NUM_LOGS; i++){
-	    			if(game.logs[i].row != game.player.row-1) game.logs[i].isOnLog = false;
+	    			if(game.logs[i].row != game.player.row-1) 
+	    				game.logs[i].isOnLog = false;
 	    		}
 	    	}
         }
+
+		if(playerHit){
+			result = OUCH;
+			break;
+		}
 
 	 	mvprintw(1,MAXX+1,"player x: %d, y: %d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
 	 	translateDirection(game.player.dir);
@@ -732,7 +790,6 @@ int roadsAndPonds(_Bool dRegister[])
 				break;
 			}
 		}
-
 		for(i = 0; i < NUM_LOGS; i++){
 			bodyClearing(game.logs[i],game.gameWin);
 			printerLogs(game.logs[i],game.gameWin);
@@ -742,30 +799,22 @@ int roadsAndPonds(_Bool dRegister[])
 			}
 			if(game.player.row-1 == game.logs[i].row){
 				bodyClearing(game.player,game.gameWin);
-				switch(game.logs[i].dir){
-            		case W:
-		    			game.player.box.topLeft.x--;	
+				//playerIsDry = logCollisions();
+				/*switch(game.logs[i].dir){
+		       		case W:
+			    			game.player.box.topLeft.x--;	
 						game.player.box.botRight.x--;
 						game.player.dir = W;
-		    		break;			    		
-		    		case E:
-		    			game.player.box.topLeft.x++;	
+			    		break;			    		
+			    		case E:
+			    			game.player.box.topLeft.x++;	
 						game.player.box.botRight.x++;
 						game.player.dir = E;
-		    		break;
-            	}
+			    		break;
+            		}*/
             	printerSingleEntities(game.player,game.gameWin);
 			}
 		}
-
-	 	// (projectiles have to be put in a list)
-		// 	iter = game.entityList->head;
-		// 	while(iter != NULL){
-		// 		bodyClearing(iter->data,game.gameWin);
-		// 		// collision controls
-		// 		printerSingleEntities(iter->data,game.gameWin);
-		// 		iter = iter->next;
-		// 	}
 	 	
         mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n", game.player.lives);       
         mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining);       
