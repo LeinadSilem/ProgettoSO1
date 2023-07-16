@@ -19,7 +19,7 @@ typedef enum {ROAD,WATER,
               SPIT_ON_ROAD,SPIT_ON_GRASS,SPIT_ON_LOG,SAFE_ZONE
               }Color;
 typedef enum {N,S,W,E,FIRE,FIXED}Direction;
-typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL}EntityType;
+typedef enum {PHROG,SPIDER,CAR,LOG,SPITBALL,TEMP}EntityType;
 
 typedef struct position
 {
@@ -47,14 +47,12 @@ typedef struct data
 }Entity;
 
 typedef struct entNode{
-    struct entNode* prev;
     Entity data;
     struct entNode* next;
 }entityNode;
 
 typedef struct entList{
     entityNode* head;
-    entityNode* tail;
     int len;
 }entityList;
 
@@ -64,4 +62,7 @@ void bodyClearing(Entity ent, WINDOW* win);
 void bodyClearingPlayer(Entity ent, WINDOW* win);
 void printerSingleEntities(Entity ent, WINDOW* win);
 _Bool verifyHitbox(Hitbox a, Hitbox b);
+entityList* initEntityList();
+entityNode *insert(Entity data, entityList *list);
+entityList* eraseEntity(pthread_t id, entityList *list);
 #endif

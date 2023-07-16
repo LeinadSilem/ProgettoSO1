@@ -378,3 +378,63 @@ _Bool verifyHitbox(Hitbox a, Hitbox b)
         return false;
     }
 }
+
+entityList* initEntityList()
+{
+    entityList* list = malloc(sizeof(entityList));
+    list->head = NULL;
+    list->len = 0;
+
+    return list;
+}
+
+entityNode *insert(Entity data, entityList *list)
+{
+    entityNode *ent;
+    entityNode *iter;
+
+    ent = malloc(sizeof(entityNode));
+    iter = malloc(sizeof(entityNode));
+
+    ent->data = data;
+
+    if(list->head == NULL){
+        list->head = ent;
+        ent->next = NULL;
+    }else{
+        iter = list->head;
+        while(iter->next != NULL){
+            iter = iter->next;
+        }
+        iter->next = ent;
+    }
+    list->len += 1;
+    free(iter);
+    return ent;
+}
+
+entityList* eraseEntity(pthread_t id, entityList *list)
+{
+    entityNode* temp = malloc(sizeof(entityNode));
+    entityNode* prev = malloc(sizeof(entityNode));
+
+    temp = list->head;
+
+    if(temp->next == NULL && list->len == 1){
+    	free(temp);
+    	list->head = NULL;	
+    	list->len = 0;
+    	return list;
+    }
+
+    while(temp->next->data.id != id && temp->next != NULL){
+        temp = temp->next;
+    }
+
+    prev = temp;
+    prev->next = temp->next->next;
+    free(temp);
+
+    list->len -= 1;
+    return list;
+}
