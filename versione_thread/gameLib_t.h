@@ -39,8 +39,9 @@ typedef struct gamestate
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
 	Entity spiders[NUM_LOGS];
+	Entity* projectilePtr;
 	Den Dens[NUM_DENS];
-	int zoneLimitY[ZONES];
+	int zoneLimitY[ZONES],sizeOfPtr;
 	_Bool gameReady;
 	_Bool alreadyStarted;
 	WINDOW *gameWin, *statWin; 
@@ -61,15 +62,14 @@ _Bool logCollisions();
 
 void* spider(void* param);
 
-void spit(Entity shooter);
-void* moveSpitball(void* param);
-
+void* spit(void* param);
 
 void initializeData(_Bool dRegister[]);
 int roadsAndPonds(_Bool dRegister[]);
 
 void screenRefresh();
 void drawMap();
+void swap(Entity *a, Entity *b);
 void translateDirection(Direction dir);
 int denCollisions();
 

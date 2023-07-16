@@ -2,7 +2,6 @@
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 Gamestate game;
-entityList *projectileList;
 
 // SEZIONE GENERAZIONE E MOVIMENTO ENTITA
 
@@ -65,7 +64,8 @@ void* phrog(void* param)
 
             case 'f':
                 pthread_mutex_lock(&mutex);
-                spit(game.player);
+                pthread_t spitThread;
+                pthread_create(&spitThread,NULL,&spit,(void*)&game.player);
                 pthread_mutex_unlock(&mutex);
                 break;
 
@@ -337,7 +337,7 @@ void* moveLog(void* param)
 
         // Se un tronco raggiunge il bordo, viene generato un ragno
         if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
-            if(/*rand()%ENEMY_CHANCE == 0 &&*/ !game.player.isOnLog && !game.logs[i].hasSpider){
+            if(rand()%ENEMY_CHANCE == 0 && !game.player.isOnLog && !game.logs[i].hasSpider){
                 game.logs[i].hasSpider = true;
                 pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
                 // 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
@@ -518,47 +518,77 @@ void* spider(void* param)
     }
 }
 
-void spit(Entity shooter)
+void* spit(void* param)
 {
-    Entity spitball;
-    pthread_t spitThread;
+    Entity* shooter = (Entity*)param;
 
-    spitball.lives = 1;
-    spitball.box.topLeft.x = spitball.box.botRight.x = shooter.box.topLeft.x+1;
-    spitball.box.topLeft.y = spitball.box.botRight.y = shooter.box.topLeft.y-1;
-    spitball.et = SPITBALL;
+	if(game.sizeOfPtr > 1){
+		game.sizeOfPtr +=1;
+    	game.projectilePtr = realloc(game.projectilePtr,sizeof(Entity)*(game.sizeOfPtr));
+	}
 
-    if(shooter.et == PHROG){
-        spitball.color = PHROG_ON_ROAD;
-        spitball.dir = N;
-    }else{
-        spitball.color = SPIDER_COLOR;
-        spitball.dir = S;
+    if(game.projectilePtr == NULL){
+        game.projectilePtr = malloc(sizeof(Entity));
+        game.sizeOfPtr +=1;
     }
 
-    flash();
+    int position = game.sizeOfPtr-1;
 
-    entityNode *spitballN = insert(spitball,projectileList);
-    pthread_create(&spitThread,NULL,&moveSpitball,(void*)spitballN);
-}
+    game.projectilePtr[position].lives = 1;
+    game.projectilePtr[position].box.topLeft.x = game.projectilePtr[position].box.botRight.x = shooter->box.topLeft.x+1;
+    game.projectilePtr[position].box.topLeft.y = game.projectilePtr[position].box.botRight.y = shooter->box.topLeft.y-1;
+    game.projectilePtr[position].et = SPITBALL;
 
-void* moveSpitball(void* param)
-{
-    entityNode *projectile = (entityNode*)param;
-    while (projectile->data.box.topLeft.y <= 1 || projectile->data.box.topLeft.y >= MAXY-1) {
-        switch(projectile->data.dir){
+    if(shooter->et == PHROG){
+        game.projectilePtr[position].color = PHROG_ON_ROAD;
+        game.projectilePtr[position].dir = N;
+    }else{
+        game.projectilePtr[position].color = SPIDER_COLOR;
+        game.projectilePtr[position].dir = S;
+    }
+
+    while (game.projectilePtr[position].box.topLeft.y <= 1 || game.projectilePtr[position].box.topLeft.y >= MAXY-1) {
+        switch(game.projectilePtr[position].dir){
             case N:
                 pthread_mutex_lock(&mutex);
-                projectile->data.box.topLeft.y--;
-                projectile->data.box.botRight.y--;
-                projectile->data.dir = N;
+                game.projectilePtr[position].box.topLeft.y--;
+                game.projectilePtr[position].box.botRight.y--;
+                game.projectilePtr[position].dir = N;
                 pthread_mutex_unlock(&mutex);
             break;
             case S:
                 pthread_mutex_lock(&mutex);
-                projectile->data.box.topLeft.y++;
-                projectile->data.box.botRight.y++;
-                projectile->data.dir = S;
+                game.projectilePtr[position].box.topLeft.y++;
+                game.projectilePtr[position].box.botRight.y++;
+                game.projectilePtr[position].dir = S;
+                pthread_mutex_unlock(&mutex);
+            break;
+        }
+
+        usleep(25000);
+    }
+}
+
+void* moveSpitball(void* param)
+{
+
+    Entity *projectile = (Entity*)param;
+    int position = projectile->col;
+
+    while (game.projectilePtr[position].box.topLeft.y <= 1 || game.projectilePtr[position].box.topLeft.y >= MAXY-1) {
+        switch(game.projectilePtr[position].dir){
+            case N:
+                pthread_mutex_lock(&mutex);
+                game.projectilePtr[position].box.topLeft.y--;
+                game.projectilePtr[position].box.botRight.y--;
+                game.projectilePtr[position].dir = N;
+                pthread_mutex_unlock(&mutex);
+            break;
+            case S:
+                pthread_mutex_lock(&mutex);
+                game.projectilePtr[position].box.topLeft.y++;
+                game.projectilePtr[position].box.botRight.y++;
+                game.projectilePtr[position].dir = S;
                 pthread_mutex_unlock(&mutex);
             break;
         }
@@ -604,6 +634,8 @@ void initializeData(_Bool dRegister[])
 
     game.gameWin = newwin(MAXY,MAXX,0,0);
     game.statWin = newwin(5,MAXX,MAXY,0);
+    game.projectilePtr = malloc(sizeof(Entity));
+    game.sizeOfPtr = 1;
 
     // init colors
     init_pair(SAFE_ZONE,COLOR_WHITE,COLOR_GREEN);
@@ -720,7 +752,6 @@ int roadsAndPonds(_Bool dRegister[])
     int timeSpent, timeRemaining;
     int result, denId, resultOfSpitCollision,i,j;
     FILE *debugLog;
-    entityNode *iter;
 
     debugLog = fopen("debugLog.txt","a");
     fprintf(debugLog,"----start of manche----\n");
@@ -741,57 +772,6 @@ int roadsAndPonds(_Bool dRegister[])
 
         bodyClearingPlayer(game.player,game.gameWin);
 
-        // (projectiles have to be put in a list)
-        if(projectileList->len > 0){
-            iter = projectileList->head;
-            while(iter != NULL){
-                if(iter->data.lives > 0){
-                    bodyClearing(iter->data,game.gameWin);
-                    resultOfSpitCollision = spitballCollisions(iter->data);
-                    switch(resultOfSpitCollision){
-                        // no collision
-                        case 0:
-                            printerSingleEntities(iter->data,game.gameWin);
-                            break;
-                            // collision w/ car
-                        case 1:
-                            fprintf(debugLog,"spitball hit the car \n");
-                            iter->data.lives = 0;
-                            break;
-                            //collision w/ spider
-                        case 2:
-                            fprintf(debugLog,"spitball killed a spider \n");
-                            iter->data.lives = 0;
-                            for(i = 0; i<NUM_LOGS; i++){
-                                if(game.spiders[i].lives <= 0){
-                                    for(j=0; j < NUM_LOGS; j++){
-                                        if(game.spiders[i].row == game.logs[j].row){
-                                            game.logs[i].hasSpider = false;
-                                            bodyClearing(game.spiders[i],game.gameWin);
-                                            fprintf(debugLog,"for real \n");
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            break;
-                            // collision w/ player
-                        case 3:
-                            fprintf(debugLog,"spitball killed the player \n");
-                            iter->data.lives = 0;
-                            bodyClearing(game.player,game.gameWin);
-                            playerHit = true;
-                            break;
-                    }
-                } else{
-                    bodyClearing(iter->data,game.gameWin);
-                    pthread_cancel(iter->data.id);
-                    projectileList = eraseEntity(iter->data.id,projectileList);
-                }
-                iter = iter->next;
-            }
-        }
-
         if(game.player.row == 0){
             denId = denCollisions();
             mvprintw(3,MAXX+1,"den collided:%d",denId);
@@ -803,6 +783,7 @@ int roadsAndPonds(_Bool dRegister[])
                 }
             }
         }
+
         mvprintw(6,MAXX+1,"prima: %d %d", logCollisions(), playerHit);
         if(game.player.row <= 3 && game.player.row >= 1){
             playerIsDry = logCollisions();
@@ -874,6 +855,55 @@ int roadsAndPonds(_Bool dRegister[])
             }
         }
 
+        for(i = 0; i<game.sizeOfPtr; i++){
+        	if((game.projectilePtr[i].box.topLeft.y <= 1 || game.projectilePtr[i].box.topLeft.y >= MAXY-1)||
+        		game.projectilePtr[i].lives <= 0){
+        		swap(&game.projectilePtr[i],&game.projectilePtr[game.sizeOfPtr-1]);
+        		game.sizeOfPtr -= 1;
+        		game.projectilePtr = realloc(game.projectilePtr,sizeof(Entity)*(game.sizeOfPtr));     		
+        	}else{
+        		bodyClearing(game.projectilePtr[i],game.gameWin);
+        		resultOfSpitCollision = spitballCollisions(game.projectilePtr[i]);
+        		switch(resultOfSpitCollision){
+            		// no collision
+            		case 0:
+            			printerSingleEntities(game.projectilePtr[i],game.gameWin);
+            		break;
+            		// collision w/ car
+            		case 1:
+            			fprintf(debugLog,"spitball hit the car \n");
+            			game.projectilePtr[i].lives = 0;           			
+            		break;
+            		//collision w/ spider
+            		case 2:
+            			fprintf(debugLog,"spitball killed a spider \n");
+            			game.projectilePtr[i].lives = 0;
+            			for(int i = 0; i<NUM_LOGS; i++){
+            				if(game.spiders[i].lives <= 0){       							
+            					for(int j=0; j < NUM_LOGS; j++){
+	   								if(game.spiders[i].row == game.logs[j].row){
+	   									game.logs[i].hasSpider = false;
+	   									bodyClearing(game.spiders[i],game.gameWin);
+		            					fprintf(debugLog,"for real \n");
+		            					break;
+	   								}
+	   							}
+            				}
+            			}
+            			
+            		break;
+            		// collision w/ player
+            		case 3:
+            			fprintf(debugLog,"spitball killed the player \n");
+            			game.projectilePtr[i].lives = 0;
+    					bodyClearing(game.player,game.gameWin);
+            			playerHit = true;
+            		break;
+            	}
+        	}
+        }
+
+
         mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n", game.player.lives);
         mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining);
         screenRefresh();
@@ -899,7 +929,7 @@ int roadsAndPonds(_Bool dRegister[])
 
 void drawMap()
 {
-    int i,j,k;
+    int i,j;
     //drawing border
     wattron(game.gameWin,COLOR_PAIR(SAFE_ZONE));
     wattron(game.statWin,COLOR_PAIR(ROAD));
@@ -931,7 +961,6 @@ void drawMap()
 
     wattroff(game.gameWin,COLOR_PAIR(SAFE_ZONE));
     wattroff(game.statWin,COLOR_PAIR(ROAD));
-
 }
 
 void translateDirection(Direction dir)
@@ -968,14 +997,19 @@ int denCollisions()
     return NUM_DENS;
 }
 
+void swap(Entity *a, Entity *b) 
+{ 
+  Entity temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
 int gameStart(int startingLives, _Bool dRegister[])
 {
 
     int* lives = malloc(sizeof(startingLives));
     *lives = startingLives;
     int result = 0;
-
-    projectileList = initEntityList();
 
     pthread_t plThread, logThread, carThread;
 
@@ -1004,3 +1038,4 @@ int gameStart(int startingLives, _Bool dRegister[])
 
     return result;
 }
+
