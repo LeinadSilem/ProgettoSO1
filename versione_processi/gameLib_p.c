@@ -450,6 +450,7 @@ void spider(Entity log, int pipewrite)
 
         usleep(100000);         
     }
+
 }
 
 // funzione per la generazione degli sputi del ragno

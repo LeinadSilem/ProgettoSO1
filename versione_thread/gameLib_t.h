@@ -63,6 +63,7 @@ _Bool logCollisions();
 void* spider(void* param);
 
 void* spit(void* param);
+int spitballCollisions(Entity spit);
 
 void initializeData(_Bool dRegister[]);
 int roadsAndPonds(_Bool dRegister[]);
