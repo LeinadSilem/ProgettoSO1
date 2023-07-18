@@ -1,67 +1,23 @@
 ----start of manche----
-spitball killed a spider 
-for real 
-spitball hit the car 
-spitball killed a spider 
-for real 
-for real 
-spitball killed a spider 
-for real 
-for real 
-for real 
-out of game loop
-clearing screen
-----start of manche----
-spitball hit the car 
-spitball hit the car 
-spitball hit the car 
-spitball killed a spider 
-for real 
-spitball hit the car 
-spitball killed a spider 
-for real 
 spitball hit the car 
 spitball killed the player 
-out of game loop
-player died xdd
-clearing screen
-----start of manche----
-out of game loop
-player died xdd
-clearing screen
-screen cleared
-----start of manche----
-spitball killed a spider 
-for real 
-spitball killed a spider 
-for real 
-for real 
-spitball killed a spider 
-for real 
-for real 
-for real 
-spitball killed the player 
-out of game loop
-player died xdd
-clearing screen
-screen cleared
-----start of manche----
-spitball killed a spider 
-for real 
-spitball killed a spider 
-for real 
-spitball killed the player 
-out of game loop
-player died xdd
-clearing screen
-screen cleared
 ----start of manche----
 spitball hit the car 
 spitball killed the player 
-out of game loop
-player died xdd
-clearing screen
-screen cleared
+----start of manche----
+----start of manche----
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+----start of manche----
+spitball hit the car 
+spitball killed the player 
+----start of manche----
 ----start of manche----
 spitball hit the car 
 spitball killed a spider 
@@ -69,70 +25,152 @@ for real
 spitball killed a spider 
 for real 
 for real 
-spitball killed a spider 
-for real 
-for real 
-for real 
 spitball hit the car 
 spitball hit the car 
 spitball killed a spider 
 for real 
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
+for real 
+for real 
 ----start of manche----
 spitball hit the car 
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
+----start of manche----
 ----start of manche----
 spitball hit the car 
 spitball killed a spider 
 for real 
+----start of manche----
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
 spitball hit the car 
 spitball killed a spider 
 for real 
+spitball hit the car 
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball killed a spider 
+for real 
+for real 
+spitball hit the car 
+spitball killed a spider 
+for real 
+for real 
+for real 
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+for real 
+----start of manche----
+spitball killed a spider 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball hit the car 
+spitball hit the car 
+spitball killed a spider 
+for real 
+for real 
+for real 
+----start of manche----
+----start of manche----
+spitball killed a spider 
 for real 
 spitball killed the player 
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
+----start of manche----
+----start of manche----
+----start of manche----
 ----start of manche----
 spitball hit the car 
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
-----start of manche----
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
-----start of manche----
-spitball killed a spider 
-for real 
-for real 
-for real 
-spitball killed a spider 
-for real 
-for real 
-for real 
-spitball killed a spider 
-for real 
-for real 
-for real 
-spitball killed a spider 
-for real 
 spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+spitball hit the car 
+----start of manche----
+----start of manche----
+----start of manche----
+----start of manche----
+spitball hit the car 
+spitball killed the player 
+----start of manche----
+----start of manche----
+spitball killed the player 
+----start of manche----
+spitball hit the car 
+----start of manche----
+----start of manche----
+----start of manche----
+spitball killed the player 
+----start of manche----
+----start of manche----
+----start of manche----
+spitball hit the car 
+spitball killed the player 
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
 spitball killed a spider 
 for real 
 spitball killed a spider 
 for real 
 spitball killed the player 
-out of game loop
-player died xdd
-clearing screen...
-clearing memory...
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+for real 
+----start of manche----
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+spitball killed a spider 
+for real 
+for real 
+for real 

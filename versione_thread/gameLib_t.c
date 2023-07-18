@@ -3,7 +3,6 @@
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 Gamestate game;
 
-// SEZIONE GENERAZIONE E MOVIMENTO ENTITA
 
 // player -------------------------------
 
@@ -1047,7 +1046,6 @@ void clearMemory()
     }
 
     game.gameReady = false;
-
 }
 
 entityList* initEntityList()
