@@ -24,7 +24,7 @@
 #define MAXY 28
 #define PHROG_STARTING_LIVES 3
 #define TIMER 30
-#define TESTING 1
+#define TESTING 0
 
 //structures and type definitions
 

@@ -59,10 +59,10 @@ void gameLoop(){
 			box(tryAgainWin,0,0);
 			if(totalLives <= 0){			
 				mvwprintw(tryAgainWin,MAXY/2,MAXX/2 - 21,  "you only reached %d/5 dens, wanna try again?",densVisited);
-				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 21,"  [y]: try for fame     [n]: lose in shame  ");
+				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 21,"   [y]:try for fame   [any]:lose in shame   ");
 			}else{
 				mvwprintw(tryAgainWin,MAXY/2,MAXX/2 - 26,  "you reached all dens, bravo! how about another try?");
-				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 26,"[y]: go for more success  [n]: retire like a coward");
+				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 26,"[y]:go for more success  [any]:retire like a coward");
 			}
 			wrefresh(tryAgainWin);
 			playerSelection = getchar();

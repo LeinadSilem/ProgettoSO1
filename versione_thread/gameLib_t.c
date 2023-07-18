@@ -161,7 +161,7 @@ void* moveCar(void* param)
 
     game.carTable[i][j].id = pthread_self();
 
-    while(true){
+    while(game.player.lives > 0){
         switch(game.carTable[i][j].dir){
             case W:
                 pthread_mutex_lock(&mutex);
@@ -187,6 +187,8 @@ void* moveCar(void* param)
         }
         usleep(100000);
     }
+
+    return NULL;
 }
 
 _Bool carCollisions(Entity currentCar, Entity phrog)
@@ -295,7 +297,7 @@ void* moveLog(void* param)
 
     game.logs[i].id = pthread_self();
 
-    while(true){
+    while(game.player.lives > 0){
         switch(game.logs[i].dir){
             case W:
                 pthread_mutex_lock(&mutex);
@@ -336,15 +338,16 @@ void* moveLog(void* param)
 
         // Se un tronco raggiunge il bordo, viene generato un ragno
         if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
-            if(/*rand()%ENEMY_CHANCE == 0 &&*/!game.player.isOnLog && !game.logs[i].hasSpider){
+            if(/*rand()%ENEMY_CHANCE == 0 &&*/!game.logs[i].isOnLog && !game.logs[i].hasSpider){
                 game.logs[i].hasSpider = true;
                 pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
-                // 	pthread_create(&projThread,NULL,&spit,(void*)game.player);
             }
         }
 
         usleep(100000);
     }
+
+    return NULL;
 }
 
 _Bool logCollisions()
@@ -1018,9 +1021,10 @@ int gameStart(int startingLives, _Bool dRegister[])
         //pthread_join(plThread,NULL);
         //pthread_join(logThread,NULL);
         //pthread_join(carThread,NULL);
-        pthread_cancel(plThread);
-        pthread_cancel(logThread);
-        pthread_cancel(carThread);
+    }
+
+    if(game.player.lives <= 0){
+        game.alreadyStarted = false;
     }
 
     pthread_mutex_destroy(&mutex);

@@ -2,7 +2,7 @@
 #define GATCHA_CROSSY_ROAD_SPRITES
 
 #define PHROG_SIZE 3
-#define TESTING 1
+#define TESTING 0
 
 #include <stdio.h>
 #include <ncurses.h>

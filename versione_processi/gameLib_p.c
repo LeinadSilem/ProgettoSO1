@@ -495,7 +495,7 @@ void moveSpitBall(int pipewrite, Entity projectile)
 			break;
     	}
 
-        if(projectile.box.topLeft.y <= 1 || projectile.box.topLeft.y >= MAXY-1){
+        if(projectile.box.topLeft.y < 1 || projectile.box.topLeft.y > MAXY-1){
             projectile.lives = 0;
             updateEntity(projectile,pipewrite);
             kill(projectile.pid, 1);
@@ -823,7 +823,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
                 printerLogs(game.logs[tempEntity.row],game.gameWin);
 
                 if(game.logs[tempEntity.row].box.topLeft.x == 1 || game.logs[tempEntity.row].box.botRight.x == MAXX-1){ 	
-					if(rand()%ENEMY_CHANCE == 0 && !game.player.isOnLog && !game.logs[tempEntity.row].hasSpider){
+					if(/*rand()%ENEMY_CHANCE == 0 &&*/ !game.logs[tempEntity.row].isOnLog && !game.logs[tempEntity.row].hasSpider){
 						game.logs[tempEntity.row].hasSpider = true;
 						fprintf(debugLog, "spooder generated\n");
 						if(fork()==0) spider(game.logs[tempEntity.row],pipewrite);
