@@ -649,15 +649,16 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     time(&start);
     mvwprintw(game.statWin,1,1,"[·phrog lives:  ·] ");
     
-    while(!playerHit && !denReached && timeSpent <= TIMER)
+    do
     {          
     	//timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
     	time(&end);
         drawMap();
+
         read(piperead, &tempEntity, sizeof(Entity));
         
- 	   timeSpent = difftime(end, start);
- 	   timeRemaining = TIMER - timeSpent;
+ 	    timeSpent = difftime(end, start);
+ 	    timeRemaining = TIMER - timeSpent;
         
         //mvwprintw(game.statWin,2,1,"[·time left:%lf·] [sec passed:%d ]\n",timeSpent);
         mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining); 
@@ -665,7 +666,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
         switch (tempEntity.et)
         {
             case PHROG:
-
+            	fprintf(debugLog, "reading player\n");
             	// se il player è sul tronco, muovilo col
                 bodyClearing(game.player,game.gameWin);                
                 
@@ -916,20 +917,22 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
         }
         
         screenRefresh();   
-    }
-
-    erase();
-    screenRefresh();
-    fclose(debugLog);
-    clearRiverInteractions();
+    }while(!playerHit && !denReached && timeSpent <= TIMER);
 
     if(playerHit || timeSpent >= TIMER){
     	result = OUCH;
     }
 
     if(denReached){
-    	result = denId;
+    	result = denId;	
     }
+
+    werase(game.gameWin);
+    werase(game.statWin);
+    screenRefresh();
+    clearRiverInteractions();
+    fclose(debugLog); 
+    
     return result;
 }
 

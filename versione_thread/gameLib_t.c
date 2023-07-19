@@ -793,10 +793,13 @@ int roadsAndPonds(_Bool dRegister[])
             }
         }
 
-        if(playerHit){
+        if(playerHit)
+        {
             result = OUCH;
             break;
-        }else{
+        }
+        else
+        {
 
             // ciclo stampa macchine
             for(i = 0; i < NUM_LANES; i++){

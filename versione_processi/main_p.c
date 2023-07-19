@@ -122,6 +122,7 @@ void gameLoop(){
 				denRegister[i] = false;
 			}
 		}
+
 		resultOfMatch = gameStart(totalLives,denRegister);
 
 		//verify the result
@@ -143,11 +144,10 @@ void gameLoop(){
 				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 26,"[y]:go for more success  [any]:retire like a coward");
 			}
 			wrefresh(tryAgainWin);
-			scanf("%c",&playerSelection);
+			playerSelection = getch();
 			werase(tryAgainWin);
 		}else{
 			playerSelection = 'y';
 		}
-
 	}while(playerSelection == 'y');
 }
