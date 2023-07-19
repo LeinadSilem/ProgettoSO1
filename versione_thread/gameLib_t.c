@@ -338,7 +338,7 @@ void* moveLog(void* param)
 
         // Se un tronco raggiunge il bordo, viene generato un ragno
         if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
-            if(/*rand()%ENEMY_CHANCE == 0 &&*/!game.logs[i].isOnLog && !game.logs[i].hasSpider){
+            if(rand()%ENEMY_CHANCE == 0 && !game.logs[i].isOnLog && !game.logs[i].hasSpider){
                 game.logs[i].hasSpider = true;
                 pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
             }
@@ -417,7 +417,7 @@ void* spider(void* param)
             game.spiders[i].box.topLeft.y = game.spiders[i].box.botRight.y = log->box.topLeft.y+1;
             game.spiders[i].box.topLeft.x = log->box.topLeft.x+3;
             game.spiders[i].box.botRight.x = log->box.botRight.x-3;
-            break;
+        break;
     }
 
     while (game.spiders[i].lives > 0) {

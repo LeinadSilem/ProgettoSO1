@@ -34,7 +34,7 @@ void gameLoop(){
 	WINDOW* tryAgainWin;
 	int totalLives = PHROG_STARTING_LIVES;
 	int densVisited = 0;
-	int resultOfMatch;
+	int resultOfMatch,i;
 	_Bool denRegister[NUM_DENS] = {false,false,false,false,false};
 	char playerSelection = 'y';
 
@@ -43,6 +43,9 @@ void gameLoop(){
 	do{
 		if(totalLives <= 0){
 			totalLives = PHROG_STARTING_LIVES;
+			for(i = 0; i < NUM_DENS; i ++){
+				denRegister[i] = false;
+			}
 		}
 		resultOfMatch = gameStart(totalLives,denRegister);
 
@@ -65,7 +68,7 @@ void gameLoop(){
 				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 26,"[y]:go for more success  [any]:retire like a coward");
 			}
 			wrefresh(tryAgainWin);
-			playerSelection = getchar();
+			scanf("%c",&playerSelection);
 			werase(tryAgainWin);
 		}else{
 			playerSelection = 'y';
