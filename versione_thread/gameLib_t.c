@@ -338,7 +338,7 @@ void* moveLog(void* param)
 
         // Se un tronco raggiunge il bordo, viene generato un ragno
         if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
-            if(rand()%ENEMY_CHANCE == 0 && !game.logs[i].isOnLog && !game.logs[i].hasSpider){
+            if(/*rand()%ENEMY_CHANCE == 0 &&*/ !game.logs[i].isOnLog && !game.logs[i].hasSpider){
                 game.logs[i].hasSpider = true;
                 pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
             }
@@ -575,7 +575,7 @@ void* moveSpitBall(void* param)
             projectile->data.lives = 0;
         }
         pthread_mutex_unlock(&mutex);   
-        usleep(50000);
+        usleep(500000);
     }
 
     return NULL;
@@ -584,6 +584,7 @@ void* moveSpitBall(void* param)
 int spitballCollisions(Entity spit)
 {
     int i,j;
+    entityNode* iter = game.projectilePtr->head;
 
     for(i = 0; i < NUM_LANES; i++){
         for(j = 0; j < NUM_CARS; j++){
@@ -602,6 +603,18 @@ int spitballCollisions(Entity spit)
 
     if(verifyHitbox(spit.box,game.player.box) && spit.dir == S){
         return 3;
+    }
+
+    // Cicla per tutti i proiettili e controlla se fanno collisione
+    iter = game.projectilePtr->head;
+    while(iter != NULL){
+    		if(verifyHitbox(spit.box, iter->data.box) && spit.dir != iter->data.dir){
+    			bodyClearing(iter->data, game.gameWin);
+    			iter->data.lives = 0;
+    			return 4;
+    		}
+    		
+    		iter = iter->next;
     }
 
     return 0;
@@ -867,9 +880,15 @@ int roadsAndPonds(_Bool dRegister[])
                             // collision w/ player
                             case 3:
                                 fprintf(debugLog,"spitball killed the player \n");
-                                iter->data.lives = 0;
                                 bodyClearing(game.player,game.gameWin);
+                                iter->data.lives = 0;
                                 playerHit = true;
+                            break;
+                            // collision w/ other bullet
+                            case 4:
+                                fprintf(debugLog,"spitball killed itself and other spitball \n");
+                                bodyClearing(iter->data, game.gameWin);
+                                iter->data.lives = 0;
                             break;
                         }
                     }
