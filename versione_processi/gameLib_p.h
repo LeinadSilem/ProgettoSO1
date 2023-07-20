@@ -23,7 +23,7 @@
 #define MAXY 28
 #define PHROG_STARTING_LIVES 3
 #define DELAY_SECONDS 3
-#define TIMER 15
+#define TIMER 90
 #define TESTING 0
 
 //structures and type definitions

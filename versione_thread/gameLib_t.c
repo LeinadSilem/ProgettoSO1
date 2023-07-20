@@ -85,9 +85,8 @@ void* phrog(void* param)
 
 void* carGenerator()
 {
-    int i,j;
+    int i,j,carlength;
     Direction dirLanes[NUM_LANES];
-
 
     if(rand()%2 == 0){
         dirLanes[0] = W;
@@ -107,6 +106,7 @@ void* carGenerator()
     }
 
     for(i = 0; i < NUM_LANES; i++){
+        carlength = (4 +rand()%6);
         for(j = 0; j < NUM_CARS; j++){
 
             // deciding map position and direction
@@ -116,7 +116,7 @@ void* carGenerator()
             game.carTable[i][j].et = CAR;
 
             // deciding characteristics
-            game.carTable[i][j].length = (4 +rand()%6);
+            game.carTable[i][j].length = carlength;
             if(game.carTable[i][j].length > 6){
                 game.carTable[i][j].color = TRUCKS;
             }else {
@@ -672,12 +672,6 @@ void initializeData(_Bool dRegister[])
             game.carTable[i][j].row = i;
             game.carTable[i][j].col = j;
             game.carTable[i][j].et = CAR;
-            game.carTable[i][j].length = (4 +rand()%6);
-            if(game.carTable[i][j].length > 6){
-                game.carTable[i][j].color = TRUCKS;
-            }else {
-                game.carTable[i][j].color = CARS;
-            }
         }
     }
 
@@ -1019,12 +1013,6 @@ int gameStart(int startingLives, _Bool dRegister[])
     }
 
     result = roadsAndPonds(dRegister);
-
-    if(result > -1){
-        //pthread_join(plThread,NULL);
-        //pthread_join(logThread,NULL);
-        //pthread_join(carThread,NULL);
-    }
 
     if(game.player.lives <= 0){
         game.alreadyStarted = false;

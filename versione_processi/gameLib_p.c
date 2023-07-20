@@ -81,7 +81,7 @@ void phrog(int lives,int pipewrite)
 
 void carGenerator(int pipewrite)
 {
-	int i,j;
+	int i,j,carlength;
 	pid_t myPid;
 
 	myPid = getpid();
@@ -106,8 +106,8 @@ void carGenerator(int pipewrite)
 	}
 	
 	for(i = 0; i < NUM_LANES; i++){
+		carlength = (4 +rand()%6);
 		for(j = 0; j < NUM_CARS; j++){
-
 			// deciding map position and direction
 			car[i][j].row = i;
 			car[i][j].col = j;
@@ -115,7 +115,7 @@ void carGenerator(int pipewrite)
 			car[i][j].et = CAR;
 
 			// deciding characteristics
-			car[i][j].length = (4 +rand()%6);
+			car[i][j].length = carlength;
 			if(car[i][j].length > 6){
 				car[i][j].color = TRUCKS;
 			}else {
