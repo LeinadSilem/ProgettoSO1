@@ -71,7 +71,6 @@ int roadsAndPonds(_Bool dRegister[]);
 
 void screenRefresh();
 void drawMap();
-void swap(Entity *a, Entity *b);
 void translateDirection(Direction dir);
 int denCollisions();
 void clearMemory();

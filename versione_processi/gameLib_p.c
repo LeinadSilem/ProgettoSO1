@@ -503,13 +503,14 @@ void moveSpitBall(int pipewrite, Entity projectile)
 
         updateEntity(projectile,pipewrite);
 
-        usleep(25000);         
+        usleep(500000);         
     }
 }
 
 int spitballCollisions(Entity spit)
 {
 	int i,j;
+	entityNode* iter;
 
 	for(i = 0; i < NUM_LANES; i++){
 		for(j = 0; j < NUM_CARS; j++){
@@ -533,8 +534,24 @@ int spitballCollisions(Entity spit)
 		return 3;
 	}
 
+	if(game.projectiles != NULL){
+        iter = game.projectiles->head;
+        while(iter != NULL){
+            if(verifyHitbox(spit.box, iter->data.box) && spit.pid != iter->data.pid){
+                bodyClearing(iter->data, game.gameWin);
+                iter->data.lives = 0;
+                game.projectiles = eraseEntity(iter,game.projectiles);
+                return 4;
+            }
+            
+            iter = iter->next;
+        }
+    }
+	
+
 	return 0;
 }
+
 
 // SEZIONE GESTIONE GIOCO E GRAFICA
 void initializeData(_Bool dRegister[])
@@ -543,7 +560,7 @@ void initializeData(_Bool dRegister[])
 
 	game.gameWin = newwin(MAXY,MAXX,0,0);
 	game.statWin = newwin(5,MAXX,MAXY,0);
-
+	game.projectiles = initEntityList();
 	// init colors
 	init_pair(SAFE_ZONE,COLOR_WHITE,COLOR_GREEN);
 	init_pair(ROAD,COLOR_WHITE,COLOR_BLACK);
@@ -636,8 +653,9 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     _Bool playerIsDry;
     time_t start, end;
     int timeSpent, timeRemaining;
-    int result, denId, resultOfSpitCollision,i;
+    int result, denId, resultOfSpitCollision,i,j;
     FILE *debugLog;
+    entityNode* iter;
 
     debugLog = fopen("debugLog.txt","a");
     fprintf(debugLog,"----start of manche----\n");
@@ -653,6 +671,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     {          
     	//timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
     	time(&end);
+    	werase(game.gameWin);
         drawMap();
 
         read(piperead, &tempEntity, sizeof(Entity));
@@ -870,6 +889,27 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
                 tempProjectile.dir = tempEntity.dir;
                 tempProjectile.pid = tempEntity.pid;
 
+                _Bool pidFound = false;
+               	if(game.projectiles != NULL){
+	                iter = game.projectiles->head;
+	                while(iter != NULL){
+	                    if(iter->data.pid == tempProjectile.pid){
+	                    	pidFound = true;
+	                    	break;
+	                    }else{
+	                    	pidFound = false;
+	                    }
+	                    iter = iter->next;                    
+	                }
+
+	                if(pidFound = false){
+	                	entityNode* newNode = insert(tempProjectile,game.projectiles);
+	                }
+	            }else{
+	            	entityNode* newNode = insert(tempProjectile,game.projectiles);
+	            }
+
+	            entityNode* forDeletion = findNode(tempProjectile.pid);
             	resultOfSpitCollision = spitballCollisions(tempProjectile);
 
             	switch(resultOfSpitCollision){
@@ -882,16 +922,17 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
             			fprintf(debugLog,"spitball hit the car \n");
             			tempProjectile.lives = 0;
             			kill(tempProjectile.pid,1);
-            			
+            			game.projectiles = eraseEntity(forDeletion,game.projectiles);
             		break;
             		//collision w/ spider
             		case 2:
             			fprintf(debugLog,"spitball killed a spider \n");
             			tempProjectile.lives = 0;
             			kill(tempProjectile.pid,1);
-            			for(int i = 0; i<NUM_LOGS; i++){
+						game.projectiles = eraseEntity(forDeletion,game.projectiles);
+            			for(i = 0; i<NUM_LOGS; i++){
             				if(game.spiders[i].lives <= 0){       							
-            					for(int j=0; j < NUM_LOGS; j++){
+            					for(j=0; j < NUM_LOGS; j++){
 	   								if(game.spiders[i].row == game.logs[j].row){
 	   									game.logs[i].hasSpider = false;
 	   									kill(game.spiders[i].pid,1);
@@ -901,16 +942,24 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 	   								}
 	   							}
             				}
-            			}
-            			
+            			}           			
             		break;
             		// collision w/ player
             		case 3:
             			fprintf(debugLog,"spitball killed the player \n");
             			tempProjectile.lives = 0;
             			kill(tempProjectile.pid,1);
+						game.projectiles = eraseEntity(forDeletion,game.projectiles);
     					bodyClearingSingleEntities(game.player,game.gameWin);
             			playerHit = true;
+            		break;
+
+            		case 4:
+            			fprintf(debugLog,"spitballs collided with themselves\n");
+            			tempProjectile.lives = 0;
+            			bodyClearingSingleEntities(tempProjectile,game.gameWin);
+						kill(tempProjectile.pid,1);
+						game.projectiles = eraseEntity(forDeletion,game.projectiles);
             		break;
             	}          
             break;
@@ -1054,3 +1103,112 @@ int denCollisions()
 	return NUM_DENS;
 }
 
+
+entityList* initEntityList()
+{
+    entityList *list = malloc(sizeof(entityList));
+    list->head = NULL;
+    list->tail = NULL;
+    list-> len = 0;
+    return list;
+}
+
+entityNode *insert(Entity data, entityList *list)
+{
+    entityNode *ent;
+    ent = malloc(sizeof(entityNode));
+
+    ent->next = NULL;
+    ent->prev = NULL;
+
+    ent->data = data;
+
+    if (list->head == NULL) 
+    {
+        list->head = ent;
+        list->tail = ent;
+        ent->prev = NULL;
+        ent->next = NULL;
+    }
+    else
+    {
+        // Setting ent data
+        ent->prev= list->tail;
+        ent->next = NULL;
+
+        // Setting list data
+        list->tail->next = ent;
+        list->tail = ent;
+    }
+
+    list->len +=1;
+
+    return ent;
+}
+
+entityList* eraseEntity(entityNode *forDeletion, entityList *list)
+{
+
+    entityNode *ent;
+
+    if (list->head != NULL) // If the list is not empty
+    {
+        ent = list->head;
+        while (ent != NULL)
+        {
+            if (ent == forDeletion)
+            {
+                entityNode *predecessor, *successor;
+                predecessor = ent->prev;
+                successor = ent->next;
+                
+                if (list->head != list->tail)
+                {
+                    if (ent != list->head)
+                    {
+                        if (ent != list->tail)
+                        {
+                            predecessor->next = successor;
+                            successor->prev = predecessor;
+                        }
+                        else
+                        {
+                            predecessor->next = NULL;
+                            list->tail = predecessor;
+                        }
+                    }
+                    else
+                    {
+                        list->head = successor;
+                        successor->prev = NULL;
+                    }
+                }
+                else
+                {  
+                    list->head = NULL;
+                    list->tail = NULL;
+                }
+            } 
+            ent = ent->next;         
+        }
+    }
+
+    list->len -=1;
+
+    return list;
+}
+
+entityNode* findNode(pid_t target){
+	entityNode* iter;
+
+	iter = game.projectiles->head;
+
+	while(iter != NULL){
+		if(iter->data.pid == target){
+			return iter;
+		}
+		iter = iter->next;
+	}
+
+	return NULL;
+}

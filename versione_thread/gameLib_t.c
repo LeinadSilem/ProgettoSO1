@@ -606,16 +606,19 @@ int spitballCollisions(Entity spit)
     }
 
     // Cicla per tutti i proiettili e controlla se fanno collisione
-    iter = game.projectilePtr->head;
-    while(iter != NULL){
-    		if(verifyHitbox(spit.box, iter->data.box) && spit.dir != iter->data.dir){
-    			bodyClearing(iter->data, game.gameWin);
-    			iter->data.lives = 0;
-    			return 4;
-    		}
-    		
-    		iter = iter->next;
-    }
+    if(game.projectilePtr != NULL){
+        iter = game.projectilePtr->head;
+        while(iter != NULL){
+            if(verifyHitbox(spit.box, iter->data.box) && spit.id != iter->data.id){
+                bodyClearing(iter->data, game.gameWin);
+                iter->data.lives = 0;
+                game.projectilePtr = eraseEntity(iter,game.projectilePtr);
+                return 4;
+            }
+            
+            iter = iter->next;
+        }
+    } 
 
     return 0;
 }
@@ -751,6 +754,7 @@ int roadsAndPonds(_Bool dRegister[])
 
     do{
         time(&end);
+        werase(game.gameWin);
         drawMap();
 
         timeSpent = difftime(end, start);
@@ -889,6 +893,7 @@ int roadsAndPonds(_Bool dRegister[])
                                 fprintf(debugLog,"spitball killed itself and other spitball \n");
                                 bodyClearing(iter->data, game.gameWin);
                                 iter->data.lives = 0;
+                                game.projectilePtr = eraseEntity(iter,game.projectilePtr);
                             break;
                         }
                     }
@@ -1003,13 +1008,6 @@ int denCollisions()
     return NUM_DENS;
 }
 
-void swap(Entity *a, Entity *b) 
-{ 
-  Entity temp = *a;
-  *a = *b;
-  *b = temp;
-}
-
 int gameStart(int startingLives, _Bool dRegister[])
 {
 
@@ -1055,7 +1053,7 @@ void clearMemory()
         while(iter != NULL){
             bodyClearing(iter->data,game.gameWin);
             iter->data.lives = 0;  
-            iter = iter->next;   
+            iter = iter->next;  
         }
     }
 

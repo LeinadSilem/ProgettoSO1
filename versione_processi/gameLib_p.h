@@ -39,8 +39,9 @@ typedef struct gamestate
 	Entity carTable[NUM_LANES][NUM_CARS];
 	Entity logs[NUM_LOGS];
 	Entity spiders[NUM_LOGS];
+	entityList* projectiles;
 	Den Dens[NUM_DENS];
-	int zoneLimitY[ZONES];
+	int zoneLimitY[ZONES],nProjectiles;
 	WINDOW *gameWin, *statWin; 
 }Gamestate;
 
@@ -70,6 +71,11 @@ void drawMap();
 void clearRiverInteractions();
 void translateDirection(Direction dir);
 void screenRefresh();
+
+entityNode* findNode(pid_t target);
+entityList* initEntityList();
+entityNode *insert(Entity data, entityList *list);
+entityList* eraseEntity(entityNode *forDeletion, entityList *list);
 
 #endif
 

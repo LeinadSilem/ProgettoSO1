@@ -46,6 +46,19 @@ typedef struct data
     _Bool hasSpider;
 }Entity;
 
+
+typedef struct entNode{
+    struct entNode* prev;
+    Entity data;
+    struct entNode* next;
+}entityNode;
+
+typedef struct entList{
+    entityNode* head;
+    entityNode* tail;
+    int len;
+}entityList;
+
 void printerLogs(Entity ent, WINDOW* win);
 void printerCars(Entity ent, WINDOW* win);
 void bodyClearing(Entity ent, WINDOW* win);
