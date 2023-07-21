@@ -138,10 +138,12 @@ void gameLoop(){
 			}
 			
 			// Restta i valori per una nuova partita
-			for(i = 0; i < NUM_DENS; i ++)
-				denRegister[i] = false;
 			densVisited = 0;
 			totalLives = PHROG_STARTING_LIVES;	
+			for(i = 0; i < NUM_DENS; i ++){
+				denRegister[i] = false;
+			}
+			
 				
 			wrefresh(tryAgainWin);
 			playerSelection = getch();

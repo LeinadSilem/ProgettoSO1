@@ -40,7 +40,8 @@ void gameLoop(){
 
 	tryAgainWin  = newwin(MAXY,MAXX,0,0);
 	
-	do{
+	do{	
+
 		resultOfMatch = gameStart(totalLives,denRegister);
 
 		//verify the result
@@ -61,15 +62,16 @@ void gameLoop(){
 				mvwprintw(tryAgainWin,MAXY/2,MAXX/2 - 26,  "you reached all dens, bravo! how about another try?");
 				mvwprintw(tryAgainWin,MAXY/2+1,MAXX/2 - 26,"[y]:go for more success  [any]:retire like a coward");
 			}
-			
-			// Restta i valori per una nuova partita
-			for(i = 0; i < NUM_DENS; i ++)
-				denRegister[i] = false;
+
 			densVisited = 0;
 			totalLives = PHROG_STARTING_LIVES;	
+			for(i = 0; i < NUM_DENS; i ++){
+				
+				denRegister[i] = false;
+			}
 			
 			wrefresh(tryAgainWin);
-			scanf("%c",&playerSelection);
+			playerSelection = getch();
 			werase(tryAgainWin);
 		}else{
 			playerSelection = 'y';
