@@ -338,7 +338,7 @@ void* moveLog(void* param)
 
         // Se un tronco raggiunge il bordo, viene generato un ragno
         if((game.logs[i].box.topLeft.x == 1 && game.logs[i].dir == W) || (game.logs[i].box.botRight.x == MAXX-1 && game.logs[i].dir == E)){
-            if(/*rand()%ENEMY_CHANCE == 0 &&*/ !game.logs[i].isOnLog && !game.logs[i].hasSpider){
+            if(rand()%ENEMY_CHANCE == 0 && !game.logs[i].isOnLog && !game.logs[i].hasSpider){
                 game.logs[i].hasSpider = true;
                 pthread_create(&spiderThread, NULL, &spider, (void*)&game.logs[i]);
             }
@@ -359,8 +359,6 @@ _Bool logCollisions()
             game.player.dir = E;
             game.logs[i].isOnLog = true;
             game.player.isOnLog = true;
-
-            mvprintw(5,MAXX+1,"log: %d",i);
             return true;
         }else{
             misses +=1;
@@ -398,7 +396,6 @@ void* spider(void* param)
     }else{
         game.spiders[i].col = rand()%3;
     }
-    //mvprintw(4,MAXX+1,"col :%d",game.spiders[i].col);
 
     switch(game.spiders[i].col){
         case 0:
@@ -513,8 +510,6 @@ void* spider(void* param)
         	spit(game.spiders[i]);
         }
 
-        //updateEntity(spider,pipewrite);
-        mvprintw(2,MAXX+1,"enemy x: %d, y: %d",game.spiders[i].box.botRight.x, game.spiders[i].row);
         usleep(100000);
     }
 
@@ -909,8 +904,6 @@ int roadsAndPonds(_Bool dRegister[])
             }
         }
 
-        //mvprintw(1,MAXX+1,"player x: %d, y: %d, dir:",game.player.box.topLeft.x,game.player.box.topLeft.y);
-        //translateDirection(game.player.dir);
         printerSingleEntities(game.player,game.gameWin);
 
         mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n", game.player.lives);
@@ -1022,9 +1015,6 @@ int gameStart(int startingLives, _Bool dRegister[])
     pthread_t plThread, logThread, carThread;
 
     pthread_mutex_init(&mutex,NULL);
-
-    mvprintw(2,MAXX+1,"starting x: %d, lives: %d, dir:",startingLives,*lives);
-
     pthread_create(&plThread,NULL,&phrog,(void*)lives);
 
     if(game.alreadyStarted != true){	// Se e' la prima manche avvia i threads dei log e macchine, altrimenti no

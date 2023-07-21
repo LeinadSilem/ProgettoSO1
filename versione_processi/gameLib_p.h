@@ -10,7 +10,7 @@
 #define NUM_CARS 3
 #define NUM_DENS 5
 #define OUCH 5
-#define ENEMY_CHANCE 3
+#define ENEMY_CHANCE 4
 #define ATTACK_CHANCE 20
 
 #define MIN_ROW_CAR 16

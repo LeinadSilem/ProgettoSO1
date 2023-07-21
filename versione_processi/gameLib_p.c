@@ -735,10 +735,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 
                 }         
 
-               	mvprintw(1,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
-                mvprintw(2,MAXX+1,"is player on log in game: %d",game.player.isOnLog);
                 mvwprintw(game.statWin,1,1,"[·phrog lives:%d·] ",game.player.lives);  
-               	translateDirection(game.player.dir);       
 				
                 if(game.player.row <= 3 && game.player.row >= 1){
                 	playerIsDry = logCollisions();
@@ -870,8 +867,7 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 			    		break;
                 	}  
                 	fprintf(debugLog, "moving car in log %d\n", game.logs[tempEntity.row].dir);
-                	printerSingleEntities(game.player,game.gameWin);
-                	mvprintw(2,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);          	
+                	printerSingleEntities(game.player,game.gameWin);	
                 }                
             break;
             
@@ -1065,27 +1061,6 @@ void clearRiverInteractions()
 	}
 
 	game.player.isOnLog = false;
-}
-
-void translateDirection(Direction dir)
-{
-	switch(dir){
-	    case N:
-	    	printw("north");
-		break;
-
-	    case S:
-	    	printw("south");
-		break;
-
-		case W:
-			printw("west ");
-		break;
-
-		case E:
-			printw("east ");
-		break;
-	}
 }
 
 int denCollisions()
