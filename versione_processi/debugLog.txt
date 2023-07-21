@@ -2208,3 +2208,3485 @@ moving car in log 2
 moving car in log 2
 ----start of manche----
 player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+spooder generated
+player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2296
+adding projectile with pid 2296 already registered
+adding projectile with pid 2296 already registered
+adding projectile with pid 2296 already registered
+adding projectile with pid 2296 already registered
+adding projectile with pid 2296 already registered
+spitball hit the car 
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2308
+adding projectile with pid 2308 already registered
+adding projectile with pid 2308 already registered
+adding projectile with pid 2308 already registered
+adding projectile with pid 2308 already registered
+adding projectile with pid 2308 already registered
+spitball hit the car 
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2321
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+adding projectile with pid 2321 already registered
+spitball hit the car 
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2340
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+adding projectile with pid 2340 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 2343
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+adding projectile with pid 2343 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2344
+adding projectile with pid 2344 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2344 already registered
+adding projectile with dir 0 and pid 2346
+adding projectile with pid 2344 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2344 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2346 already registered
+adding projectile with dir 0 and pid 2347
+adding projectile with pid 2346 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2346 already registered
+adding projectile with pid 2347 already registered
+adding projectile with dir 1 and pid 2348
+adding projectile with pid 2346 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with dir 0 and pid 2349
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2347 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with dir 0 and pid 2350
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2350 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2348 already registered
+adding projectile with pid 2350 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2348 already registered
+spitball hit the car 
+adding projectile with pid 2350 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2350 already registered
+adding projectile with pid 2349 already registered
+adding projectile with pid 2350 already registered
+adding projectile with pid 2350 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 2351
+adding projectile with pid 2351 already registered
+adding projectile with pid 2351 already registered
+adding projectile with pid 2351 already registered
+adding projectile with pid 2351 already registered
+adding projectile with pid 2351 already registered
+adding projectile with dir 0 and pid 2352
+adding projectile with pid 2351 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 2352 already registered
+adding projectile with pid 2352 already registered
+adding projectile with pid 2352 already registered
+adding projectile with pid 2352 already registered
+player is dry and on log in position x:49 y:10 
+adding projectile with pid 2352 already registered
+adding projectile with pid 2352 already registered
+spitball killed a spider 
+for real 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:42 y:7 
+moving car in log 3
+player is dry and on log in position x:43 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2365
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+adding projectile with pid 2365 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2368
+adding projectile with pid 2368 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2368 already registered
+adding projectile with dir 1 and pid 2369
+adding projectile with pid 2368 already registered
+adding projectile with dir 0 and pid 2370
+adding projectile with pid 2369 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2368 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+adding projectile with pid 2370 already registered
+adding projectile with pid 2369 already registered
+spitball killed the player 
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2385
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+adding projectile with pid 2385 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 2391
+adding projectile with pid 2391 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2391 already registered
+adding projectile with dir 0 and pid 2392
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with dir 0 and pid 2393
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2391 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2391 already registered
+spitball hit the car 
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2392 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2393 already registered
+adding projectile with pid 2393 already registered
+player is dry and on log in position x:52 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2396
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+moving car in log 2
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+moving car in log 2
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+adding projectile with pid 2396 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:42 y:7 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+adding projectile with dir 1 and pid 2398
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+moving car in log 3
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+moving car in log 3
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+adding projectile with pid 2398 already registered
+spitball hit the car 
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:52 y:7 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:58 y:7 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+spooder generated
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2405
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+moving car in log 2
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+moving car in log 2
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+moving car in log 2
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+moving car in log 2
+adding projectile with pid 2405 already registered
+adding projectile with pid 2405 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2406
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+moving car in log 2
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+moving car in log 2
+adding projectile with dir 1 and pid 2408
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+moving car in log 2
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+moving car in log 2
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2406 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+moving car in log 2
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+moving car in log 2
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+moving car in log 2
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+adding projectile with pid 2408 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2409
+adding projectile with pid 2409 already registered
+adding projectile with pid 2409 already registered
+player is dry and on log in position x:51 y:7 
+adding projectile with dir 0 and pid 2410
+adding projectile with pid 2409 already registered
+adding projectile with pid 2410 already registered
+moving car in log 2
+adding projectile with pid 2409 already registered
+adding projectile with pid 2410 already registered
+adding projectile with pid 2409 already registered
+spitball hit the car 
+adding projectile with pid 2410 already registered
+adding projectile with pid 2410 already registered
+adding projectile with pid 2410 already registered
+moving car in log 2
+player is dry and on log in position x:49 y:7 
+adding projectile with dir 0 and pid 2412
+adding projectile with pid 2412 already registered
+adding projectile with pid 2412 already registered
+adding projectile with pid 2412 already registered
+moving car in log 2
+adding projectile with pid 2412 already registered
+adding projectile with pid 2412 already registered
+player is dry and on log in position x:48 y:7 
+adding projectile with dir 0 and pid 2413
+adding projectile with pid 2413 already registered
+moving car in log 2
+adding projectile with pid 2413 already registered
+adding projectile with pid 2413 already registered
+adding projectile with pid 2413 already registered
+adding projectile with pid 2413 already registered
+player is dry and on log in position x:47 y:7 
+adding projectile with dir 0 and pid 2414
+moving car in log 2
+adding projectile with pid 2414 already registered
+adding projectile with pid 2414 already registered
+adding projectile with pid 2414 already registered
+adding projectile with pid 2414 already registered
+moving car in log 2
+adding projectile with pid 2414 already registered
+player is dry and on log in position x:45 y:7 
+adding projectile with dir 0 and pid 2416
+adding projectile with pid 2416 already registered
+adding projectile with pid 2416 already registered
+moving car in log 2
+adding projectile with pid 2416 already registered
+adding projectile with pid 2416 already registered
+adding projectile with pid 2416 already registered
+player is dry and on log in position x:44 y:7 
+adding projectile with dir 0 and pid 2417
+moving car in log 2
+adding projectile with pid 2417 already registered
+adding projectile with pid 2417 already registered
+adding projectile with pid 2417 already registered
+adding projectile with pid 2417 already registered
+moving car in log 2
+adding projectile with pid 2417 already registered
+player is dry and on log in position x:42 y:7 
+adding projectile with dir 0 and pid 2421
+adding projectile with pid 2421 already registered
+adding projectile with pid 2421 already registered
+adding projectile with pid 2421 already registered
+moving car in log 2
+adding projectile with pid 2421 already registered
+adding projectile with pid 2421 already registered
+player is dry and on log in position x:41 y:7 
+adding projectile with dir 0 and pid 2422
+spitball killed a spider 
+for real 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:7 
+adding projectile with dir 0 and pid 2423
+spitball killed a spider 
+for real 
+moving car in log 2
+adding projectile with dir 1 and pid 2424
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+moving car in log 2
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+moving car in log 2
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+adding projectile with pid 2424 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+spooder generated
+adding projectile with dir 1 and pid 2427
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+moving car in log 2
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+moving car in log 2
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+adding projectile with pid 2427 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+adding projectile with dir 1 and pid 2428
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+moving car in log 3
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+moving car in log 3
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+adding projectile with pid 2428 already registered
+spitball hit the car 
+moving car in log 3
+moving car in log 3
+adding projectile with dir 1 and pid 2429
+adding projectile with pid 2429 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2429 already registered
+moving car in log 3
+adding projectile with pid 2429 already registered
+adding projectile with pid 2429 already registered
+player is dry and on log in position x:15 y:7 
+adding projectile with dir 0 and pid 2430
+adding projectile with pid 2429 already registered
+adding projectile with pid 2430 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2430 already registered
+moving car in log 3
+adding projectile with pid 2429 already registered
+adding projectile with pid 2430 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2430 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2430 already registered
+adding projectile with pid 2429 already registered
+moving car in log 3
+adding projectile with pid 2429 already registered
+player is dry and on log in position x:17 y:7 
+adding projectile with dir 0 and pid 2431
+adding projectile with pid 2429 already registered
+adding projectile with pid 2431 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2431 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2431 already registered
+moving car in log 3
+adding projectile with pid 2429 already registered
+adding projectile with pid 2431 already registered
+adding projectile with pid 2429 already registered
+adding projectile with pid 2431 already registered
+player is dry and on log in position x:18 y:7 
+adding projectile with dir 0 and pid 2432
+spitballs collided with themselves
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:20 y:7 
+adding projectile with dir 0 and pid 2433
+adding projectile with pid 2433 already registered
+moving car in log 3
+adding projectile with pid 2433 already registered
+adding projectile with pid 2433 already registered
+adding projectile with pid 2433 already registered
+adding projectile with pid 2433 already registered
+moving car in log 3
+player is dry and on log in position x:22 y:7 
+adding projectile with dir 0 and pid 2434
+adding projectile with pid 2434 already registered
+adding projectile with pid 2434 already registered
+adding projectile with pid 2434 already registered
+moving car in log 3
+adding projectile with pid 2434 already registered
+adding projectile with pid 2434 already registered
+player is dry and on log in position x:23 y:7 
+adding projectile with dir 0 and pid 2435
+adding projectile with pid 2435 already registered
+moving car in log 3
+adding projectile with dir 1 and pid 2436
+adding projectile with pid 2435 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2435 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2435 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2435 already registered
+moving car in log 3
+adding projectile with pid 2436 already registered
+player is dry and on log in position x:25 y:7 
+adding projectile with dir 0 and pid 2437
+adding projectile with pid 2436 already registered
+adding projectile with pid 2437 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2437 already registered
+adding projectile with pid 2436 already registered
+moving car in log 3
+adding projectile with pid 2436 already registered
+adding projectile with pid 2437 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2437 already registered
+adding projectile with pid 2436 already registered
+adding projectile with pid 2437 already registered
+adding projectile with pid 2436 already registered
+spitball hit the car 
+player is dry and on log in position x:26 y:7 
+adding projectile with dir 0 and pid 2438
+moving car in log 3
+adding projectile with pid 2438 already registered
+adding projectile with pid 2438 already registered
+adding projectile with pid 2438 already registered
+adding projectile with pid 2438 already registered
+moving car in log 3
+adding projectile with pid 2438 already registered
+player is dry and on log in position x:28 y:7 
+adding projectile with dir 0 and pid 2439
+adding projectile with pid 2439 already registered
+adding projectile with pid 2439 already registered
+moving car in log 3
+adding projectile with pid 2439 already registered
+adding projectile with pid 2439 already registered
+adding projectile with pid 2439 already registered
+player is dry and on log in position x:29 y:7 
+adding projectile with dir 0 and pid 2440
+moving car in log 3
+adding projectile with pid 2440 already registered
+adding projectile with pid 2440 already registered
+adding projectile with pid 2440 already registered
+adding projectile with pid 2440 already registered
+moving car in log 3
+adding projectile with pid 2440 already registered
+player is dry and on log in position x:31 y:7 
+adding projectile with dir 0 and pid 2441
+adding projectile with pid 2441 already registered
+moving car in log 3
+adding projectile with pid 2441 already registered
+adding projectile with pid 2441 already registered
+adding projectile with pid 2441 already registered
+adding projectile with pid 2441 already registered
+moving car in log 3
+player is dry and on log in position x:33 y:7 
+adding projectile with dir 0 and pid 2442
+adding projectile with pid 2442 already registered
+adding projectile with pid 2442 already registered
+adding projectile with pid 2442 already registered
+moving car in log 3
+adding projectile with pid 2442 already registered
+adding projectile with pid 2442 already registered
+player is dry and on log in position x:34 y:7 
+adding projectile with dir 0 and pid 2443
+adding projectile with pid 2443 already registered
+moving car in log 3
+adding projectile with pid 2443 already registered
+adding projectile with pid 2443 already registered
+adding projectile with pid 2443 already registered
+adding projectile with pid 2443 already registered
+moving car in log 3
+player is dry and on log in position x:36 y:7 
+adding projectile with dir 0 and pid 2444
+adding projectile with pid 2444 already registered
+adding projectile with pid 2444 already registered
+adding projectile with pid 2444 already registered
+moving car in log 3
+adding projectile with dir 1 and pid 2445
+adding projectile with pid 2444 already registered
+adding projectile with pid 2445 already registered
+adding projectile with pid 2444 already registered
+adding projectile with pid 2445 already registered
+player is dry and on log in position x:37 y:7 
+adding projectile with dir 0 and pid 2446
+adding projectile with pid 2445 already registered
+adding projectile with pid 2446 already registered
+moving car in log 3
+adding projectile with pid 2445 already registered
+spitball killed the player 
+----start of manche----
+adding projectile with dir 0 and pid 2456
+adding projectile with pid 2456 already registered
+adding projectile with pid 2456 already registered
+adding projectile with pid 2456 already registered
+adding projectile with pid 2456 already registered
+player got run over by cars
+----start of manche----
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:41 y:7 
+moving car in log 3
+player is dry and on log in position x:42 y:4 
+moving car in log 2
+----start of manche----
+spooder generated
+adding projectile with dir 0 and pid 2483
+adding projectile with pid 2483 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2483 already registered
+adding projectile with dir 0 and pid 2484
+adding projectile with pid 2483 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2483 already registered
+adding projectile with pid 2484 already registered
+adding projectile with dir 0 and pid 2485
+spitball killed a spider 
+for real 
+adding projectile with pid 2484 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2484 already registered
+adding projectile with pid 2484 already registered
+adding projectile with dir 0 and pid 2486
+spitball killed a spider 
+for real 
+player is dry and on log in position x:22 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:38 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:44 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:50 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:42 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+adding projectile with dir 0 and pid 2511
+adding projectile with pid 2511 already registered
+adding projectile with pid 2511 already registered
+adding projectile with pid 2511 already registered
+adding projectile with pid 2511 already registered
+adding projectile with pid 2511 already registered
+adding projectile with pid 2511 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 2512
+adding projectile with pid 2512 already registered
+adding projectile with pid 2512 already registered
+adding projectile with pid 2512 already registered
+adding projectile with pid 2512 already registered
+adding projectile with pid 2512 already registered
+adding projectile with dir 0 and pid 2513
+adding projectile with pid 2512 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 2513 already registered
+adding projectile with pid 2513 already registered
+adding projectile with pid 2513 already registered
+adding projectile with pid 2513 already registered
+adding projectile with pid 2513 already registered
+adding projectile with pid 2513 already registered
+spitball killed a spider 
+for real 
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:42 y:7 
+moving car in log 3
+player is dry and on log in position x:43 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:35 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+missed the log in row 3
+----start of manche----
+spooder generated
+player is dry and on log in position x:46 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:10 
+adding projectile with dir 0 and pid 2536
+adding projectile with pid 2536 already registered
+moving car in log 2
+adding projectile with pid 2536 already registered
+adding projectile with pid 2536 already registered
+adding projectile with pid 2536 already registered
+adding projectile with pid 2536 already registered
+player is dry and on log in position x:39 y:10 
+adding projectile with dir 0 and pid 2537
+spitball killed a spider 
+for real 
+moving car in log 2
+adding projectile with pid 2536 already registered
+adding projectile with pid 2536 already registered
+adding projectile with pid 2536 already registered
+player is dry and on log in position x:38 y:7 
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:30 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:5 y:4 
+moving car in log 2
+spooder generated
+moving car in log 3
+spooder generated
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+adding projectile with dir 1 and pid 2548
+adding projectile with pid 2548 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2548 already registered
+moving car in log 3
+adding projectile with dir 1 and pid 2549
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+moving car in log 3
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+moving car in log 3
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+adding projectile with pid 2548 already registered
+adding projectile with pid 2549 already registered
+----start of manche----
+player got run over by cars
+----start of manche----
+player is dry and on log in position x:22 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:35 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:43 y:7 
+moving car in log 2
+player is dry and on log in position x:42 y:4 
+moving car in log 3
+----start of manche----
+player is dry and on log in position x:19 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:38 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:46 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2768
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+adding projectile with pid 2768 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2769
+adding projectile with pid 2769 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2769 already registered
+adding projectile with dir 0 and pid 2770
+adding projectile with dir 1 and pid 2771
+adding projectile with pid 2769 already registered
+adding projectile with pid 2770 already registered
+adding projectile with pid 2771 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2770 already registered
+adding projectile with pid 2771 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2770 already registered
+adding projectile with pid 2771 already registered
+adding projectile with pid 2769 already registered
+adding projectile with pid 2770 already registered
+adding projectile with pid 2771 already registered
+adding projectile with dir 0 and pid 2772
+adding projectile with pid 2769 already registered
+adding projectile with pid 2770 already registered
+adding projectile with pid 2771 already registered
+adding projectile with pid 2772 already registered
+adding projectile with pid 2770 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 2771 already registered
+adding projectile with pid 2772 already registered
+adding projectile with pid 2771 already registered
+adding projectile with pid 2772 already registered
+adding projectile with pid 2771 already registered
+spitball killed the player 
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2792
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+adding projectile with pid 2792 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 2793
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+adding projectile with pid 2793 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2794
+adding projectile with pid 2794 already registered
+adding projectile with pid 2794 already registered
+adding projectile with pid 2794 already registered
+player is dry and on log in position x:22 y:10 
+adding projectile with pid 2794 already registered
+adding projectile with pid 2794 already registered
+adding projectile with pid 2794 already registered
+spitball killed a spider 
+for real 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:38 y:7 
+moving car in log 2
+player is dry and on log in position x:37 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:44 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:55 y:4 
+adding projectile with dir 0 and pid 2795
+adding projectile with pid 2795 already registered
+adding projectile with pid 2795 already registered
+moving car in log 3
+player is dry and on log in position x:56 y:4 
+adding projectile with dir 0 and pid 2799
+adding projectile with pid 2799 already registered
+moving car in log 3
+adding projectile with pid 2799 already registered
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2810
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+adding projectile with pid 2810 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 2811
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+adding projectile with pid 2811 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2812
+adding projectile with pid 2812 already registered
+adding projectile with pid 2812 already registered
+adding projectile with pid 2812 already registered
+adding projectile with pid 2812 already registered
+adding projectile with pid 2812 already registered
+adding projectile with pid 2812 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 2813
+adding projectile with pid 2813 already registered
+adding projectile with pid 2813 already registered
+adding projectile with pid 2813 already registered
+adding projectile with pid 2813 already registered
+adding projectile with pid 2813 already registered
+adding projectile with pid 2813 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 2814
+adding projectile with pid 2814 already registered
+adding projectile with pid 2814 already registered
+adding projectile with pid 2814 already registered
+adding projectile with pid 2814 already registered
+adding projectile with pid 2814 already registered
+adding projectile with pid 2814 already registered
+spitball killed a spider 
+for real 
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+spooder generated
+moving car in log 2
+adding projectile with dir 1 and pid 2819
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+adding projectile with pid 2819 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2820
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+adding projectile with pid 2820 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2821
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+adding projectile with pid 2821 already registered
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+adding projectile with dir 0 and pid 2822
+spitball killed a spider 
+for real 
+moving car in log 2
+player is dry and on log in position x:39 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+spooder generated
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2827
+adding projectile with pid 2827 already registered
+adding projectile with pid 2827 already registered
+adding projectile with pid 2827 already registered
+moving car in log 2
+adding projectile with pid 2827 already registered
+adding projectile with pid 2827 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2828
+adding projectile with pid 2828 already registered
+adding projectile with pid 2828 already registered
+adding projectile with pid 2828 already registered
+moving car in log 2
+adding projectile with pid 2828 already registered
+adding projectile with pid 2828 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2841
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with pid 2841 already registered
+adding projectile with dir 0 and pid 2842
+adding projectile with pid 2841 already registered
+spitball hit the car 
+adding projectile with pid 2842 already registered
+adding projectile with pid 2842 already registered
+adding projectile with pid 2842 already registered
+adding projectile with pid 2842 already registered
+adding projectile with pid 2842 already registered
+adding projectile with pid 2842 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 2843
+adding projectile with pid 2843 already registered
+adding projectile with pid 2843 already registered
+adding projectile with pid 2843 already registered
+adding projectile with pid 2843 already registered
+adding projectile with pid 2843 already registered
+adding projectile with pid 2843 already registered
+spitball killed a spider 
+for real 
+player is dry and on log in position x:28 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:38 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:43 y:7 
+moving car in log 2
+player is dry and on log in position x:42 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:44 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 2
+spooder generated
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2849
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+moving car in log 2
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+moving car in log 2
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+moving car in log 2
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+moving car in log 2
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+adding projectile with pid 2849 already registered
+moving car in log 2
+adding projectile with pid 2849 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2853
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+moving car in log 2
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+moving car in log 2
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+moving car in log 2
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+moving car in log 2
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+adding projectile with pid 2853 already registered
+moving car in log 2
+adding projectile with pid 2853 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2854
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+moving car in log 2
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+moving car in log 2
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+moving car in log 2
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+moving car in log 2
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+adding projectile with pid 2854 already registered
+moving car in log 2
+adding projectile with pid 2854 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 2865
+adding projectile with pid 2865 already registered
+adding projectile with pid 2865 already registered
+adding projectile with pid 2865 already registered
+adding projectile with pid 2865 already registered
+adding projectile with pid 2865 already registered
+spitball hit the car 
+player got run over by cars
+----start of manche----
+player got run over by cars
+----start of manche----
+missed the log in row 3
+----start of manche----
+player got run over by cars
+----start of manche----
+spooder generated
+player got run over by cars
+----start of manche----
+player is dry and on log in position x:49 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:42 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:38 y:7 
+moving car in log 3
+player is dry and on log in position x:39 y:4 
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+spooder generated
+adding projectile with dir 1 and pid 2947
+adding projectile with pid 2947 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2947 already registered
+adding projectile with dir 1 and pid 2948
+adding projectile with pid 2947 already registered
+adding projectile with pid 2948 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2948 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2948 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2948 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2948 already registered
+spitball hit the car 
+adding projectile with pid 2947 already registered
+adding projectile with pid 2947 already registered
+adding projectile with pid 2947 already registered
+spitball hit the car 
+adding projectile with dir 0 and pid 2949
+adding projectile with pid 2949 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2949 already registered
+adding projectile with dir 0 and pid 2950
+adding projectile with pid 2949 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2949 already registered
+adding projectile with pid 2950 already registered
+adding projectile with dir 0 and pid 2951
+adding projectile with pid 2950 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2950 already registered
+adding projectile with pid 2951 already registered
+adding projectile with dir 0 and pid 2952
+adding projectile with pid 2951 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2951 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2951 already registered
+adding projectile with dir 0 and pid 2953
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2952 already registered
+adding projectile with pid 2953 already registered
+adding projectile with dir 0 and pid 2954
+adding projectile with pid 2953 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2953 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2953 already registered
+adding projectile with dir 0 and pid 2956
+spitball killed a spider 
+for real 
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with pid 2954 already registered
+adding projectile with dir 0 and pid 2957
+spitball killed a spider 
+for real 
+player is dry and on log in position x:46 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:41 y:7 
+moving car in log 3
+adding projectile with dir 1 and pid 2958
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+moving car in log 3
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+moving car in log 3
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+adding projectile with pid 2958 already registered
+spitball hit the car 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+spooder generated
+moving car in log 2
+moving car in log 2
+adding projectile with dir 1 and pid 2964
+adding projectile with pid 2964 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2964 already registered
+moving car in log 2
+adding projectile with dir 1 and pid 2965
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+moving car in log 2
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+moving car in log 2
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+moving car in log 2
+adding projectile with dir 1 and pid 2966
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+moving car in log 2
+adding projectile with dir 1 and pid 2967
+adding projectile with pid 2966 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2965 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2964 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2964 already registered
+moving car in log 2
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+moving car in log 2
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+moving car in log 2
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+player is dry and on log in position x:69 y:7 
+adding projectile with dir 0 and pid 2968
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2968 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2968 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2968 already registered
+moving car in log 2
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2968 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2968 already registered
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+player is dry and on log in position x:68 y:7 
+adding projectile with dir 0 and pid 2969
+adding projectile with pid 2966 already registered
+adding projectile with pid 2967 already registered
+moving car in log 2
+adding projectile with pid 2969 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2969 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2969 already registered
+adding projectile with pid 2967 already registered
+adding projectile with pid 2969 already registered
+adding projectile with pid 2967 already registered
+moving car in log 2
+adding projectile with pid 2969 already registered
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:64 y:7 
+adding projectile with dir 0 and pid 2970
+adding projectile with pid 2970 already registered
+adding projectile with pid 2970 already registered
+adding projectile with pid 2970 already registered
+moving car in log 2
+adding projectile with pid 2970 already registered
+adding projectile with pid 2970 already registered
+player is dry and on log in position x:63 y:7 
+adding projectile with dir 0 and pid 2971
+adding projectile with pid 2971 already registered
+moving car in log 2
+adding projectile with pid 2971 already registered
+adding projectile with pid 2971 already registered
+adding projectile with pid 2971 already registered
+adding projectile with pid 2971 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:59 y:7 
+adding projectile with dir 0 and pid 2972
+adding projectile with pid 2972 already registered
+adding projectile with pid 2972 already registered
+adding projectile with pid 2972 already registered
+moving car in log 2
+adding projectile with pid 2972 already registered
+adding projectile with pid 2972 already registered
+player is dry and on log in position x:58 y:7 
+adding projectile with dir 0 and pid 2973
+adding projectile with pid 2973 already registered
+moving car in log 2
+adding projectile with pid 2973 already registered
+adding projectile with pid 2973 already registered
+adding projectile with pid 2973 already registered
+adding projectile with pid 2973 already registered
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:55 y:7 
+adding projectile with dir 0 and pid 2974
+moving car in log 2
+adding projectile with pid 2974 already registered
+adding projectile with pid 2974 already registered
+adding projectile with pid 2974 already registered
+adding projectile with pid 2974 already registered
+moving car in log 2
+adding projectile with pid 2974 already registered
+player is dry and on log in position x:53 y:7 
+adding projectile with dir 0 and pid 2975
+adding projectile with pid 2975 already registered
+adding projectile with pid 2975 already registered
+moving car in log 2
+adding projectile with pid 2975 already registered
+adding projectile with pid 2975 already registered
+adding projectile with pid 2975 already registered
+player is dry and on log in position x:52 y:7 
+adding projectile with dir 0 and pid 2976
+moving car in log 2
+adding projectile with pid 2976 already registered
+adding projectile with pid 2976 already registered
+adding projectile with pid 2976 already registered
+adding projectile with pid 2976 already registered
+moving car in log 2
+adding projectile with pid 2976 already registered
+player is dry and on log in position x:50 y:7 
+adding projectile with dir 0 and pid 2977
+adding projectile with pid 2977 already registered
+adding projectile with pid 2977 already registered
+moving car in log 2
+adding projectile with pid 2977 already registered
+adding projectile with pid 2977 already registered
+adding projectile with pid 2977 already registered
+moving car in log 2
+player is dry and on log in position x:48 y:7 
+adding projectile with dir 0 and pid 2978
+adding projectile with pid 2978 already registered
+adding projectile with pid 2978 already registered
+adding projectile with pid 2978 already registered
+moving car in log 2
+adding projectile with pid 2978 already registered
+adding projectile with pid 2978 already registered
+player is dry and on log in position x:47 y:7 
+adding projectile with dir 0 and pid 2979
+adding projectile with pid 2979 already registered
+adding projectile with pid 2979 already registered
+moving car in log 2
+adding projectile with pid 2979 already registered
+adding projectile with pid 2979 already registered
+adding projectile with pid 2979 already registered
+player is dry and on log in position x:46 y:7 
+adding projectile with dir 0 and pid 2980
+moving car in log 2
+adding projectile with pid 2980 already registered
+adding projectile with pid 2980 already registered
+adding projectile with pid 2980 already registered
+adding projectile with pid 2980 already registered
+moving car in log 2
+adding projectile with dir 1 and pid 2981
+adding projectile with pid 2980 already registered
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+player is dry and on log in position x:44 y:7 
+adding projectile with dir 0 and pid 2982
+adding projectile with pid 2981 already registered
+adding projectile with pid 2982 already registered
+moving car in log 2
+adding projectile with pid 2981 already registered
+adding projectile with pid 2982 already registered
+adding projectile with pid 2981 already registered
+adding projectile with pid 2982 already registered
+adding projectile with pid 2981 already registered
+adding projectile with pid 2982 already registered
+adding projectile with pid 2981 already registered
+adding projectile with pid 2982 already registered
+moving car in log 2
+adding projectile with pid 2981 already registered
+player is dry and on log in position x:42 y:7 
+adding projectile with dir 0 and pid 2983
+spitball killed a spider 
+for real 
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+moving car in log 2
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+player is dry and on log in position x:41 y:7 
+adding projectile with dir 0 and pid 2987
+spitball killed a spider 
+for real 
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+moving car in log 2
+adding projectile with pid 2981 already registered
+adding projectile with pid 2981 already registered
+player is dry and on log in position x:40 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+spooder generated
+adding projectile with dir 0 and pid 3002
+adding projectile with pid 3002 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3002 already registered
+adding projectile with dir 0 and pid 3003
+adding projectile with pid 3002 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3002 already registered
+adding projectile with pid 3003 already registered
+adding projectile with dir 0 and pid 3004
+adding projectile with pid 3003 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3003 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3003 already registered
+adding projectile with dir 0 and pid 3005
+adding projectile with pid 3004 already registered
+adding projectile with pid 3005 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3005 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3005 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3005 already registered
+adding projectile with pid 3004 already registered
+adding projectile with pid 3005 already registered
+adding projectile with pid 3004 already registered
+adding projectile with dir 0 and pid 3006
+adding projectile with pid 3005 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 3006 already registered
+adding projectile with pid 3006 already registered
+adding projectile with pid 3006 already registered
+adding projectile with pid 3006 already registered
+adding projectile with pid 3006 already registered
+adding projectile with dir 0 and pid 3007
+adding projectile with pid 3006 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 3007 already registered
+adding projectile with pid 3007 already registered
+adding projectile with pid 3007 already registered
+player is dry and on log in position x:49 y:10 
+adding projectile with pid 3007 already registered
+adding projectile with pid 3007 already registered
+adding projectile with pid 3007 already registered
+spitball killed a spider 
+for real 
+moving car in log 2
+adding projectile with dir 1 and pid 3008
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+moving car in log 2
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+moving car in log 2
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+adding projectile with pid 3008 already registered
+spitball hit the car 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:43 y:10 
+adding projectile with dir 0 and pid 3009
+moving car in log 2
+adding projectile with pid 3009 already registered
+adding projectile with pid 3009 already registered
+adding projectile with pid 3009 already registered
+adding projectile with pid 3009 already registered
+moving car in log 2
+adding projectile with pid 3009 already registered
+player is dry and on log in position x:41 y:10 
+adding projectile with dir 0 and pid 3010
+adding projectile with pid 3009 already registered
+adding projectile with pid 3010 already registered
+adding projectile with pid 3009 already registered
+adding projectile with pid 3010 already registered
+adding projectile with pid 3009 already registered
+moving car in log 2
+adding projectile with pid 3010 already registered
+adding projectile with pid 3010 already registered
+adding projectile with pid 3010 already registered
+attempted to jump on log with a spider in row 2
+----start of manche----
+adding projectile with dir 0 and pid 3020
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+adding projectile with pid 3020 already registered
+spooder generated
+adding projectile with dir 0 and pid 3022
+adding projectile with pid 3022 already registered
+adding projectile with pid 3022 already registered
+adding projectile with pid 3022 already registered
+adding projectile with pid 3022 already registered
+adding projectile with pid 3022 already registered
+adding projectile with pid 3022 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 3023
+adding projectile with pid 3023 already registered
+adding projectile with pid 3023 already registered
+adding projectile with pid 3023 already registered
+adding projectile with pid 3023 already registered
+adding projectile with pid 3023 already registered
+adding projectile with dir 0 and pid 3024
+adding projectile with pid 3023 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 3024 already registered
+adding projectile with pid 3024 already registered
+adding projectile with pid 3024 already registered
+adding projectile with pid 3024 already registered
+adding projectile with pid 3024 already registered
+adding projectile with pid 3024 already registered
+spitball killed a spider 
+for real 
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:43 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+player is dry and on log in position x:41 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player is dry and on log in position x:25 y:10 
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:30 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:38 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:46 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+player got run over by cars
+----start of manche----
+player is dry and on log in position x:58 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:7 
+moving car in log 3
+player is dry and on log in position x:40 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player got run over by cars
+----start of manche----
+player is dry and on log in position x:37 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:42 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:4 
+moving car in log 3
+moving car in log 3
+----start of manche----
+player is dry and on log in position x:25 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:40 y:7 
+moving car in log 2
+player is dry and on log in position x:39 y:4 
+moving car in log 3
+moving car in log 3
+----start of manche----
+player is dry and on log in position x:25 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:41 y:7 
+moving car in log 2
+player is dry and on log in position x:40 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 0 and pid 3138
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3138 already registered
+adding projectile with dir 0 and pid 3141
+adding projectile with pid 3138 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3138 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3141 already registered
+adding projectile with dir 0 and pid 3142
+adding projectile with pid 3141 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3141 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3142 already registered
+adding projectile with dir 0 and pid 3143
+adding projectile with pid 3142 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3142 already registered
+adding projectile with pid 3143 already registered
+adding projectile with dir 0 and pid 3144
+spitball killed a spider 
+for real 
+adding projectile with pid 3143 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3143 already registered
+adding projectile with pid 3143 already registered
+player is dry and on log in position x:46 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+player is dry and on log in position x:41 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:34 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player is dry and on log in position x:25 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:41 y:7 
+moving car in log 2
+player is dry and on log in position x:40 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:49 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 0 and pid 3170
+adding projectile with pid 3170 already registered
+adding projectile with pid 3170 already registered
+adding projectile with pid 3170 already registered
+adding projectile with pid 3170 already registered
+adding projectile with pid 3170 already registered
+adding projectile with pid 3170 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 3171
+adding projectile with pid 3171 already registered
+adding projectile with pid 3171 already registered
+adding projectile with pid 3171 already registered
+adding projectile with pid 3171 already registered
+adding projectile with pid 3171 already registered
+adding projectile with pid 3171 already registered
+spitball killed a spider 
+for real 
+player is dry and on log in position x:25 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:31 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:41 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player is dry and on log in position x:58 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:44 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:7 
+moving car in log 3
+player is dry and on log in position x:40 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player is dry and on log in position x:22 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:41 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:47 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 3229
+spooder generated
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+adding projectile with pid 3229 already registered
+spitball hit the car 
+player got run over by cars
+----start of manche----
+spooder generated
+spooder generated
+adding projectile with dir 0 and pid 3247
+adding projectile with pid 3247 already registered
+adding projectile with pid 3247 already registered
+adding projectile with pid 3247 already registered
+adding projectile with pid 3247 already registered
+adding projectile with pid 3247 already registered
+adding projectile with pid 3247 already registered
+spitball killed a spider 
+for real 
+adding projectile with dir 0 and pid 3248
+adding projectile with pid 3248 already registered
+adding projectile with pid 3248 already registered
+adding projectile with pid 3248 already registered
+adding projectile with pid 3248 already registered
+adding projectile with pid 3248 already registered
+adding projectile with dir 0 and pid 3249
+adding projectile with pid 3248 already registered
+spitball killed a spider 
+for real 
+adding projectile with pid 3249 already registered
+adding projectile with pid 3249 already registered
+adding projectile with pid 3249 already registered
+adding projectile with pid 3249 already registered
+adding projectile with pid 3249 already registered
+adding projectile with dir 0 and pid 3250
+spitball killed a spider 
+for real 
+for real 
+adding projectile with pid 3249 already registered
+spitball killed a spider 
+for real 
+for real 
+player is dry and on log in position x:52 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:44 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:39 y:7 
+moving car in log 3
+player is dry and on log in position x:40 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:31 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+player is dry and on log in position x:19 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:33 y:10 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:42 y:7 
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:4 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+moving car in log 3
+----start of manche----
+spooder generated
+adding projectile with dir 0 and pid 3286
+adding projectile with pid 3286 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3286 already registered
+adding projectile with dir 0 and pid 3287
+adding projectile with pid 3286 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3286 already registered
+adding projectile with pid 3287 already registered
+adding projectile with dir 0 and pid 3288
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with dir 0 and pid 3289
+spitball killed a spider 
+for real 
+adding projectile with pid 3287 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3288 already registered
+player is dry and on log in position x:55 y:10 
+adding projectile with pid 3288 already registered
+adding projectile with pid 3288 already registered
+adding projectile with pid 3288 already registered
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:43 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:40 y:7 
+moving car in log 3
+moving car in log 3
+moving car in log 3
+player is dry and on log in position x:43 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:36 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:30 y:4 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+----start of manche----
+spooder generated
+spooder generated
+adding projectile with dir 1 and pid 3304
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with dir 1 and pid 3305
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3305 already registered
+spitball hit the car 
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+adding projectile with pid 3304 already registered
+player got run over by cars
+----start of manche----
+spooder generated
+spooder generated
+adding projectile with dir 1 and pid 3317
+adding projectile with pid 3317 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3317 already registered
+adding projectile with dir 1 and pid 3318
+adding projectile with pid 3317 already registered
+adding projectile with dir 0 and pid 3319
+adding projectile with pid 3318 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3318 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3318 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3318 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3318 already registered
+spitball hit the car 
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3317 already registered
+adding projectile with pid 3319 already registered
+adding projectile with dir 0 and pid 3320
+adding projectile with pid 3317 already registered
+spitball hit the car 
+adding projectile with pid 3319 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3319 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3320 already registered
+adding projectile with dir 0 and pid 3321
+spitball killed a spider 
+for real 
+adding projectile with pid 3320 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3320 already registered
+adding projectile with pid 3320 already registered
+adding projectile with dir 0 and pid 3322
+spitball killed a spider 
+for real 
+player is dry and on log in position x:55 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:49 y:10 
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+moving car in log 2
+player is dry and on log in position x:41 y:10 
+adding projectile with dir 0 and pid 3325
+adding projectile with pid 3325 already registered
+moving car in log 2
+adding projectile with pid 3325 already registered
+adding projectile with pid 3325 already registered
+adding projectile with pid 3325 already registered
+adding projectile with pid 3325 already registered
+moving car in log 2
+player is dry and on log in position x:39 y:10 
+adding projectile with dir 0 and pid 3326
+adding projectile with pid 3325 already registered
+adding projectile with pid 3325 already registered
+adding projectile with pid 3326 already registered
+adding projectile with pid 3325 already registered
+adding projectile with pid 3326 already registered
+attempted to jump on log with a spider in row 2
+----start of manche----
+player got run over by cars
