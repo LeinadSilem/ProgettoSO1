@@ -575,7 +575,7 @@ void* moveSpitBall(void* param)
             projectile->data.lives = 0;
         }
         pthread_mutex_unlock(&mutex);   
-        usleep(500000);
+        usleep(25000);
     }
 
     return NULL;
@@ -915,6 +915,10 @@ int roadsAndPonds(_Bool dRegister[])
 
         mvwprintw(game.statWin,1,1,"[·phrog lives:%d·]\n", game.player.lives);
         mvwprintw(game.statWin,2,1,"[·time left:%d·]\n", timeRemaining);
+        mvwprintw(game.statWin,3,1,"visited dens: ");
+        for(i = 0; i < NUM_DENS; i++){
+            wprintw(game.statWin,"%d[%d]\t", i+1, game.Dens[i].visited);
+        }  
         screenRefresh();
 
         pthread_mutex_unlock(&mutex);

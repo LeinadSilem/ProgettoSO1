@@ -46,7 +46,6 @@ typedef struct gamestate
 }Gamestate;
 
 void phrog(int lives,int pipewrite);
-_Bool verifyInput(char input);
 
 void carGenerator(int pipewrite);
 void moveCar(Entity car,int pipewrite);

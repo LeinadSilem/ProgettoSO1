@@ -64,12 +64,9 @@ void phrog(int lives,int pipewrite)
 					tempPlayer.dir = FIRE;
 				break;
 
-#if TESTING == 1
-				//suicide button only for debug
-				case 'q':
-					tempPlayer.lives = 0;
+				default:
+					tempPlayer.dir = FIXED;
 				break;
-#endif
 		    }
 
 		tempPlayer.length = input;
@@ -503,7 +500,7 @@ void moveSpitBall(int pipewrite, Entity projectile)
 
         updateEntity(projectile,pipewrite);
 
-        usleep(500000);         
+        usleep(25000);         
     }
 }
 
@@ -537,13 +534,13 @@ int spitballCollisions(Entity spit)
 	if(game.projectiles != NULL){
         iter = game.projectiles->head;
         while(iter != NULL){
-            if(verifyHitbox(spit.box, iter->data.box) && spit.pid != iter->data.pid){
+            if(verifyHitbox(spit.box, iter->data.box) && spit.color != iter->data.color){
                 bodyClearing(iter->data, game.gameWin);
-                iter->data.lives = 0;
+                bodyClearing(spit,game.gameWin);
+                kill(iter->data.pid,1);
                 game.projectiles = eraseEntity(iter,game.projectiles);
                 return 4;
-            }
-            
+            }           
             iter = iter->next;
         }
     }
@@ -671,7 +668,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
     {          
     	//timeSpent = (double)(clock() - startTime) / CLOCKS_PER_SEC;
     	time(&end);
-    	werase(game.gameWin);
         drawMap();
 
         read(piperead, &tempEntity, sizeof(Entity));
@@ -685,7 +681,6 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
         switch (tempEntity.et)
         {
             case PHROG:
-            	fprintf(debugLog, "reading player\n");
             	// se il player è sul tronco, muovilo col
                 bodyClearing(game.player,game.gameWin);                
                 
@@ -734,6 +729,10 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 					case FIRE:
 						spit(pipewrite, game.player.box,game.player.et);
 					break;
+					case FIXED:
+
+					break;	
+
                 }         
 
                	mvprintw(1,MAXX+1,"current player position x:%d, y:%d, row:%d dir:",game.player.box.topLeft.x,game.player.box.topLeft.y,game.player.row);
@@ -894,18 +893,19 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 	                iter = game.projectiles->head;
 	                while(iter != NULL){
 	                    if(iter->data.pid == tempProjectile.pid){
+	                    	fprintf(debugLog,"adding projectile with pid %d already registered\n", tempProjectile.pid);
 	                    	pidFound = true;
 	                    	break;
-	                    }else{
-	                    	pidFound = false;
 	                    }
 	                    iter = iter->next;                    
 	                }
 
-	                if(pidFound = false){
+	                if(pidFound == false){
 	                	entityNode* newNode = insert(tempProjectile,game.projectiles);
+	                	fprintf(debugLog,"adding projectile with dir %d and pid %d\n",tempProjectile.dir, tempProjectile.pid);
 	                }
 	            }else{
+	            	fprintf(debugLog, "no list, adding projectile\n");
 	            	entityNode* newNode = insert(tempProjectile,game.projectiles);
 	            }
 
@@ -955,10 +955,8 @@ int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
             		break;
 
             		case 4:
+            			kill(tempProjectile.pid,1);
             			fprintf(debugLog,"spitballs collided with themselves\n");
-            			tempProjectile.lives = 0;
-            			bodyClearingSingleEntities(tempProjectile,game.gameWin);
-						kill(tempProjectile.pid,1);
 						game.projectiles = eraseEntity(forDeletion,game.projectiles);
             		break;
             	}          
@@ -1102,7 +1100,6 @@ int denCollisions()
 
 	return NUM_DENS;
 }
-
 
 entityList* initEntityList()
 {
