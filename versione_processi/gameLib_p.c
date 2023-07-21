@@ -5,6 +5,7 @@ Gamestate game;
 // SEZIONE GENERAZIONE E MOVIMENTO ENTITA
 
 // funzione per il movimento della rana
+// muove la rana e spara il proiettile
 void phrog(int lives,int pipewrite)
 {
     char input;
@@ -76,6 +77,9 @@ void phrog(int lives,int pipewrite)
     }
 }
 
+// cars ---------------------------------
+
+// genera le macchine che percorreranno le corsie
 void carGenerator(int pipewrite)
 {
 	int i,j,carlength;
@@ -143,6 +147,7 @@ void carGenerator(int pipewrite)
 	}
 }
 
+// muove la singola macchina
 void moveCar(Entity car,int pipewrite)
 {
 	car.pid = getpid();
@@ -173,6 +178,7 @@ void moveCar(Entity car,int pipewrite)
 	}
 }
 
+// verifica le collisioni tra macchina e rana
 _Bool carCollisions(Entity currentCar, Entity phrog)
 {
 	int i;
@@ -185,7 +191,9 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
     return false;
 }
 
+// logs ---------------------------------
 
+// genera i tronchi
 void logGenerator(int pipewrite)
 {
 	int i;
@@ -251,6 +259,8 @@ void logGenerator(int pipewrite)
 	}
 }
 
+
+// muove il singolo tronco e genera il ragno
 void moveLog(Entity log,int pipewrite)
 {
 	//spitter random generation and forking
@@ -282,6 +292,7 @@ void moveLog(Entity log,int pipewrite)
 	}
 }
 
+// controlla se la rana riesce a salire sul tronco
 _Bool logCollisions()
 {
 	int i,misses=0;
@@ -302,6 +313,7 @@ _Bool logCollisions()
 	}
 }
 
+// genera e muove il singolo ragno, regola gli spari
 void spider(Entity log, int pipewrite)
 {
 	Entity spider;
@@ -429,7 +441,8 @@ void spider(Entity log, int pipewrite)
     }
 }
 
-// funzione per la generazione degli sputi del ragno
+// genera un proiettile che baserà le sue caratteristiche dall'entità che lo spara inizialmente
+
 void spit(int pipewrite, Hitbox pH, EntityType et)
 {
     Entity spitball;
@@ -452,7 +465,7 @@ void spit(int pipewrite, Hitbox pH, EntityType et)
     }
 }
 
-// funzione per il movimento degli sputi
+// funzione per il movimento dei proiettili
 void moveSpitBall(int pipewrite, Entity projectile)
 {
     
@@ -484,6 +497,7 @@ void moveSpitBall(int pipewrite, Entity projectile)
     }
 }
 
+// verifica le collisioni tra proiettili e altre Entità
 int spitballCollisions(Entity spit)
 {
 	int i,j;
@@ -531,6 +545,8 @@ int spitballCollisions(Entity spit)
 
 
 // SEZIONE GESTIONE GIOCO E GRAFICA
+
+// inizializza alcuni dati iniziali, colori, lista proiettili
 void initializeData(_Bool dRegister[])
 {
 	int i,j;
@@ -619,6 +635,7 @@ void initializeData(_Bool dRegister[])
 	}
 }
 
+// funzione di stampa principale
 int roadsAndPonds(int piperead, int pipewrite, _Bool dRegister[])
 {
     
@@ -1030,9 +1047,11 @@ void screenRefresh()
 	refresh();
 }
 
+// pulisce ragni, e proiettili, anche connessioni con i tronchi
 void clearRiverInteractions()
 {
 	int i;
+	entityNode* iter;
 
 	for(i = 0; i < NUM_LOGS; i++){
 		game.logs[i].isOnLog = false;
@@ -1040,9 +1059,20 @@ void clearRiverInteractions()
 		game.spiders[i].lives = 0;
 	}
 
+	if(game.projectilePtr != NULL){
+        iter = game.projectilePtr->head;
+        while(iter != NULL){
+            bodyClearing(iter->data,game.gameWin);
+            iter->data.lives = 0;  
+            iter = iter->next;  
+        }
+    }
+
 	game.player.isOnLog = false;
 }
 
+
+// controllo collisioni con le tane
 int denCollisions()
 {
 	int i;
@@ -1056,6 +1086,7 @@ int denCollisions()
 	return NUM_DENS;
 }
 
+// inizializza lista per i proiettili
 entityList* initEntityList()
 {
     entityList *list = malloc(sizeof(entityList));
@@ -1065,6 +1096,7 @@ entityList* initEntityList()
     return list;
 }
 
+// inserisce nodo in lista
 entityNode *insert(Entity data, entityList *list)
 {
     entityNode *ent;
@@ -1098,6 +1130,7 @@ entityNode *insert(Entity data, entityList *list)
     return ent;
 }
 
+// elimina nodo in lista
 entityList* eraseEntity(entityNode *forDeletion, entityList *list)
 {
 
@@ -1150,6 +1183,7 @@ entityList* eraseEntity(entityNode *forDeletion, entityList *list)
     return list;
 }
 
+// trova un nodo nella lista dato un pid obiettivo
 entityNode* findNode(pid_t target){
 	entityNode* iter;
 

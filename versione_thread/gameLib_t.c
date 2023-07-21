@@ -5,7 +5,7 @@ Gamestate game;
 
 
 // player -------------------------------
-
+// muove la rana e spara il proiettile
 void* phrog(void* param)
 {
     char input;
@@ -83,6 +83,7 @@ void* phrog(void* param)
 
 // cars ---------------------------------
 
+// genera le macchine che percorreranno le corsie
 void* carGenerator()
 {
     int i,j,carlength;
@@ -151,6 +152,7 @@ void* carGenerator()
     return NULL;
 }
 
+// muove la singola macchina
 void* moveCar(void* param)
 {
 
@@ -191,6 +193,7 @@ void* moveCar(void* param)
     return NULL;
 }
 
+// verifica le collisioni tra macchina e rana
 _Bool carCollisions(Entity currentCar, Entity phrog)
 {
     int i;
@@ -205,6 +208,7 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
 
 // logs ---------------------------------
 
+// genera i tronchi
 void* logGenerator()
 {
     int i;
@@ -265,6 +269,7 @@ void* logGenerator()
     }
 }
 
+// muove il singolo tronco e genera il ragno 
 void* moveLog(void* param)
 {
     //spitter random generation and forking
@@ -329,6 +334,7 @@ void* moveLog(void* param)
     return NULL;
 }
 
+// controlla se la rana riesce a salire sul tronco
 _Bool logCollisions()
 {
     int i,misses=0;
@@ -352,6 +358,7 @@ _Bool logCollisions()
     }
 }
 
+// genera e muove il singolo ragno, regola gli spari
 void* spider(void* param)
 {
 
@@ -495,6 +502,7 @@ void* spider(void* param)
     return NULL;
 }
 
+// genera un proiettile che baserà le sue caratteristiche dall'entità che lo spara inizialmente
 void spit(Entity shooter)
 {
     pthread_t spitThread;
@@ -520,6 +528,7 @@ void spit(Entity shooter)
     pthread_create(&spitThread,NULL,&moveSpitBall,(void*)spitNode);
 }
 
+// muove il proiettile singolo
 void* moveSpitBall(void* param)
 {
      entityNode* projectile = (entityNode*)param;
@@ -555,6 +564,7 @@ void* moveSpitBall(void* param)
     return NULL;
 }
 
+// verifica le collisioni tra proiettili e altre Entità
 int spitballCollisions(Entity spit)
 {
     int i,j;
@@ -597,8 +607,10 @@ int spitballCollisions(Entity spit)
     return 0;
 }
 
-// game --------------------------------
 
+// SEZIONE GESTIONE GIOCO E GRAFICA
+
+// inizializza alcuni dati iniziali, colori, lista proiettili
 void initializeData(_Bool dRegister[])
 {
     int i,j;
@@ -698,6 +710,7 @@ void initializeData(_Bool dRegister[])
     }
 }
 
+
 void screenRefresh()
 {
     wrefresh(game.gameWin);
@@ -705,6 +718,7 @@ void screenRefresh()
     refresh();
 }
 
+// funzione di stampa principale
 int roadsAndPonds(_Bool dRegister[])
 {
     //clock_t startTime;
@@ -715,11 +729,7 @@ int roadsAndPonds(_Bool dRegister[])
     time_t start, end;
     int timeSpent, timeRemaining;
     int result, denId, resultOfSpitCollision,i,j;
-    FILE *debugLog;
     entityNode* iter;
-
-    debugLog = fopen("debugLog.txt","a");
-    fprintf(debugLog,"----start of manche----\n");
 
     initializeData(dRegister);
     drawMap();
@@ -737,6 +747,7 @@ int roadsAndPonds(_Bool dRegister[])
 
         bodyClearingPlayer(game.player,game.gameWin);
 
+        // controlli tronchi
         for(i = 0; i < NUM_LOGS; i++){
             bodyClearing(game.logs[i],game.gameWin);
             printerLogs(game.logs[i],game.gameWin);
@@ -750,6 +761,7 @@ int roadsAndPonds(_Bool dRegister[])
             }
         }
 
+        // controllo collisioni con tane
         if(game.player.row == 0){
             denId = denCollisions();
             if(game.player.box.topLeft.y == 1){
@@ -761,6 +773,7 @@ int roadsAndPonds(_Bool dRegister[])
             }
         }
 
+        // controllo salita tronchi
         if(game.player.row <= 3 && game.player.row >= 1){
             playerIsDry = logCollisions();
 
@@ -909,7 +922,6 @@ int roadsAndPonds(_Bool dRegister[])
     werase(game.statWin);
     screenRefresh();
     clearMemory();
-    fclose(debugLog);
 
     return result;
 }
@@ -950,7 +962,7 @@ void drawMap()
     wattroff(game.statWin,COLOR_PAIR(ROAD));
 }
 
-
+// controllo collisioni con le tane
 int denCollisions()
 {
     int i;
@@ -964,6 +976,7 @@ int denCollisions()
     return NUM_DENS;
 }
 
+// funzione che inizializza i thread principali
 int gameStart(int startingLives, _Bool dRegister[])
 {
 
@@ -992,6 +1005,7 @@ int gameStart(int startingLives, _Bool dRegister[])
     return result;
 }
 
+// pulisce ragni, e proiettili
 void clearMemory()
 {
     int i;
@@ -1013,6 +1027,7 @@ void clearMemory()
     game.gameReady = false;
 }
 
+// inizializza lista per i proiettili
 entityList* initEntityList()
 {
     entityList *list = malloc(sizeof(entityList));
@@ -1022,6 +1037,7 @@ entityList* initEntityList()
     return list;
 }
 
+// inserisce nodo in lista
 entityNode *insert(Entity data, entityList *list)
 {
     entityNode *ent;
@@ -1055,6 +1071,7 @@ entityNode *insert(Entity data, entityList *list)
     return ent;
 }
 
+// elimina nodo in lista
 entityList* eraseEntity(entityNode *forDeletion, entityList *list)
 {
 
