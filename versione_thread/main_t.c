@@ -65,8 +65,7 @@ void gameLoop(){
 
 			densVisited = 0;
 			totalLives = PHROG_STARTING_LIVES;	
-			for(i = 0; i < NUM_DENS; i ++){
-				
+			for(i = 0; i < NUM_DENS; i ++){				
 				denRegister[i] = false;
 			}
 			

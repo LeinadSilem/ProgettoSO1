@@ -142,8 +142,7 @@ void gameLoop(){
 			totalLives = PHROG_STARTING_LIVES;	
 			for(i = 0; i < NUM_DENS; i ++){
 				denRegister[i] = false;
-			}
-			
+			}			
 				
 			wrefresh(tryAgainWin);
 			playerSelection = getch();

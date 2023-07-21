@@ -5690,3 +5690,143 @@ adding projectile with pid 3326 already registered
 attempted to jump on log with a spider in row 2
 ----start of manche----
 player got run over by cars
+----start of manche----
+spooder generated
+player got run over by cars
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 4467
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with pid 4467 already registered
+adding projectile with dir 1 and pid 4468
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with pid 4468 already registered
+adding projectile with dir 1 and pid 4469
+adding projectile with pid 4469 already registered
+adding projectile with pid 4469 already registered
+spitball killed the player 
+----start of manche----
+missed the log in row 3
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 4494
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+adding projectile with pid 4494 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 4496
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+adding projectile with pid 4496 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 4498
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+adding projectile with pid 4498 already registered
+spitball killed the player 
+----start of manche----
+spooder generated
+adding projectile with dir 1 and pid 4512
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+adding projectile with pid 4512 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 4515
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+adding projectile with pid 4515 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 4516
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+adding projectile with pid 4516 already registered
+spitball hit the car 
+adding projectile with dir 1 and pid 4517
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+adding projectile with pid 4517 already registered
+spitball hit the car 
+missed the log in row 3

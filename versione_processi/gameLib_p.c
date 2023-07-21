@@ -177,12 +177,6 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
 {
 	int i;
 
-	for(i = 0; i < NUM_CARS; i++){
-    	if(verifyHitbox(currentCar.box,game.carTable[currentCar.row][i].box) && currentCar.pid != game.carTable[currentCar.row][i].pid){
-    		haltCar(currentCar.col,currentCar.row);
-    	}
-    }
-
     if(verifyHitbox(currentCar.box,phrog.box)){
     	bodyClearingSingleEntities(game.player,game.gameWin);
     	return true;
@@ -191,20 +185,6 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
     return false;
 }
 
-void haltCar(int currentCar, int row)
-{
-	switch(game.carTable[row][currentCar].dir){
-		case W:
-			game.carTable[row][currentCar].box.topLeft.x++;
-			game.carTable[row][currentCar].box.botRight.x++;
-		break;
-
-		case E:
-			game.carTable[row][currentCar].box.topLeft.x--;
-			game.carTable[row][currentCar].box.botRight.x--;
-		break;
-	}
-}
 
 void logGenerator(int pipewrite)
 {

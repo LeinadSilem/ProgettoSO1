@@ -195,33 +195,12 @@ _Bool carCollisions(Entity currentCar, Entity phrog)
 {
     int i;
 
-    //for(i = 0; i < NUM_CARS; i++){
-    //	  if(verifyHitbox(currentCar.box,game.carTable[currentCar.row][i].box) && currentCar.id != game.carTable[currentCar.row][i].id){
-    //	  	  haltCar(currentCar.col,currentCar.row);
-    //	  }
-    //}
-
     if(verifyHitbox(currentCar.box,phrog.box)){
         bodyClearing(game.player,game.gameWin);
         return true;
     }
 
     return false;
-}
-
-void haltCar(int currentCar, int row)
-{
-    switch(game.carTable[row][currentCar].dir){
-        case W:
-            game.carTable[row][currentCar].box.topLeft.x++;
-            game.carTable[row][currentCar].box.botRight.x++;
-        break;
-
-        case E:
-            game.carTable[row][currentCar].box.topLeft.x--;
-            game.carTable[row][currentCar].box.botRight.x--;
-        break;
-    }
 }
 
 // logs ---------------------------------
@@ -971,26 +950,6 @@ void drawMap()
     wattroff(game.statWin,COLOR_PAIR(ROAD));
 }
 
-void translateDirection(Direction dir)
-{
-    switch(dir){
-        case N:
-            printw("north");
-            break;
-
-        case S:
-            printw("south");
-            break;
-
-        case W:
-            printw("west ");
-            break;
-
-        case E:
-            printw("east ");
-            break;
-    }
-}
 
 int denCollisions()
 {

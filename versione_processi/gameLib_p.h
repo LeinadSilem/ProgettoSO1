@@ -50,7 +50,6 @@ void phrog(int lives,int pipewrite);
 void carGenerator(int pipewrite);
 void moveCar(Entity car,int pipewrite);
 _Bool carCollisions(Entity currentCar, Entity phrog);
-void haltCar(int currentCar, int row);
 
 void spider(Entity log,int pipewrite);
 void spit(int pipewrite, Hitbox pH, EntityType et);

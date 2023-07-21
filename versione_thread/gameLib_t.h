@@ -53,7 +53,6 @@ void* phrog(void* param);
 
 void* carGenerator();
 void* moveCar(void* param);
-void haltCar(int currentCar, int row);
 _Bool carCollisions(Entity currentCar, Entity phrog);
 
 void* logGenerator();
@@ -71,7 +70,6 @@ int roadsAndPonds(_Bool dRegister[]);
 
 void screenRefresh();
 void drawMap();
-void translateDirection(Direction dir);
 int denCollisions();
 void clearMemory();
 
